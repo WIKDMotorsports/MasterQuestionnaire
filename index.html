@@ -41,7 +41,7 @@
         .widget-container {
             max-width: 800px;
             margin: auto;
-            padding: 2rem;
+            padding: 1rem 2rem 2rem; /* ADJUSTED: Reduced top padding */
         }
 
         .panel {
@@ -73,10 +73,13 @@
         }
         .step-header h2 {
             font-size: 2.5rem;
+            margin-top: 0; /* ADJUSTED: Removed space above header to match bottom padding */
+            margin-bottom: 0.25rem; /* ADJUSTED: Reduced space below header */
         }
         .step-header p {
             color: var(--color-text-muted);
             font-size: 1rem;
+            margin-top: 0; /* ADJUSTED: Removed space above paragraph */
         }
         
         /* --- NEW PROGRESS BAR STYLES --- */
@@ -84,7 +87,7 @@
             position: relative;
             display: flex;
             justify-content: space-between;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem; /* ADJUSTED: Balanced margin */
         }
 
         .progress-bar::before {
@@ -307,6 +310,7 @@
         .result-card h3 {
             color: var(--color-primary);
             font-size: 1.5rem;
+            margin-top: 0; /* ADJUSTED: Removed default browser margin */
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
@@ -338,6 +342,7 @@
         .summary-item span {
             color: white;
             font-weight: 500;
+            font-size: 1.1rem;
         }
         
         .product-grid {
@@ -511,6 +516,11 @@
                             <input type="radio" id="tune-remote" name="prior_tune" value="Remote" class="choice-input"><label for="tune-remote" class="choice-label">Remote Tune</label>
                         </div>
                     </div>
+                    <!-- NEW: Current HP input, hidden by default -->
+                    <div class="form-group hidden-field" id="current-hp-group">
+                        <label for="current-hp">Current Horsepower (WHP)</label>
+                        <input type="number" id="current-hp" name="current_hp" class="form-control" placeholder="e.g., 650">
+                    </div>
                     <div class="btn-group"><button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button><button type="button" class="btn btn-primary next-btn"><span>Next <i class="fas fa-arrow-right"></i></span></button></div>
                 </div>
             </div>
@@ -537,12 +547,15 @@
                 <div class="panel" id="result-panel">
                      <div class="step-header"><h2>Your Recommendations</h2><p>Based on your selections, here are our suggestions.</p></div>
                      
+                     <!-- UPDATED: Summary Card -->
                      <div id="summary-card" class="result-card">
                          <h3><i class="fas fa-car"></i> Your Build Summary</h3>
                          <div class="result-summary-grid">
                              <div class="summary-item"><strong>Vehicle</strong><span id="summary-vehicle"></span></div>
                              <div class="summary-item"><strong>Transmission</strong><span id="summary-transmission"></span></div>
-                             <div class="summary-item"><strong>Target Gain</strong><span id="summary-whp"></span></div>
+                             <div class="summary-item" id="summary-power">
+                                 <!-- This will be populated by JS -->
+                             </div>
                          </div>
                      </div>
 
@@ -555,15 +568,16 @@
                          <p style="color: var(--color-text-muted);">Since you've had a remote tune previously, we highly recommend a baseline dyno run. This "Power Check" ensures we have accurate data to build upon, guaranteeing the best and safest results for your vehicle. <a href="https://www.wikdmotorsports.com/pages/power-check" target="_blank" style="color: var(--color-primary);">Learn more here.</a></p>
                      </div>
 
-                     <div class="result-card">
-                         <h3><i class="fas fa-comments"></i> Need More Help?</h3>
-                         <p style="color: var(--color-text-muted); margin-bottom: 1rem;">If our recommendations don't quite fit, or if you need a fully custom build, our experts are here to help craft the perfect solution for you.</p>
-                         <button type="button" class="btn btn-primary contact-expert-btn"><span><i class="fas fa-envelope"></i> Talk to an Expert</span></button>
+                     <div style="text-align: center; margin-top: 3rem;">
+                        <h3 style="justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-comments"></i> Next Steps</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 0;">
+                           Ready to upgrade or need a fully custom build? Our experts are here to help craft the perfect solution for you.
+                        </p>
                      </div>
 
                      <div class="btn-group">
                           <button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
-                          <div></div>
+                          <button type="button" class="btn btn-primary contact-expert-btn"><span>Talk to an Expert <i class="fas fa-envelope"></i></span></button>
                      </div>
                 </div>
             </div>
@@ -607,7 +621,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Corvette-specific technical data for tuning eligibility.
     const corvetteTechData = [
-        { year: 2005, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2005, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2015, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2016, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "ZR1", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2020, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2021, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2022, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2025, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 1500, tcmCost: 400 }, { year: 2025, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2025, trim: "ZR1", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }
+        { year: 2005, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2005, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2015, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2016, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "ZR1", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2020, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2021, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2022, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2025, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 1500, tcmCost: 400 }, { year: 2025, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "ZR1", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }
     ];
 
     // Performance packages data.
@@ -655,6 +669,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const whpOutput = document.getElementById('whp-output');
     const transManualInput = document.getElementById('trans-manual');
     const transAutoInput = document.getElementById('trans-auto');
+    const priorTuneRadios = document.querySelectorAll('input[name="prior_tune"]');
+    const currentHpGroup = document.getElementById('current-hp-group');
     let currentStep = 1;
 
     // --- UI POPULATION & EVENT LISTENERS ---
@@ -717,6 +733,17 @@ document.addEventListener('DOMContentLoaded', function() {
         whpOutput.innerHTML = `+${e.target.value} <span>WHP</span>`;
     });
     
+    // NEW: Show/hide current HP input based on prior tune selection
+    priorTuneRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'Dyno' || this.value === 'Remote') {
+                currentHpGroup.classList.remove('hidden-field');
+            } else {
+                currentHpGroup.classList.add('hidden-field');
+            }
+        });
+    });
+    
     // --- UPDATED STEP NAVIGATION LOGIC ---
     const updateStep = (newStep) => {
         // --- Form Validation ---
@@ -772,7 +799,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateStep(4);
     });
     
-    // --- BUG FIX: C8 Transmission Logic ---
+    // --- C8 Transmission Logic ---
     function handleCorvetteTransmission() {
         const model = modelSelect.value;
         const year = parseInt(yearSelect.value);
@@ -811,17 +838,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- UPDATED: Result Generation Logic ---
     function generateResults() {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        
+        if (!data.transmission) {
+            data.transmission = document.querySelector('input[name="transmission"]:checked').value;
+        }
+
         const targetHpDelta = parseInt(data.hp_delta);
+        const currentHp = data.current_hp ? parseInt(data.current_hp) : null;
+        const priorTuneType = data.prior_tune;
         const selectedYear = parseInt(data.year);
         
+        // --- Update Summary Card ---
         document.getElementById('summary-vehicle').textContent = `${data.year} ${data.make} ${data.model} ${data.trim || ''}`.trim();
         document.getElementById('summary-transmission').textContent = data.transmission;
-        document.getElementById('summary-whp').textContent = `+${targetHpDelta} WHP`;
+        
+        const summaryPowerEl = document.getElementById('summary-power');
+        let powerSummaryHTML = '';
+
+        if (priorTuneType === 'None' || !currentHp) {
+            powerSummaryHTML = `<strong>Target Gain</strong><span>+${targetHpDelta} WHP</span>`;
+        } else {
+            let hpText = `${currentHp} WHP`;
+            if (priorTuneType === 'Remote') {
+                hpText += ' (unconf.)';
+            }
+            powerSummaryHTML = `<strong>Power Target</strong><span>${hpText} &rarr; +${targetHpDelta} WHP</span>`;
+        }
+        summaryPowerEl.innerHTML = powerSummaryHTML;
+        
         document.getElementById('power-check-notice').classList.toggle('hidden-field', data.prior_tune !== 'Remote');
 
+        // --- Generate Recommendations ---
         const recommendationsContainer = document.getElementById('recommendations-container');
         recommendationsContainer.innerHTML = ''; 
         let totalRecommendations = 0;
@@ -840,7 +891,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 canHaveDynoTune = techSpec.dynoTune === 'yes';
                 canHaveParts = techSpec.parts === 'yes';
             } else {
-                // Fallback for C8s if manual was somehow selected before being disabled
                 const isC8 = selectedYear >= 2020;
                 if(isC8) canHavePackages = true;
             }
@@ -863,7 +913,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (canHavePackages) {
             let vehiclePackages;
-
             if (data.model === 'Corvette') {
                 const generationKey = selectedYear <= 2019 ? 'Corvette_C7' : 'Corvette_C8';
                 vehiclePackages = packages[generationKey] || [];
@@ -873,20 +922,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let bestMatch = null;
             let maxHpPackage = null;
-            if (vehiclePackages.length > 0) {
-                maxHpPackage = vehiclePackages.reduce((max, pkg) => pkg.hp_delta > max.hp_delta ? pkg : max, vehiclePackages[0]);
-                bestMatch = vehiclePackages.reduce((best, pkg) => {
-                    const diff = Math.abs(targetHpDelta - pkg.hp_delta);
-                    return diff < best.diff ? { diff, pkg } : best;
-                }, { diff: Infinity, pkg: null }).pkg;
+            const highHpThreshold = 75;
+
+            if (vehiclePackages && vehiclePackages.length > 0) {
+                vehiclePackages.sort((a, b) => a.hp_delta - b.hp_delta);
+                maxHpPackage = vehiclePackages[vehiclePackages.length - 1];
+                bestMatch = vehiclePackages.find(pkg => pkg.hp_delta >= targetHpDelta);
+                if (!bestMatch) {
+                    bestMatch = maxHpPackage;
+                }
             }
             
-            const highHpThreshold = 75;
             if (maxHpPackage && targetHpDelta > maxHpPackage.hp_delta + highHpThreshold) {
                 totalRecommendations++;
                 primaryRecommendationMade = true;
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-rocket"></i> Custom WIKD Tune Recommended</h3><p style="color: var(--color-text-muted);">Your horsepower goal of <strong>+${targetHpDelta} WHP</strong> is ambitious and exceeds our standard performance packages. For this level of performance, we recommend a fully custom WIKD Tune.</p><p style="color: var(--color-text-muted); margin-top: 1rem;">This involves a personalized consultation with our expert tuners to develop a bespoke solution, including part selection and dyno tuning, tailored specifically to your vehicle and goals.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">This build will likely require: ${unlockReason.join(' + ')}.</p>` : ''}<button type="button" class="btn btn-primary contact-expert-btn" style="margin-top: 1rem;"><span><i class="fas fa-envelope"></i> Discuss Your Custom Build</span></button></div>`;
-            } else if (bestMatch && Math.abs(targetHpDelta - bestMatch.hp_delta) <= 50) { 
+            } else if (bestMatch) { 
                 totalRecommendations++;
                 primaryRecommendationMade = true;
                 const finalPrice = bestMatch.price + unlockCost;
@@ -897,75 +948,43 @@ document.addEventListener('DOMContentLoaded', function() {
         if (canHaveParts) {
             const recommendedProducts = products.filter(p => {
                 const productKeywords = p.keywords.map(k => k.toLowerCase());
-
-                // Specific Corvette trim/part compatibility rules
                 if (data.model === 'Corvette') {
-                    // Rule 1: Exclude the standard C8 catback from the Z06 trim.
-                    if (p.id === 'c8-catback-blue' && data.trim === 'Z06') {
-                        return false;
-                    }
-                    // Rule 2: Exclude the Z06 exhaust from any non-Z06 trim.
-                    if (p.id === 'c8-z06-exhaust-blue' && data.trim !== 'Z06') {
-                        return false;
-                    }
+                    if (p.id === 'c8-catback-blue' && data.trim === 'Z06') return false;
+                    if (p.id === 'c8-z06-exhaust-blue' && data.trim !== 'Z06') return false;
                 }
-
-                if (productKeywords.includes('universal')) {
-                    return true;
-                }
+                if (productKeywords.includes('universal')) return true;
                 
                 const selectedMakeLower = data.make.toLowerCase();
                 const selectedModelLower = data.model.toLowerCase();
-
                 let makeMatch = productKeywords.includes(selectedMakeLower);
-                if (selectedModelLower === 'r8' && (productKeywords.includes('lamborghini') || productKeywords.includes('audi'))) {
-                    makeMatch = true;
-                }
+                if (selectedModelLower === 'r8' && (productKeywords.includes('lamborghini') || productKeywords.includes('audi'))) makeMatch = true;
                 
                 const selectedModelWords = selectedModelLower.split(' ');
                 const modelWordsMatch = selectedModelWords.every(word => productKeywords.includes(word));
                 const singleKeywordModelMatch = productKeywords.includes(selectedModelLower.replace(/[\s-]/g, ''));
-                
                 let modelMatch = modelWordsMatch || singleKeywordModelMatch;
+                if (selectedModelLower === 'r8' && productKeywords.includes('r8')) modelMatch = true;
 
-                if (selectedModelLower === 'r8' && productKeywords.includes('r8')) {
-                    modelMatch = true;
-                }
-
-                if (!makeMatch || !modelMatch) {
-                    return false;
-                }
+                if (!makeMatch || !modelMatch) return false;
 
                 if (selectedModelLower === 'corvette') {
                     const isC8 = selectedYear >= 2020;
                     const productIsForC8 = productKeywords.includes('c8');
                     const productIsForC7 = productKeywords.includes('c7');
-                    
                     if (productIsForC8 && !isC8) return false;
                     if (productIsForC7 && isC8) return false;
                 }
                 
                 return (!p.minYear || selectedYear >= p.minYear) && (!p.maxYear || selectedYear <= p.maxYear);
-
             }).sort((a, b) => b.price - a.price);
-
 
             if (recommendedProducts.length > 0) {
                 totalRecommendations++;
                 let productsHtml = recommendedProducts.map(p => `<div class="product-card"><img src="${p.imageUrl}" alt="${p.title}" onerror="this.style.display='none'"><div class="product-card-content"><h4>${p.title}</h4><div class="product-card-footer"><span class="product-price">$${p.price.toLocaleString()}</span><a href="${p.productUrl}" class="btn" target="_blank"><span>View</span></a></div></div></div>`).join('');
-                
                 const isCollapsible = recommendedProducts.length > 3; 
                 const containerCollapsedClass = isCollapsible ? 'collapsed' : '';
                 const showMoreButtonHtml = isCollapsible ? `<div class="show-more-container"><button class="btn show-more-btn"><span>Show More</span></button></div>` : '';
-
-                recommendationsContainer.innerHTML += `
-                    <div class="result-card">
-                        <h3><i class="fas fa-shopping-cart"></i> Recommended Parts & Gear</h3>
-                        <div class="product-grid-container ${containerCollapsedClass}">
-                            <div class="product-grid">${productsHtml}</div>
-                        </div>
-                        ${showMoreButtonHtml}
-                    </div>`;
+                recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-shopping-cart"></i> Recommended Parts & Gear</h3><div class="product-grid-container ${containerCollapsedClass}"><div class="product-grid">${productsHtml}</div></div>${showMoreButtonHtml}</div>`;
             }
         }
         
@@ -1008,6 +1027,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // --- UPDATED: Email Generation Logic ---
     document.getElementById('generate-email-btn').addEventListener('click', function(e) {
         e.preventDefault();
         const nameInput = document.getElementById('customer-name');
@@ -1025,6 +1045,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        
+        if (!data.transmission) {
+            data.transmission = document.querySelector('input[name="transmission"]:checked').value;
+        }
+
         const subject = `Tuning Inquiry: ${data.year} ${data.make} ${data.model} ${data.trim || ''}`.trim();
         const body = `Hello WIKD Motorsports Team,
 
@@ -1043,12 +1068,13 @@ Phone: ${data.customer_phone}
 CONFIGURATOR BUILD SUMMARY:
 Vehicle: ${data.year} ${data.make} ${data.model} ${data.trim || ''}
 Transmission: ${data.transmission}
+Prior Tune History: ${data.prior_tune}
+Current HP: ${data.current_hp ? data.current_hp + ' WHP' : 'N/A'}
 Target WHP Gain: +${data.hp_delta} WHP
 
 ECU Unlocked: ${data.ecu_unlocked}
 TCM Unlocked: ${data.transmission === 'Automatic' ? data.tcm_unlocked : 'N/A'}
 Primary Fuel: ${data.fuel_type}
-Prior Tune History: ${data.prior_tune}
 
 Existing Mods:
 ${data.prior_mods || 'None listed'}
@@ -1070,7 +1096,7 @@ ${data.prior_mods || 'None listed'}
     populateMakes();
     populateYears();
     updateTechInfo();
-    initializeProgressBar(); // Initialize the new progress bar
+    initializeProgressBar(); 
 });
 </script>
 </body>
