@@ -423,6 +423,26 @@
         .hidden-field {
             display: none;
         }
+
+        /* --- ADDED: Responsive Styles for Mobile --- */
+        @media (max-width: 640px) {
+            .widget-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .panel {
+                padding: 1.5rem;
+            }
+
+            .step-header h2 {
+                font-size: 2rem; /* Reduced font size for the main title */
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr; /* Stack product cards vertically */
+            }
+        }
     </style>
 </head>
 <body>
