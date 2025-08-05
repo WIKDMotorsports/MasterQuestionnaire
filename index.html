@@ -164,6 +164,16 @@
         .form-control:focus { outline: none; border-color: var(--color-primary); }
         .form-control:disabled { background-color: #2a2a2a; color: #888; cursor: not-allowed; }
 
+        /* Hide number input spinners */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         .choice-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -314,7 +324,11 @@
                         <label for="vin-input-lookup">Enter Your 17-Digit VIN</label>
                         <input type="text" id="vin-input-lookup" class="form-control" placeholder="XXXXXXXXXXXXXXXXX" maxlength="17">
                     </div>
-                    <button type="button" class="btn btn-primary" id="decode-vin-btn" style="width: 100%;"><span><i class="fas fa-search"></i> Look Up Vehicle</span></button>
+                    <!-- MODIFIED: Changed single button to a button group with a back button -->
+                    <div class="btn-group">
+                        <button type="button" class="btn" id="vin-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                        <button type="button" class="btn btn-primary" id="decode-vin-btn"><span><i class="fas fa-search"></i> Look Up</span></button>
+                    </div>
                     <div id="vin-loader" class="hidden-field"><div class="spinner"></div></div>
                     <p id="vin-error" style="color: var(--color-primary); text-align: center; margin-top: 1rem; display: none;"></p>
                 </div>
@@ -363,7 +377,11 @@
                                 <input type="radio" id="trans-auto" name="transmission" value="Automatic" class="choice-input"><label for="trans-auto" class="choice-label">Automatic</label>
                             </div>
                         </div>
-                        <div class="btn-group"><div></div><button type="button" class="btn btn-primary next-btn"><span>Next <i class="fas fa-arrow-right"></i></span></button></div>
+                        <!-- MODIFIED: Added a back button to the first step -->
+                        <div class="btn-group">
+                            <button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                            <button type="button" class="btn btn-primary next-btn"><span>Next <i class="fas fa-arrow-right"></i></span></button>
+                        </div>
                     </div>
                 </div>
 
@@ -511,6 +529,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const decodeVinBtn = document.getElementById('decode-vin-btn');
     const vinLoader = document.getElementById('vin-loader');
     const vinError = document.getElementById('vin-error');
+    // ADDED: New button constant
+    const vinBackBtn = document.getElementById('vin-back-btn');
 
     let currentStep = 1;
     let userVin = null;
@@ -527,6 +547,14 @@ document.addEventListener('DOMContentLoaded', function() {
     startVinBtn.addEventListener('click', () => {
         initialButtons.classList.add('hidden-field');
         vinLookupContainer.classList.remove('hidden-field');
+    });
+    
+    // ADDED: Listener for the new back button in the VIN section
+    vinBackBtn.addEventListener('click', () => {
+        vinLookupContainer.classList.add('hidden-field');
+        initialButtons.classList.remove('hidden-field');
+        vinError.style.display = 'none';
+        vinInput.value = '';
     });
 
     decodeVinBtn.addEventListener('click', async () => {
@@ -562,12 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
             makeSelect.dispatchEvent(new Event('change'));
             
             const modelOptions = Array.from(modelSelect.options).map(opt => opt.value);
-            const apiModelLower = result.Model.toLowerCase();
-            const decodedModel = modelOptions.find(m => m.toLowerCase().includes(apiModelLower)) || modelOptions.find(m => apiModelLower.includes(m.toLowerCase()));
-
-            if (!decodedModel || decodedModel === "") {
-                 throw new Error(`Could not match model "${result.Model}" for ${decodedMake}. Please select manually.`);
-            }
+            const decodedModel = modelOptions.find(m => m.toLowerCase() === result.Model.toLowerCase()) || modelOptions[0];
 
             modelSelect.value = decodedModel;
             modelSelect.dispatchEvent(new Event('change'));
@@ -717,31 +740,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nextBtns.forEach(btn => btn.addEventListener('click', () => updateStep(currentStep + 1)));
     
-    prevBtns.forEach(btn => btn.addEventListener('click', () => {
-        if (currentStep === 2 && makeSelect.disabled) {
-            questionnaireContainer.classList.add('hidden-field');
-            questionnaireContainer.classList.remove('active');
-            initialChoiceContainer.classList.remove('hidden-field');
-            initialChoiceContainer.classList.add('active');
-            initialButtons.classList.remove('hidden-field');
-            vinLookupContainer.classList.add('hidden-field');
-            vinInput.value = '';
+    // MODIFIED: Reworked previous button logic to be simpler and handle all back cases.
+    function goToInitialScreen() {
+        // Hide the questionnaire and show the initial choice screen
+        questionnaireContainer.classList.add('hidden-field');
+        questionnaireContainer.classList.remove('active');
+        initialChoiceContainer.classList.remove('hidden-field');
+        initialChoiceContainer.classList.add('active');
+        
+        // Reset the VIN lookup view to its starting state
+        initialButtons.classList.remove('hidden-field');
+        vinLookupContainer.classList.add('hidden-field');
+        vinInput.value = '';
+        vinError.style.display = 'none';
 
-            form.reset();
-            makeSelect.disabled = false;
-            modelSelect.disabled = false;
-            yearSelect.disabled = false;
-            trimSelect.disabled = false;
-            userVin = null;
-            populateMakes();
-            populateYears();
-            modelSelect.innerHTML = '<option value="">-- Select Make First --</option>';
-            trimSelect.innerHTML = '<option value="">-- Select Model First --</option>';
-            updateStep(1);
+        // Reset the form data and state
+        form.reset();
+        makeSelect.disabled = false;
+        modelSelect.disabled = false;
+        yearSelect.disabled = false;
+        trimSelect.disabled = false;
+        userVin = null;
+        populateMakes();
+        populateYears();
+        modelSelect.innerHTML = '<option value="">-- Select Make First --</option>';
+        trimSelect.innerHTML = '<option value="">-- Select Model First --</option>';
+        
+        // Reset the logical step and progress bar visuals without showing the questionnaire
+        currentStep = 1;
+        progressBar.style.setProperty('--progress-width', `0%`);
+        progressSteps.forEach((step, index) => {
+            step.classList.remove('active', 'completed');
+            if (index === 0) step.classList.add('active');
+        });
+    }
+
+    prevBtns.forEach(btn => btn.addEventListener('click', () => {
+        // If on step 1 (manual entry) or step 2 (after VIN), go back to the main screen.
+        if (currentStep === 1 || (currentStep === 2 && makeSelect.disabled)) {
+            goToInitialScreen();
             return;
         }
-
-        updateStep(currentStep === 5 ? 4 : currentStep - 1);
+        // For all other steps, just go back one linear step.
+        updateStep(currentStep - 1);
     }));
 
     getResultsBtn.addEventListener('click', () => {
