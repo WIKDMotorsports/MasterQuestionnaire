@@ -268,17 +268,17 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 1rem;
-            gap: 1rem; /* Added gap for spacing */
+            gap: 1rem;
         }
         .product-price {
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--color-primary);
-            flex-shrink: 0; /* Prevent price from shrinking */
+            flex-shrink: 0;
         }
         .product-card-footer .btn {
-            flex-grow: 0; /* Stop button from growing */
-            padding: 8px 20px; /* Slightly smaller button padding */
+            flex-grow: 0;
+            padding: 8px 20px;
         }
 
         .product-grid-container { position: relative; transition: max-height 0.5s ease-in-out; }
@@ -562,11 +562,18 @@ document.addEventListener('DOMContentLoaded', function() {
             makeSelect.dispatchEvent(new Event('change'));
             
             const modelOptions = Array.from(modelSelect.options).map(opt => opt.value);
-            const decodedModel = modelOptions.find(m => m.toLowerCase() === result.Model.toLowerCase()) || modelOptions[0];
+            const apiModelLower = result.Model.toLowerCase();
+            const decodedModel = modelOptions.find(m => m.toLowerCase().includes(apiModelLower)) || modelOptions.find(m => apiModelLower.includes(m.toLowerCase()));
+
+            if (!decodedModel || decodedModel === "") {
+                 throw new Error(`Could not match model "${result.Model}" for ${decodedMake}. Please select manually.`);
+            }
+
             modelSelect.value = decodedModel;
             modelSelect.dispatchEvent(new Event('change'));
 
             const apiTrim = result.Trim || result.Trim2 || '';
+            let trimFound = false;
             if (apiTrim && trimSelect.options.length > 1) {
                 const trimOptions = Array.from(trimSelect.options);
                 let bestMatch = trimOptions.find(opt => opt.value.toLowerCase() === apiTrim.toLowerCase());
@@ -575,6 +582,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 if (bestMatch) {
                     trimSelect.value = bestMatch.value;
+                    trimFound = true;
+                }
+            }
+            
+            if (!trimFound && modelSelect.value === 'Corvette') {
+                const apiTrimLower = apiTrim.toLowerCase();
+                if (apiTrim === '' || apiTrimLower.includes('lt')) {
+                    const stingrayOption = Array.from(trimSelect.options).find(opt => opt.value === 'Stingray');
+                    if (stingrayOption) {
+                        trimSelect.value = 'Stingray';
+                    }
                 }
             }
 
