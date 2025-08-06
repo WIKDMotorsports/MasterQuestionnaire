@@ -397,8 +397,8 @@
         <div id="initial-choice-container" class="hidden-field">
             <div class="panel">
                 <div class="step-header">
-                    <h2>Start Your Build <span id="build-title-vehicle-name" class="vehicle-name-highlight"></span></h2>
-                    <p>How would you like to begin?</p>
+                    <h2 id="initial-choice-title">Start Your Build <span id="build-title-vehicle-name" class="vehicle-name-highlight"></span></h2>
+                    <p id="initial-choice-subtitle">How would you like to begin?</p>
                 </div>
                 <div id="vin-lookup-container" class="hidden-field">
                     <div class="form-group">
@@ -636,6 +636,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const userNameSpans = document.querySelectorAll('.user-name');
     const userNamePossessiveSpan = document.querySelector('.user-name-possessive');
     const initialChoiceContainer = document.getElementById('initial-choice-container');
+    const initialChoiceTitle = document.getElementById('initial-choice-title');
+    const initialChoiceSubtitle = document.getElementById('initial-choice-subtitle');
     const questionnaireContainer = document.getElementById('questionnaire-container');
     const startManualBtn = document.getElementById('start-manual-btn');
     const startVinBtn = document.getElementById('start-vin-btn');
@@ -708,6 +710,8 @@ document.addEventListener('DOMContentLoaded', function() {
     startVinBtn.addEventListener('click', () => {
         initialButtons.classList.add('hidden-field');
         vinLookupContainer.classList.remove('hidden-field');
+        initialChoiceTitle.innerHTML = 'VIN Lookup';
+        initialChoiceSubtitle.innerHTML = `Alright <span class="user-name">${userFirstName}</span>, let's find your vehicle.`;
     });
     
     vinBackBtn.addEventListener('click', () => {
@@ -715,6 +719,8 @@ document.addEventListener('DOMContentLoaded', function() {
         initialButtons.classList.remove('hidden-field');
         showStatus('');
         vinInput.value = '';
+        initialChoiceTitle.innerHTML = 'Start Your Build <span id="build-title-vehicle-name" class="vehicle-name-highlight"></span>';
+        initialChoiceSubtitle.textContent = 'How would you like to begin?';
     });
 
     function showStatus(message, isError = false, isInfo = false) {
@@ -732,10 +738,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateBuildTitle() {
         const make = makeSelect.value;
         const model = modelSelect.value;
-        if (make && model && make !== 'Other') {
-            buildTitleVehicleName.textContent = `For Your ${make} ${model}`;
-        } else {
-            buildTitleVehicleName.textContent = '';
+        const titleContainer = document.getElementById('build-title-vehicle-name');
+        if (titleContainer) {
+            if (make && model && make !== 'Other') {
+                titleContainer.textContent = `For Your ${make} ${model}`;
+            } else {
+                titleContainer.textContent = '';
+            }
         }
     }
 
