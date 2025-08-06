@@ -55,10 +55,10 @@
             transition: all 0.5s ease;
         }
         
-        .form-step, #initial-choice-container {
+        .form-step, #initial-choice-container, #welcome-container {
             display: none;
         }
-        .form-step.active, #initial-choice-container.active {
+        .form-step.active, #initial-choice-container.active, #welcome-container.active {
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -76,6 +76,12 @@
             font-size: 2.5rem;
             margin-top: 0;
             margin-bottom: 0.25rem;
+        }
+        .step-header h2 .vehicle-name-highlight {
+            color: var(--color-primary);
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
         }
         .step-header p {
             color: var(--color-text-muted);
@@ -214,7 +220,7 @@
             gap: 1rem;
         }
         .btn {
-            display: inline-flex; /* Use inline-flex for alignment */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 12px 28px;
@@ -250,18 +256,17 @@
         .btn-primary { border-color: var(--color-primary); color: var(--color-primary); }
         .btn-primary:hover { color: white; }
 
-        /* ADDED: Style for a prominent, filled button */
         .btn-primary-filled {
             background-color: var(--color-primary);
             border-color: var(--color-primary);
             color: white;
         }
         .btn-primary-filled:hover {
-            background-color: #e03024; /* A slightly darker shade for hover */
+            background-color: #e03024;
             border-color: #e03024;
         }
         .btn-primary-filled::before {
-            display: none; /* Hide the slide-in effect for this button type */
+            display: none;
         }
 
 
@@ -373,10 +378,26 @@
 <body>
 
     <div class="widget-container">
-        <div id="initial-choice-container" class="active">
+        <div id="welcome-container" class="active">
             <div class="panel">
                 <div class="step-header">
-                    <h2>Start Your Build</h2>
+                    <h2>WIKD Tuning Configurator</h2>
+                    <p>Find the perfect performance package and parts for your vehicle. Let's get started!</p>
+                </div>
+                <div class="form-group">
+                    <label for="first-name">First, what should we call you?</label>
+                    <input type="text" id="first-name" class="form-control" placeholder="e.g., Alex">
+                </div>
+                <div class="btn-group" style="justify-content: flex-end;">
+                     <button type="button" class="btn btn-primary-filled" id="start-config-btn"><span>Let's Go <i class="fas fa-arrow-right"></i></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="initial-choice-container" class="hidden-field">
+            <div class="panel">
+                <div class="step-header">
+                    <h2>Start Your Build <span id="build-title-vehicle-name" class="vehicle-name-highlight"></span></h2>
                     <p>How would you like to begin?</p>
                 </div>
                 <div id="vin-lookup-container" class="hidden-field">
@@ -387,7 +408,6 @@
                             <button type="button" class="btn btn-icon" id="snap-vin-btn" title="Scan VIN with Camera">
                                 <i class="fas fa-camera"></i>
                             </button>
-                            <!-- MODIFIED: Changed label to a button for visual consistency -->
                             <button type="button" class="btn btn-icon" id="upload-vin-btn" title="Upload VIN Image">
                                 <i class="fas fa-upload"></i>
                             </button>
@@ -396,13 +416,15 @@
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn" id="vin-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
-                        <!-- MODIFIED: Added btn-primary-filled for prominence -->
                         <button type="button" class="btn btn-primary-filled" id="decode-vin-btn"><span><i class="fas fa-search"></i> Look Up</span></button>
                     </div>
                     <div id="vin-loader" class="hidden-field"><div class="spinner"></div></div>
                     <p id="vin-status" class="status-message"></p>
                 </div>
                 <div id="initial-buttons">
+                    <div class="btn-group">
+                        <button type="button" class="btn" id="choice-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn" id="start-vin-btn"><span><i class="fas fa-barcode"></i> Start with VIN</span></button>
                         <button type="button" class="btn" id="start-manual-btn"><span><i class="fas fa-edit"></i> Fill Out Manually</span></button>
@@ -423,7 +445,7 @@
             <form id="tuning-form">
                 <div id="step-1" class="form-step active">
                     <div class="panel">
-                        <div class="step-header"><h2>Select Your Vehicle</h2><p>Let's start with the basics. Tell us what you drive.</p></div>
+                        <div class="step-header"><h2>Select Your Vehicle</h2><p>Alright <span class="user-name"></span>, let's start with the basics. Tell us what you drive.</p></div>
                         <div class="form-group">
                             <label for="make">Make</label>
                             <select id="make" name="make" class="form-control" required><option value="">-- Select Make --</option></select>
@@ -456,7 +478,7 @@
 
                 <div id="step-2" class="form-step">
                     <div class="panel">
-                        <div class="step-header"><h2>Technical Details</h2><p>Tell us about your vehicle's current state.</p></div>
+                        <div class="step-header"><h2>Technical Details</h2><p>Sweet ride 🔥 Now, tell us about your <span class="vehicle-model-name">vehicle</span>'s current state.</p></div>
                         <div class="form-group" id="tcm-unlock-group">
                             <label>TCM Unlocked?</label>
                             <div class="choice-group">
@@ -497,7 +519,7 @@
                 
                 <div id="step-3" class="form-step">
                     <div class="panel">
-                        <div class="step-header"><h2>Goals & Mods</h2><p>What have you done, and what do you want to achieve?</p></div>
+                        <div class="step-header"><h2>Goals & Mods</h2><p>Great, <span class="user-name"></span>. Finally, what have you done, and what do you want to achieve?</p></div>
                         <div class="form-group">
                             <label for="prior-mods">List Prior Performance Mods</label>
                             <textarea id="prior-mods" name="prior_mods" class="form-control" rows="4" placeholder="e.g., Cold Air Intake, Long Tube Headers, Upgraded Pulley, etc."></textarea>
@@ -513,9 +535,9 @@
 
                 <div id="step-4" class="form-step">
                     <div class="panel" id="result-panel">
-                        <div class="step-header"><h2>Your Recommendations</h2><p>Based on your selections, here are our suggestions.</p></div>
+                        <div class="step-header"><h2>Your Recommendations</h2><p>Based on your selections here are our suggestions.</p></div>
                         <div id="summary-card" class="result-card">
-                            <h3><i class="fas fa-car"></i> Your Build Summary</h3>
+                            <h3><i class="fas fa-car"></i> <span class="user-name-possessive"></span> Build Summary</h3>
                             <div class="result-summary-grid">
                                 <div class="summary-item"><strong>Vehicle</strong><span id="summary-vehicle"></span></div>
                                 <div class="summary-item"><strong>Transmission</strong><span id="summary-transmission"></span></div>
@@ -540,10 +562,18 @@
 
                 <div id="step-5" class="form-step">
                     <div class="panel">
-                        <div class="step-header"><h2>Contact an Expert</h2><p>Please provide your contact information below so our team can get in touch with you.</p></div>
+                        <div class="step-header"><h2>Contact an Expert</h2><p>Please provide your contact information below so our team can get in touch.</p></div>
                         <div class="form-group">
-                            <label for="customer-name">Full Name</label>
-                            <input type="text" id="customer-name" name="customer_name" class="form-control" required placeholder="e.g., John Doe">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div>
+                                    <label for="customer-first-name">First Name</label>
+                                    <input type="text" id="customer-first-name" name="customer_first_name" class="form-control" required placeholder="e.g., John">
+                                </div>
+                                <div>
+                                    <label for="customer-last-name">Last Name</label>
+                                    <input type="text" id="customer-last-name" name="customer_last_name" class="form-control" required placeholder="e.g., Doe">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="customer-phone">Phone Number</label>
@@ -559,7 +589,7 @@
         </div>
     </div>
 
-    <!-- ADDED: Camera Modal HTML -->
+    <!-- Camera Modal HTML -->
     <div id="camera-modal" class="hidden-field">
         <video id="camera-stream" playsinline></video>
         <canvas id="snapshot-canvas" class="hidden-field"></canvas>
@@ -572,7 +602,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- MASTER DATA ---
+    // --- MASTER DATA (omitted for brevity, same as original) ---
     const vehicleData = { 'Audi': { 'R8': { trims: ['Standard'] } }, 'Cadillac': { 'CT5-V Blackwing': { trims: ['Standard'] }, 'CTS-V': { trims: ['Gen 2', 'Gen 3'] }, 'CT4-V Blackwing': { trims: ['Standard'] }, 'Escalade': { trims: ['Standard'] } }, 'Chevrolet': { 'Corvette': { trims: ['Base', 'Z06', 'ZR1', 'Stingray', 'Grand Sport', 'E-Ray'] }, 'Camaro': { trims: ['Gen 5', 'Gen 6 SS', 'Gen 6 ZL1'] }, 'Silverado 1500': { trims: ['Standard'] }, 'Tahoe': { trims: ['Standard'] } }, 'Ferrari': { '458 Italia': { trims: ['Standard'] } }, 'GMC': { 'Sierra 1500': { trims: ['Standard'] }, 'Yukon': { trims: ['Standard'] } }, 'Lamborghini': { 'Huracan': { trims: ['EVO', 'STO'] } }, 'Mclaren': { '570S': { trims: ['Standard'] }, '540C': { trims: ['Standard'] }, '570GT': { trims: ['Standard'] }, '720S': { trims: ['Standard'] } }, 'Other': { 'Other': { trims: ['Other'] } } };
     const corvetteTechData = [ { year: 2005, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2005, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2015, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2016, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "ZR1", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2020, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2021, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2022, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2025, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 1500, tcmCost: 400 }, { year: 2025, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "ZR1", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 } ];
     const packages = { 'CT5-V Blackwing': [ { id: 'bw-35', title: '+35 WHP Package (E85)', hp_delta: 35, price: 4510, parts: ['Flex Fuel Kit', 'Intake System', 'Custom E85 Dyno Tune'], description: 'A simple package to get you started with E85.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-75', title: '+75 WHP Package', hp_delta: 75, price: 4760, parts: ['WIKD Intake', 'Lower Pulley Upgrade', 'Performance Plugs & Wires'], description: 'Great bang for your buck power increase.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-140', title: '+140 WHP Package', hp_delta: 140, price: 10813, parts: ['Big Gulp Intake', 'Upper & Lower Pulleys', 'Long Tube Headers'], description: 'Serious power gains with supporting bolt-ons.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-190', title: '+190 WHP Package', hp_delta: 190, price: 12473, parts: ['Ported Supercharger', 'Throttle Body', 'Meth Injection'], description: 'Pushing the stock blower to its limits.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-250', title: '+250 WHP Package', hp_delta: 250, price: 20254, parts: ['Custom Camshaft', 'WIKD Subzero Chiller', 'WIKD Fuel Package'], description: 'A comprehensive package for major power.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' } ], 'Camaro': [ { id: 'camaro-stage1', title: 'Gen 6 Camaro Stage 1', hp_delta: 50, price: 3500, parts: ['Cold Air Intake', 'Custom Dyno Tune'], description: 'A great starting point for your Gen 6 Camaro.', url: 'https://www.wikdmotorsports.com/pages/6th-gen-camaro-tuning-packages'} ], 'Corvette_C7': [ { id: 'c7-lt4-50', title: 'C7 LT4 +50 WHP (E85)', hp_delta: 50, price: 2610, parts: ['Flex Fuel Kit', 'Big Gulp Intake'], description: 'Entry-level power for C7 LT4 on E85.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-75', title: 'C7 LT4 +75 WHP', hp_delta: 75, price: 4786, parts: ['Intake', '9.2” Pulley', 'Spark Plug Wires'], description: 'Budget-friendly bolt-on performance for the C7 LT4.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-125', title: 'C7 LT4 +125 WHP', hp_delta: 125, price: 9944, parts: ['Headers', 'Pulley Combo', 'Catch Can'], description: 'Serious performance gain for your C7 Z06 or ZR1.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-175', title: 'C7 LT4 +175 WHP', hp_delta: 175, price: 13400, parts: ['Ported Snout', 'Throttle Body', 'Meth Injection'], description: 'An aggressive package for street and strip C7s.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-250', title: 'C7 LT4 +250 WHP', hp_delta: 250, price: 23450, parts: ['Camshaft', 'Interchiller', 'Head Studs'], description: 'A full build to max out the factory LT4 supercharger.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' } ], 'Corvette_C8': [ { id: 'c8-lt2-60', title: 'C8 LT2 +50-70WHP', hp_delta: 60, price: 5390.45, parts: ['Flex Fuel Kit', 'Cold Air Intake'], description: 'Boosts performance with a Flex Fuel Kit, Cold Air Intake, and custom dyno tuning for E85 fuel.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-77', title: 'C8 LT2 +75-80 WHP', hp_delta: 77.5, price: 13735.10, parts: ['Cold Air Intake', 'Headers', 'Off-Road Pipe', 'Intake Manifold'], description: 'Features intake and exhaust upgrades, including headers, an off-road pipe, and a new throttle body.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-120', title: 'C8 LT2 +120 WHP', hp_delta: 120, price: 23171.43, parts: ['Blower Camshaft', 'Cylinder Heads', 'Head Studs'], description: 'Includes camshaft and cylinder head upgrades along with intake/exhaust enhancements for a comprehensive power boost.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-200-mag', title: 'C8 LT2 +200 WHP Magnuson', hp_delta: 200, price: 23105.07, parts: ['Magnuson Supercharger Kit'], description: 'A Magnuson Supercharger system provides a massive power increase with custom dyno tuning.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-200-pro', title: 'C8 LT2 +200 WHP Procharger', hp_delta: 200, price: 25603.28, parts: ['Procharger Supercharger Kit'], description: 'Features a Procharger Supercharger system for a huge jump in power, including a custom tune.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-250', title: 'C8 LT2 +250 WHP', hp_delta: 250, price: 44437.95, parts: ['Supercharger Kit', 'Clutch Box', 'Blower Camshaft'], description: 'The most comprehensive package, featuring a supercharger, a custom camshaft, and extensive tuning for maximum horsepower.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' } ] };
@@ -600,6 +630,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentHpGroup = document.getElementById('current-hp-group');
     
     // --- INITIAL FLOW & VIN ELEMENTS ---
+    const welcomeContainer = document.getElementById('welcome-container');
+    const startConfigBtn = document.getElementById('start-config-btn');
+    const firstNameInput = document.getElementById('first-name');
+    const userNameSpans = document.querySelectorAll('.user-name');
+    const userNamePossessiveSpan = document.querySelector('.user-name-possessive');
     const initialChoiceContainer = document.getElementById('initial-choice-container');
     const questionnaireContainer = document.getElementById('questionnaire-container');
     const startManualBtn = document.getElementById('start-manual-btn');
@@ -612,10 +647,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const vinStatus = document.getElementById('vin-status');
     const vinBackBtn = document.getElementById('vin-back-btn');
     const uploadVinImageInput = document.getElementById('upload-vin-image-input');
-    // MODIFIED: Added a constant for the new upload button
     const uploadVinBtn = document.getElementById('upload-vin-btn'); 
-    
-    // --- ADDED: CAMERA ELEMENTS ---
+    const buildTitleVehicleName = document.getElementById('build-title-vehicle-name');
+    const choiceBackBtn = document.getElementById('choice-back-btn');
+    const vehicleModelNameSpans = document.querySelectorAll('.vehicle-model-name');
+
+    // --- CAMERA ELEMENTS ---
     const snapVinBtn = document.getElementById('snap-vin-btn');
     const cameraModal = document.getElementById('camera-modal');
     const cameraStream = document.getElementById('camera-stream');
@@ -624,17 +661,48 @@ document.addEventListener('DOMContentLoaded', function() {
     const snapshotCanvas = document.getElementById('snapshot-canvas');
     let currentStream = null;
 
-
     let currentStep = 1;
     let userVin = null;
+    let userFirstName = '';
 
     // --- INITIAL FLOW LOGIC ---
+    startConfigBtn.addEventListener('click', () => {
+        const name = firstNameInput.value.trim();
+        if (name === '') {
+            firstNameInput.style.borderColor = 'var(--color-primary)';
+            setTimeout(() => { firstNameInput.style.borderColor = ''; }, 2000);
+            return;
+        }
+        userFirstName = name;
+        userNameSpans.forEach(span => { span.textContent = userFirstName; });
+
+        if (userFirstName.toLowerCase().endsWith('s')) {
+            userNamePossessiveSpan.textContent = userFirstName + "'";
+        } else {
+            userNamePossessiveSpan.textContent = userFirstName + "'s";
+        }
+
+        welcomeContainer.classList.remove('active');
+        welcomeContainer.classList.add('hidden-field');
+        initialChoiceContainer.classList.remove('hidden-field');
+        initialChoiceContainer.classList.add('active');
+    });
+    
+    choiceBackBtn.addEventListener('click', () => {
+        initialChoiceContainer.classList.remove('active');
+        initialChoiceContainer.classList.add('hidden-field');
+        welcomeContainer.classList.remove('hidden-field');
+        welcomeContainer.classList.add('active');
+        buildTitleVehicleName.textContent = '';
+    });
+
     startManualBtn.addEventListener('click', () => {
         initialChoiceContainer.classList.remove('active');
         initialChoiceContainer.classList.add('hidden-field');
         questionnaireContainer.classList.remove('hidden-field');
         questionnaireContainer.classList.add('active');
         initializeProgressBar();
+        updateBuildTitle(); 
     });
 
     startVinBtn.addEventListener('click', () => {
@@ -645,19 +713,29 @@ document.addEventListener('DOMContentLoaded', function() {
     vinBackBtn.addEventListener('click', () => {
         vinLookupContainer.classList.add('hidden-field');
         initialButtons.classList.remove('hidden-field');
-        showStatus(''); // Clear status message
+        showStatus('');
         vinInput.value = '';
     });
 
     function showStatus(message, isError = false, isInfo = false) {
         vinStatus.textContent = message;
-        vinStatus.className = 'status-message'; // Reset classes
+        vinStatus.className = 'status-message';
         if (message) {
             if (isError) vinStatus.classList.add('error');
             if (isInfo) vinStatus.classList.add('info');
             vinStatus.style.display = 'block';
         } else {
             vinStatus.style.display = 'none';
+        }
+    }
+    
+    function updateBuildTitle() {
+        const make = makeSelect.value;
+        const model = modelSelect.value;
+        if (make && model && make !== 'Other') {
+            buildTitleVehicleName.textContent = `For Your ${make} ${model}`;
+        } else {
+            buildTitleVehicleName.textContent = '';
         }
     }
 
@@ -725,7 +803,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             yearSelect.value = result.ModelYear;
             yearSelect.dispatchEvent(new Event('change'));
-
+            
             makeSelect.disabled = true;
             modelSelect.disabled = true;
             yearSelect.disabled = true;
@@ -744,14 +822,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- VIN SCANNER & CAMERA LOGIC ---
-    function correctVin(vin) {
-        return vin
-            .replace(/[^A-Z0-9]/gi, '')
-            .replace(/O/g, '0')
-            .replace(/Q/g, '0')
-            .replace(/I/g, '1');
-    }
-
+    function correctVin(vin) { return vin.replace(/[^A-Z0-9]/gi, '').replace(/O/g, '0').replace(/Q/g, '0').replace(/I/g, '1'); }
     function extractVin(text) {
         const vinRegex = /VIN[:\s]*([A-Z0-9\-\s]{11,20})/i;
         const match = text.match(vinRegex);
@@ -770,46 +841,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return null;
     }
-    
     function processImage(imageFile) {
         vinLoader.classList.remove('hidden-field');
         showStatus('Scanning image...', false, true);
         decodeVinBtn.disabled = true;
         vinBackBtn.disabled = true;
-
-        Tesseract.recognize(imageFile, 'eng', {
-            logger: m => console.log(m),
-        }).then(({ data: { text } }) => {
-            const vin = extractVin(text);
-            if (vin) {
-                vinInput.value = vin;
-                showStatus('VIN Detected. Click "Look Up" to continue.', false, true);
-            } else {
-                showStatus('VIN not detected in image. Please try again or enter it manually.', true);
-            }
-        }).catch(err => {
-            console.error(err);
-            showStatus('An error occurred during image processing.', true);
-        }).finally(() => {
-            vinLoader.classList.add('hidden-field');
-            decodeVinBtn.disabled = false;
-            vinBackBtn.disabled = false;
-        });
+        Tesseract.recognize(imageFile, 'eng', { logger: m => console.log(m) })
+            .then(({ data: { text } }) => {
+                const vin = extractVin(text);
+                if (vin) {
+                    vinInput.value = vin;
+                    showStatus('VIN Detected. Click "Look Up" to continue.', false, true);
+                } else {
+                    showStatus('VIN not detected in image. Please try again or enter it manually.', true);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showStatus('An error occurred during image processing.', true);
+            })
+            .finally(() => {
+                vinLoader.classList.add('hidden-field');
+                decodeVinBtn.disabled = false;
+                vinBackBtn.disabled = false;
+            });
     }
-
-    // MODIFIED: Added event listener for the new upload button to trigger the file input
-    uploadVinBtn.addEventListener('click', () => {
-        uploadVinImageInput.click();
-    });
-
+    uploadVinBtn.addEventListener('click', () => { uploadVinImageInput.click(); });
     uploadVinImageInput.addEventListener('change', () => {
         const file = uploadVinImageInput.files[0];
         if (!file) return;
         processImage(file);
         uploadVinImageInput.value = '';
     });
-
-    // --- ADDED: Camera Event Listeners and Functions ---
     async function openCamera() {
         if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
             showStatus('Camera access is not supported by your browser.', true);
@@ -825,30 +888,21 @@ document.addEventListener('DOMContentLoaded', function() {
             showStatus('Could not access the camera. Please check permissions.', true);
         }
     }
-
     function closeCamera() {
         if (currentStream) {
             currentStream.getTracks().forEach(track => track.stop());
         }
         cameraModal.classList.add('hidden-field');
     }
-
     snapVinBtn.addEventListener('click', openCamera);
     closeCameraBtn.addEventListener('click', closeCamera);
-
     captureBtn.addEventListener('click', () => {
         const context = snapshotCanvas.getContext('2d');
         snapshotCanvas.width = cameraStream.videoWidth;
         snapshotCanvas.height = cameraStream.videoHeight;
         context.drawImage(cameraStream, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
-        
         closeCamera();
-
-        snapshotCanvas.toBlob(blob => {
-            if (blob) {
-                processImage(blob);
-            }
-        }, 'image/jpeg');
+        snapshotCanvas.toBlob(blob => { if (blob) { processImage(blob); } }, 'image/jpeg');
     });
 
 
@@ -857,19 +911,16 @@ document.addEventListener('DOMContentLoaded', function() {
         makeSelect.innerHTML = '<option value="">-- Select Make --</option>';
         Object.keys(vehicleData).sort().forEach(make => makeSelect.add(new Option(make, make)));
     };
-
     const populateModels = (make) => {
         const models = vehicleData[make] || {};
         modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
         Object.keys(models).sort().forEach(model => modelSelect.add(new Option(model, model)));
     };
-    
     const populateYears = () => {
         yearSelect.innerHTML = '<option value="">-- Select Year --</option>';
         const currentYr = new Date().getFullYear();
         for (let y = currentYr + 1; y >= 2005; y--) yearSelect.add(new Option(y, y));
     };
-
     const populateTrims = (make, model) => {
         trimSelect.innerHTML = '<option value="">-- Select Trim --</option>';
         trimGroup.classList.add('hidden-field');
@@ -890,14 +941,14 @@ document.addEventListener('DOMContentLoaded', function() {
         trimGroup.classList.add('hidden-field');
         handleCorvetteTransmission();
         updateTechInfo();
+        updateBuildTitle();
     });
-
     modelSelect.addEventListener('change', function() {
         populateTrims(makeSelect.value, this.value);
         handleCorvetteTransmission();
         updateTechInfo();
+        updateBuildTitle();
     });
-
     yearSelect.addEventListener('change', () => {
         handleCorvetteTransmission();
         updateTechInfo();
@@ -907,7 +958,6 @@ document.addEventListener('DOMContentLoaded', function() {
     whpSlider.addEventListener('input', (e) => {
         whpOutput.innerHTML = `+${e.target.value} <span>WHP</span>`;
     });
-    
     priorTuneRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             currentHpGroup.classList.toggle('hidden-field', !(this.value === 'Dyno' || this.value === 'Remote'));
@@ -930,64 +980,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        if (newStep === 2) {
+            const model = modelSelect.value;
+            vehicleModelNameSpans.forEach(span => {
+                span.textContent = model || 'vehicle';
+            });
+        }
+
         steps.forEach(step => step.classList.remove('active'));
         document.getElementById(`step-${newStep}`).classList.add('active');
-        
         const totalSteps = progressSteps.length;
         const progressFraction = newStep > 1 ? (newStep - 1) / (totalSteps - 1) : 0;
         const barTotalWidth = 100 - ( (1 / totalSteps) * 100 );
         const fillWidth = progressFraction * barTotalWidth;
         progressBar.style.setProperty('--progress-width', `${fillWidth}%`);
-
         progressSteps.forEach((step, index) => {
             const stepNumber = index + 1;
             step.classList.remove('active', 'completed');
             if (stepNumber < newStep) step.classList.add('completed');
             else if (stepNumber === newStep) step.classList.add('active');
         });
-
         currentStep = newStep;
         window.scrollTo(0, 0);
     };
 
     nextBtns.forEach(btn => btn.addEventListener('click', () => updateStep(currentStep + 1)));
     
-    function goToInitialScreen() {
-        questionnaireContainer.classList.add('hidden-field');
-        questionnaireContainer.classList.remove('active');
-        initialChoiceContainer.classList.remove('hidden-field');
-        initialChoiceContainer.classList.add('active');
-        
-        initialButtons.classList.remove('hidden-field');
-        vinLookupContainer.classList.add('hidden-field');
-        vinInput.value = '';
-        showStatus('');
-
-        form.reset();
-        makeSelect.disabled = false;
-        modelSelect.disabled = false;
-        yearSelect.disabled = false;
-        trimSelect.disabled = false;
-        userVin = null;
-        populateMakes();
-        populateYears();
-        modelSelect.innerHTML = '<option value="">-- Select Make First --</option>';
-        trimSelect.innerHTML = '<option value="">-- Select Model First --</option>';
-        
-        currentStep = 1;
-        progressBar.style.setProperty('--progress-width', `0%`);
-        progressSteps.forEach((step, index) => {
-            step.classList.remove('active', 'completed');
-            if (index === 0) step.classList.add('active');
-        });
-    }
-
     prevBtns.forEach(btn => btn.addEventListener('click', () => {
-        if (currentStep === 1 || (currentStep === 2 && makeSelect.disabled)) {
-            goToInitialScreen();
-            return;
+        if (currentStep === 1) {
+            questionnaireContainer.classList.add('hidden-field');
+            questionnaireContainer.classList.remove('active');
+            initialChoiceContainer.classList.remove('hidden-field');
+            initialChoiceContainer.classList.add('active');
+            updateBuildTitle();
+        } else {
+            updateStep(currentStep - 1);
         }
-        updateStep(currentStep - 1);
     }));
 
     getResultsBtn.addEventListener('click', () => {
@@ -1014,17 +1042,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const year = parseInt(yearSelect.value);
         const trim = trimSelect.value;
         const transmission = document.querySelector('input[name="transmission"]:checked').value;
-        
         tcmUnlockGroup.style.display = transmission === 'Automatic' ? 'block' : 'none';
-
         if (make !== 'Chevrolet' || model !== 'Corvette' || !year || !trim) return;
-
         let techSpec = corvetteTechData.find(spec => 
             spec.year === year && 
             spec.trim === trim &&
             spec.transmission === (transmission === 'Automatic' ? 'Auto' : 'Manual')
         );
-        
         if (techSpec) {
             document.querySelector(`input[name="ecu_unlocked"][value="${techSpec.lockedECU === 'yes' ? 'no' : 'yes'}"]`).checked = true;
             if (transmission === 'Automatic') {
@@ -1036,50 +1060,36 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateResults() {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-
         data.make = makeSelect.value;
         data.model = modelSelect.value;
         data.year = yearSelect.value;
         data.trim = trimSelect.value;
-        
-        if (!data.transmission) {
-            data.transmission = document.querySelector('input[name="transmission"]:checked').value;
-        }
-
+        if (!data.transmission) { data.transmission = document.querySelector('input[name="transmission"]:checked').value; }
         const targetHpDelta = parseInt(data.hp_delta);
         const currentHp = data.current_hp ? parseInt(data.current_hp) : null;
         const priorTuneType = data.prior_tune;
         const selectedYear = parseInt(data.year);
-        
         document.getElementById('summary-vehicle').textContent = `${data.year} ${data.make} ${data.model} ${data.trim || ''}`.trim();
         document.getElementById('summary-transmission').textContent = data.transmission;
-        
         const summaryPowerEl = document.getElementById('summary-power');
         let powerSummaryHTML = '';
-
         if (priorTuneType === 'None' || !currentHp) {
             powerSummaryHTML = `<strong>Target Gain</strong><span>+${targetHpDelta} WHP</span>`;
         } else {
             let hpText = `${currentHp} WHP`;
-            if (priorTuneType === 'Remote') {
-                hpText += ' (unconf.)';
-            }
+            if (priorTuneType === 'Remote') { hpText += ' (unconf.)'; }
             powerSummaryHTML = `<strong>Power Target</strong><span>${hpText} &rarr; +${targetHpDelta} WHP</span>`;
         }
         summaryPowerEl.innerHTML = powerSummaryHTML;
-        
         document.getElementById('power-check-notice').classList.toggle('hidden-field', data.prior_tune !== 'Remote');
-
         const recommendationsContainer = document.getElementById('recommendations-container');
         recommendationsContainer.innerHTML = ''; 
         let totalRecommendations = 0;
         let primaryRecommendationMade = false;
-
         let canHavePackages = false;
         let canHaveDynoTune = true;
         let canHaveParts = true;
         const isEuro = ['Audi', 'Ferrari', 'Lamborghini', 'Mclaren'].includes(data.make);
-
         let techSpec = null;
         if (data.make === 'Chevrolet' && data.model === 'Corvette') {
             techSpec = corvetteTechData.find(spec => spec.year === selectedYear && spec.trim === data.trim && spec.transmission === (data.transmission === 'Automatic' ? 'Auto' : 'Manual'));
@@ -1094,7 +1104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
              canHavePackages = !!packages[data.model];
         }
-
         let unlockCost = 0;
         let unlockReason = [];
         if (techSpec) {
@@ -1107,7 +1116,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 unlockReason.push(`TCM Unlock ($${techSpec.tcmCost})`);
             }
         }
-        
         if (canHavePackages) {
             let vehiclePackages;
             if (data.model === 'Corvette') {
@@ -1116,20 +1124,15 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 vehiclePackages = packages[data.model] || [];
             }
-
             let bestMatch = null;
             let maxHpPackage = null;
             const highHpThreshold = 75;
-
             if (vehiclePackages && vehiclePackages.length > 0) {
                 vehiclePackages.sort((a, b) => a.hp_delta - b.hp_delta);
                 maxHpPackage = vehiclePackages[vehiclePackages.length - 1];
                 bestMatch = vehiclePackages.find(pkg => pkg.hp_delta >= targetHpDelta);
-                if (!bestMatch) {
-                    bestMatch = maxHpPackage;
-                }
+                if (!bestMatch) { bestMatch = maxHpPackage; }
             }
-            
             if (maxHpPackage && targetHpDelta > maxHpPackage.hp_delta + highHpThreshold) {
                 totalRecommendations++;
                 primaryRecommendationMade = true;
@@ -1141,7 +1144,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-box-open"></i> Recommended Package</h3><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;"><div><strong style="font-size: 1.2rem; color: white;">${bestMatch.title}</strong><span class="badge">+${bestMatch.hp_delta} WHP</span></div><span style="font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">$${finalPrice.toLocaleString()}</span></div><a href="${bestMatch.url}" class="btn btn-primary" style="margin-top: 1rem;" target="_blank"><span>View Package Details</span></a></div>`;
             }
         }
-
         if (canHaveParts) {
             const recommendedProducts = products.filter(p => {
                 const productKeywords = p.keywords.map(k => k.toLowerCase());
@@ -1150,20 +1152,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (p.id === 'c8-z06-exhaust-blue' && data.trim !== 'Z06') return false;
                 }
                 if (productKeywords.includes('universal')) return true;
-                
                 const selectedMakeLower = data.make.toLowerCase();
                 const selectedModelLower = data.model.toLowerCase();
                 let makeMatch = productKeywords.includes(selectedMakeLower);
                 if (selectedModelLower === 'r8' && (productKeywords.includes('lamborghini') || productKeywords.includes('audi'))) makeMatch = true;
-                
                 const selectedModelWords = selectedModelLower.split(' ');
                 const modelWordsMatch = selectedModelWords.every(word => productKeywords.includes(word));
                 const singleKeywordModelMatch = productKeywords.includes(selectedModelLower.replace(/[\s-]/g, ''));
                 let modelMatch = modelWordsMatch || singleKeywordModelMatch;
                 if (selectedModelLower === 'r8' && productKeywords.includes('r8')) modelMatch = true;
-
                 if (!makeMatch || !modelMatch) return false;
-
                 if (selectedModelLower === 'corvette') {
                     const isC8 = selectedYear >= 2020;
                     const productIsForC8 = productKeywords.includes('c8');
@@ -1171,10 +1169,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (productIsForC8 && !isC8) return false;
                     if (productIsForC7 && isC8) return false;
                 }
-                
                 return (!p.minYear || selectedYear >= p.minYear) && (!p.maxYear || selectedYear <= p.maxYear);
             }).sort((a, b) => b.price - a.price);
-
             if (recommendedProducts.length > 0) {
                 totalRecommendations++;
                 let productsHtml = recommendedProducts.map(p => `<div class="product-card"><img src="${p.imageUrl}" alt="${p.title}" onerror="this.style.display='none'"><div class="product-card-content"><h4>${p.title}</h4><div class="product-card-footer"><span class="product-price">$${p.price.toLocaleString()}</span><a href="${p.productUrl}" class="btn" target="_blank"><span>View</span></a></div></div></div>`).join('');
@@ -1184,7 +1180,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-shopping-cart"></i> Recommended Parts & Gear</h3><div class="product-grid-container ${containerCollapsedClass}"><div class="product-grid">${productsHtml}</div></div>${showMoreButtonHtml}</div>`;
             }
         }
-        
         if (isEuro && !primaryRecommendationMade) {
             totalRecommendations++;
             recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-cogs"></i> Custom Euro Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, a custom tune is the best path forward to unlock its full potential. We specialize in tuning European vehicles for maximum safe, reliable power.</p><a href="https://www.wikdmotorsports.com/pages/euro-tune" class="btn btn-primary" style="margin-top: 1rem;" target="_blank"><span>Learn About Euro Tuning</span></a></div>`;
@@ -1192,7 +1187,6 @@ document.addEventListener('DOMContentLoaded', function() {
              totalRecommendations++;
              recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-cogs"></i> Custom Dyno Tune Recommended</h3><p style="color: var(--color-text-muted);">For your vehicle and goals, a custom dyno tune is the best path forward. This allows us to tailor every parameter to your specific modifications for maximum safe, reliable power.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">Required Unlocks: ${unlockReason.join(' + ')}.</p>` : ''}</div>`;
         }
-
         if (totalRecommendations === 0) {
             recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-question-circle"></i> No Automatic Recommendations</h3><p style="color: var(--color-text-muted);">Based on your specific vehicle and goals, we don't have an automatic recommendation. This often means a fully custom approach is best. Please contact one of our experts to discuss your build.</p></div>`;
         }
@@ -1202,7 +1196,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const target = e.target;
         const contactBtn = target.closest('.contact-expert-btn');
         const showMoreBtn = target.closest('.show-more-btn');
-        if (contactBtn) { e.preventDefault(); updateStep(5); }
+        if (contactBtn) { 
+            e.preventDefault(); 
+            const customerFirstNameInput = document.getElementById('customer-first-name');
+            if (userFirstName && !customerFirstNameInput.value) {
+                customerFirstNameInput.value = userFirstName;
+            }
+            updateStep(5); 
+        }
         if (showMoreBtn) {
             e.preventDefault();
             const container = showMoreBtn.closest('.result-card').querySelector('.product-grid-container');
@@ -1216,19 +1217,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('generate-email-btn').addEventListener('click', function(e) {
         e.preventDefault();
-        const nameInput = document.getElementById('customer-name');
+        const firstNameInputContact = document.getElementById('customer-first-name');
+        const lastNameInputContact = document.getElementById('customer-last-name');
         const phoneInput = document.getElementById('customer-phone');
-        if (!nameInput.value || !phoneInput.value) {
-            if (!nameInput.value) nameInput.style.borderColor = 'var(--color-primary)';
-            if (!phoneInput.value) phoneInput.style.borderColor = 'var(--color-primary)';
-            setTimeout(() => { nameInput.style.borderColor = ''; phoneInput.style.borderColor = ''; }, 2000);
+        
+        let isValid = true;
+        if (!firstNameInputContact.value) {
+            firstNameInputContact.style.borderColor = 'var(--color-primary)';
+            isValid = false;
+        }
+        if (!lastNameInputContact.value) {
+            lastNameInputContact.style.borderColor = 'var(--color-primary)';
+            isValid = false;
+        }
+        if (!phoneInput.value) {
+            phoneInput.style.borderColor = 'var(--color-primary)';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            setTimeout(() => { 
+                firstNameInputContact.style.borderColor = ''; 
+                lastNameInputContact.style.borderColor = ''; 
+                phoneInput.style.borderColor = ''; 
+            }, 2000);
             return;
         }
+        
+        const customerFullName = `${firstNameInputContact.value.trim()} ${lastNameInputContact.value.trim()}`;
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         if (!data.transmission) data.transmission = document.querySelector('input[name="transmission"]:checked').value;
-
+        
         makeSelect.disabled = false;
         modelSelect.disabled = false;
         yearSelect.disabled = false;
@@ -1243,37 +1264,8 @@ document.addEventListener('DOMContentLoaded', function() {
             yearSelect.disabled = true;
             trimSelect.disabled = true;
         }
-
         const subject = `Tuning Inquiry: ${finalYear} ${finalMake} ${finalModel} ${finalTrim || ''}`.trim();
-        const body = `Hello WIKD Motorsports Team,
-
-My name is ${data.customer_name}, and I've filled out the tuning configurator. I am interested in discussing my build.
-
-[PLEASE ADD ANY QUESTIONS OR COMMENTS HERE]
-
-====================
-
-MY CONTACT INFO:
-Name: ${data.customer_name}
-Phone: ${data.customer_phone}
-
-====================
-
-CONFIGURATOR BUILD SUMMARY:
-Vehicle: ${finalYear} ${finalMake} ${finalModel} ${finalTrim || ''}
-VIN: ${userVin || 'Not Provided'}
-Transmission: ${data.transmission}
-Prior Tune History: ${data.prior_tune}
-Current HP: ${data.current_hp ? data.current_hp + ' WHP' : 'N/A'}
-Target WHP Gain: +${data.hp_delta} WHP
-
-ECU Unlocked: ${data.ecu_unlocked}
-TCM Unlocked: ${data.transmission === 'Automatic' ? data.tcm_unlocked : 'N/A'}
-Primary Fuel: ${data.fuel_type}
-
-Existing Mods:
-${data.prior_mods || 'None listed'}
-`;
+        const body = `Hello WIKD Motorsports Team,\n\nMy name is ${customerFullName}, and I've filled out the tuning configurator. I am interested in discussing my build.\n\n[PLEASE ADD ANY QUESTIONS OR COMMENTS HERE]\n\n====================\n\nMY CONTACT INFO:\nName: ${customerFullName}\nPhone: ${data.customer_phone}\n\n====================\n\nCONFIGURATOR BUILD SUMMARY:\nVehicle: ${finalYear} ${finalMake} ${finalModel} ${finalTrim || ''}\nVIN: ${userVin || 'Not Provided'}\nTransmission: ${data.transmission}\nPrior Tune History: ${data.prior_tune}\nCurrent HP: ${data.current_hp ? data.current_hp + ' WHP' : 'N/A'}\nTarget WHP Gain: +${data.hp_delta} WHP\n\nECU Unlocked: ${data.ecu_unlocked}\nTCM Unlocked: ${data.transmission === 'Automatic' ? data.tcm_unlocked : 'N/A'}\nPrimary Fuel: ${data.fuel_type}\n\nExisting Mods:\n${data.prior_mods || 'None listed'}\n`;
         window.location.href = `mailto:sales@wikdmotorsports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
 
