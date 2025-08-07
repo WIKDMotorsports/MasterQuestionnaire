@@ -194,24 +194,35 @@
         }
         .choice-input { display: none; }
         .choice-label {
-            display: block;
-            background: var(--color-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 24px; /* FIX: Reverted to symmetrical padding */
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--color-text);
+            background-color: transparent;
             border: 2px solid var(--color-border);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
+            transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out;
+            cursor: pointer;
+            text-align: center;
+            min-height: 48px;
         }
-        .choice-label:hover { border-color: var(--color-primary); color: white; }
+
+        .choice-group > *:first-child .choice-label { clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 85%); }
+        .choice-group > *:last-child:not(:first-child) .choice-label { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+        .choice-group > *:not(:first-child):not(:last-child) .choice-label { clip-path: none; border-radius: 0;}
+
+
         .choice-input:checked + .choice-label {
             background-color: var(--color-primary);
             border-color: var(--color-primary);
             color: white;
-            box-shadow: 0 0 20px rgba(255, 59, 48, 0.4);
         }
-        .choice-input:disabled + .choice-label { cursor: not-allowed; opacity: 0.5; }
 
         .btn-group {
             display: flex;
@@ -223,7 +234,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 28px;
+            padding: 12px 28px; /* FIX: Reverted to symmetrical padding */
             font-family: var(--font-heading);
             font-size: 1.1rem;
             font-weight: 600;
@@ -234,13 +245,21 @@
             position: relative;
             overflow: hidden;
             transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 85%);
             cursor: pointer;
             text-align: center;
             text-decoration: none;
             flex-grow: 1;
         }
-        .btn span { position: relative; z-index: 2; }
+        .btn.btn-left { clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 85%); }
+        .btn.btn-right { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+
+        /* FIX: Added rule to precisely align text in all buttons */
+        .btn span, .choice-label span { 
+            position: relative; 
+            z-index: 2; 
+            top: 1px; /* Nudge text down for optical alignment */
+        }
+        
         .btn::before {
             content: '';
             position: absolute;
@@ -252,20 +271,22 @@
             transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
         }
         .btn:hover { color: white; border-color: var(--color-primary); }
-        .btn:hover::before { transform: translateX(0); }
+        .btn.btn-left:hover::before { transform: translateX(0); }
+        .btn.btn-right:hover::before { transform: translateX(0); }
+
         .btn-primary { border-color: var(--color-primary); color: var(--color-primary); }
         .btn-primary:hover { color: white; }
 
-        .btn-primary-filled {
+        .btn-primary-filled, .btn.selected {
             background-color: var(--color-primary);
             border-color: var(--color-primary);
             color: white;
         }
-        .btn-primary-filled:hover {
+        .btn-primary-filled:hover, .btn.selected:hover {
             background-color: #e03024;
             border-color: #e03024;
         }
-        .btn-primary-filled::before {
+        .btn-primary-filled::before, .btn.selected::before {
             display: none;
         }
 
@@ -287,7 +308,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            clip-path: polygon(10px 0, 100% 0, 100% 85%, 90% 100%, 0 100%, 0 10px);
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+        }
+
+        .btn-add {
+            flex-grow: 0;
+            padding-left: 18px;
+            padding-right: 18px;
         }
         
         .hidden-field { display: none !important; }
@@ -316,9 +343,11 @@
         .product-card img { width: 100%; height: 200px; object-fit: cover; }
         .product-card-content { padding: 1rem; display: flex; flex-direction: column; flex-grow: 1; }
         .product-card-content h4 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; text-transform: none; line-height: 1.4; flex-grow: 1; }
-        .product-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; gap: 1rem; }
-        .product-price { font-size: 1.2rem; font-weight: bold; color: var(--color-primary); flex-shrink: 0; }
+        .product-card-footer { display: flex; justify-content: space-between; align-items: stretch; margin-top: 1rem; gap: 1rem; }
+        .product-price { font-size: 1.2rem; font-weight: bold; color: var(--color-primary); flex-shrink: 0; align-self: center;}
         .product-card-footer .btn { flex-grow: 0; padding: 8px 20px; }
+        .product-card-footer .btn-add { height: 100%; }
+
 
         .product-grid-container { position: relative; transition: max-height 0.5s ease-in-out; }
         .product-grid-container.collapsed { max-height: 360px; overflow: hidden; }
@@ -363,6 +392,35 @@
             max-width: 400px;
         }
 
+        /* E85 Toggle */
+        .e85-toggle-label {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+            background-color: var(--color-border);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .e85-toggle-label .dot {
+            position: absolute;
+            content: '';
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            top: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        input:checked + .e85-toggle-label {
+            background-color: var(--color-primary);
+        }
+        input:checked + .e85-toggle-label .dot {
+            transform: translateX(24px);
+        }
+
         @media (max-width: 640px) {
             .widget-container { padding-left: 1rem; padding-right: 1rem; }
             .panel { padding: 1.5rem; }
@@ -389,7 +447,7 @@
                     <input type="text" id="first-name" class="form-control" placeholder="e.g., Alex">
                 </div>
                 <div class="btn-group" style="justify-content: flex-end;">
-                     <button type="button" class="btn btn-primary-filled" id="start-config-btn"><span>Let's Go <i class="fas fa-arrow-right"></i></span></button>
+                     <button type="button" class="btn btn-primary-filled btn-right" id="start-config-btn"><span>Let's Go <i class="fas fa-arrow-right"></i></span></button>
                 </div>
             </div>
         </div>
@@ -415,19 +473,19 @@
                         </div>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn" id="vin-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
-                        <button type="button" class="btn btn-primary-filled" id="decode-vin-btn"><span><i class="fas fa-search"></i> Look Up</span></button>
+                        <button type="button" class="btn btn-left" id="vin-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                        <button type="button" class="btn btn-primary-filled btn-right" id="decode-vin-btn"><span><i class="fas fa-search"></i> Look Up</span></button>
                     </div>
                     <div id="vin-loader" class="hidden-field"><div class="spinner"></div></div>
                     <p id="vin-status" class="status-message"></p>
                 </div>
                 <div id="initial-buttons">
                     <div class="btn-group">
-                        <button type="button" class="btn" id="choice-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                        <button type="button" class="btn btn-left" id="choice-back-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn" id="start-vin-btn"><span><i class="fas fa-barcode"></i> Start with VIN</span></button>
-                        <button type="button" class="btn" id="start-manual-btn"><span><i class="fas fa-edit"></i> Fill Out Manually</span></button>
+                        <button type="button" class="btn btn-left" id="start-vin-btn"><span><i class="fas fa-barcode"></i> Start with VIN</span></button>
+                        <button type="button" class="btn btn-right" id="start-manual-btn"><span><i class="fas fa-edit"></i> Fill Out Manually</span></button>
                     </div>
                 </div>
             </div>
@@ -465,13 +523,14 @@
                         <div class="form-group">
                             <label>Transmission</label>
                             <div class="choice-group" id="transmission-choice-group">
-                                <input type="radio" id="trans-manual" name="transmission" value="Manual" class="choice-input" checked><label for="trans-manual" class="choice-label">Manual</label>
-                                <input type="radio" id="trans-auto" name="transmission" value="Automatic" class="choice-input"><label for="trans-auto" class="choice-label">Automatic</label>
+                                <!-- FIX: Wrapped text in spans for alignment control -->
+                                <div><input type="radio" id="trans-manual" name="transmission" value="Manual" class="choice-input" checked><label for="trans-manual" class="choice-label"><span>Manual</span></label></div>
+                                <div><input type="radio" id="trans-auto" name="transmission" value="Automatic" class="choice-input"><label for="trans-auto" class="choice-label"><span>Automatic</span></label></div>
                             </div>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
-                            <button type="button" class="btn btn-primary next-btn"><span>Next <i class="fas fa-arrow-right"></i></span></button>
+                            <button type="button" class="btn prev-btn btn-left"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                            <button type="button" class="btn btn-primary next-btn btn-right"><span>Next <i class="fas fa-arrow-right"></i></span></button>
                         </div>
                     </div>
                 </div>
@@ -482,38 +541,42 @@
                         <div class="form-group" id="tcm-unlock-group">
                             <label>TCM Unlocked?</label>
                             <div class="choice-group">
-                                <input type="radio" id="tcm-yes" name="tcm_unlocked" value="yes" class="choice-input"><label for="tcm-yes" class="choice-label">Yes</label>
-                                <input type="radio" id="tcm-no" name="tcm_unlocked" value="no" class="choice-input" checked><label for="tcm-no" class="choice-label">No</label>
+                                <!-- FIX: Wrapped text in spans for alignment control -->
+                                <div><input type="radio" id="tcm-yes" name="tcm_unlocked" value="yes" class="choice-input"><label for="tcm-yes" class="choice-label"><span>Yes</span></label></div>
+                                <div><input type="radio" id="tcm-no" name="tcm_unlocked" value="no" class="choice-input" checked><label for="tcm-no" class="choice-label"><span>No</span></label></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>ECU Unlocked?</label>
                             <div class="choice-group">
-                                <input type="radio" id="ecu-yes" name="ecu_unlocked" value="yes" class="choice-input"><label for="ecu-yes" class="choice-label">Yes</label>
-                                <input type="radio" id="ecu-no" name="ecu_unlocked" value="no" class="choice-input" checked><label for="ecu-no" class="choice-label">No</label>
+                                <!-- FIX: Wrapped text in spans for alignment control -->
+                                <div><input type="radio" id="ecu-yes" name="ecu_unlocked" value="yes" class="choice-input"><label for="ecu-yes" class="choice-label"><span>Yes</span></label></div>
+                                <div><input type="radio" id="ecu-no" name="ecu_unlocked" value="no" class="choice-input" checked><label for="ecu-no" class="choice-label"><span>No</span></label></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Primary Fuel Type</label>
                             <div class="choice-group">
-                                <input type="radio" id="fuel-93" name="fuel_type" value="93 Octane" class="choice-input" checked><label for="fuel-93" class="choice-label">93 Octane</label>
-                                <input type="radio" id="fuel-e85" name="fuel_type" value="E85 / Flex Fuel" class="choice-input"><label for="fuel-e85" class="choice-label">E85 / Flex</label>
-                                <input type="radio" id="fuel-other" name="fuel_type" value="Other" class="choice-input"><label for="fuel-other" class="choice-label">Other</label>
+                                <!-- FIX: Wrapped text in spans for alignment control -->
+                                <div><input type="radio" id="fuel-93" name="fuel_type" value="93 Octane" class="choice-input" checked><label for="fuel-93" class="choice-label"><span>93 Octane</span></label></div>
+                                <div><input type="radio" id="fuel-e85" name="fuel_type" value="E85 / Flex Fuel" class="choice-input"><label for="fuel-e85" class="choice-label"><span>E85 / Flex</span></label></div>
+                                <div><input type="radio" id="fuel-other" name="fuel_type" value="Other" class="choice-input"><label for="fuel-other" class="choice-label"><span>Other</span></label></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Prior Tune</label>
                             <div class="choice-group">
-                                <input type="radio" id="tune-none" name="prior_tune" value="None" class="choice-input" checked><label for="tune-none" class="choice-label">None</label>
-                                <input type="radio" id="tune-dyno" name="prior_tune" value="Dyno" class="choice-input"><label for="tune-dyno" class="choice-label">Dyno Tune</label>
-                                <input type="radio" id="tune-remote" name="prior_tune" value="Remote" class="choice-input"><label for="tune-remote" class="choice-label">Remote Tune</label>
+                                <!-- FIX: Wrapped text in spans for alignment control -->
+                                <div><input type="radio" id="tune-none" name="prior_tune" value="None" class="choice-input" checked><label for="tune-none" class="choice-label"><span>None</span></label></div>
+                                <div><input type="radio" id="tune-dyno" name="prior_tune" value="Dyno" class="choice-input"><label for="tune-dyno" class="choice-label"><span>Dyno Tune</span></label></div>
+                                <div><input type="radio" id="tune-remote" name="prior_tune" value="Remote" class="choice-input"><label for="tune-remote" class="choice-label"><span>Remote Tune</span></label></div>
                             </div>
                         </div>
                         <div class="form-group hidden-field" id="current-hp-group">
                             <label for="current-hp">Current Horsepower (WHP)</label>
                             <input type="number" id="current-hp" name="current_hp" class="form-control" placeholder="e.g., 650">
                         </div>
-                        <div class="btn-group"><button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button><button type="button" class="btn btn-primary next-btn"><span>Next <i class="fas fa-arrow-right"></i></span></button></div>
+                        <div class="btn-group"><button type="button" class="btn prev-btn btn-left"><span><i class="fas fa-arrow-left"></i> Back</span></button><button type="button" class="btn btn-primary next-btn btn-right"><span>Next <i class="fas fa-arrow-right"></i></span></button></div>
                     </div>
                 </div>
                 
@@ -529,13 +592,13 @@
                             <input type="range" id="whp-slider" name="hp_delta" min="30" max="1000" value="75" step="5">
                             <div id="whp-output">+75 <span>WHP</span></div>
                         </div>
-                        <div class="btn-group"><button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button><button type="button" class="btn btn-primary" id="get-results-btn"><span>Get Results <i class="fas fa-bolt"></i></span></button></div>
+                        <div class="btn-group"><button type="button" class="btn prev-btn btn-left"><span><i class="fas fa-arrow-left"></i> Back</span></button><button type="button" class="btn btn-primary btn-right" id="get-results-btn"><span>Get Results <i class="fas fa-bolt"></i></span></button></div>
                     </div>
                 </div>
 
                 <div id="step-4" class="form-step">
                     <div class="panel" id="result-panel">
-                        <div class="step-header"><h2>Your Recommendations</h2><p>Based on your selections here are our suggestions.</p></div>
+                        <div class="step-header"><h2>Here's what we can do for you</h2><p>Press '+' to add to your upgrade inquiry.</p></div>
                         <div id="summary-card" class="result-card">
                             <h3><i class="fas fa-car"></i> <span class="user-name-possessive"></span> Build Summary</h3>
                             <div class="result-summary-grid">
@@ -547,15 +610,19 @@
                         <div id="recommendations-container"></div>
                         <div id="power-check-notice" class="result-card hidden-field">
                             <h3><i class="fas fa-tachometer-alt"></i> Power Check Recommended</h3>
-                            <p style="color: var(--color-text-muted);">Since you've had a remote tune previously, we highly recommend a baseline dyno run. This "Power Check" ensures we have accurate data to build upon, guaranteeing the best and safest results for your vehicle. <a href="https://www.wikdmotorsports.com/pages/power-check" target="_blank" style="color: var(--color-primary);">Learn more here.</a></p>
+                            <p style="color: var(--color-text-muted);">Since you've had a remote tune previously, we highly recommend a baseline dyno run. This "Power Check" ensures we have accurate data to build upon, guaranteeing the best and safest results for your vehicle.</p>
+                             <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
+                                <a href="https://www.wikdmotorsports.com/pages/power-check" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                                <button type="button" class="btn btn-add btn-right" data-id="power-check" data-type="service" data-title="Power Check Service" data-price="0"><span>+</span></button>
+                            </div>
                         </div>
                         <div style="text-align: center; margin-top: 3rem;">
                             <h3 style="justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-comments"></i> Next Steps</h3>
                             <p style="color: var(--color-text-muted); margin-bottom: 0;">Ready to upgrade or need a fully custom build? Our experts are here to help craft the perfect solution for you.</p>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back</span></button>
-                            <button type="button" class="btn btn-primary contact-expert-btn"><span>Talk to an Expert <i class="fas fa-envelope"></i></span></button>
+                            <button type="button" class="btn prev-btn btn-left"><span><i class="fas fa-arrow-left"></i> Back</span></button>
+                            <button type="button" class="btn btn-primary contact-expert-btn btn-right"><span>Talk to an Expert <i class="fas fa-envelope"></i></span></button>
                         </div>
                     </div>
                 </div>
@@ -579,9 +646,13 @@
                             <label for="customer-phone">Phone Number</label>
                             <input type="tel" id="customer-phone" name="customer_phone" class="form-control" required placeholder="e.g., (555) 123-4567">
                         </div>
+                        <div class="form-group">
+                            <label for="customer-comments">Questions or Comments (Optional)</label>
+                            <textarea id="customer-comments" name="customer_comments" class="form-control" rows="3" placeholder="e.g., I'd like to discuss a custom camshaft..."></textarea>
+                        </div>
                         <div class="btn-group">
-                            <button type="button" class="btn prev-btn"><span><i class="fas fa-arrow-left"></i> Back to Results</span></button>
-                            <button type="button" class="btn btn-primary" id="generate-email-btn"><span>Generate Email <i class="fas fa-paper-plane"></i></span></button>
+                            <button type="button" class="btn prev-btn btn-left"><span><i class="fas fa-arrow-left"></i> Back to Results</span></button>
+                            <button type="button" class="btn btn-primary btn-right" id="generate-email-btn"><span>Generate Email <i class="fas fa-paper-plane"></i></span></button>
                         </div>
                     </div>
                 </div>
@@ -602,11 +673,37 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- MASTER DATA (omitted for brevity, same as original) ---
+    // --- MASTER DATA ---
     const vehicleData = { 'Audi': { 'R8': { trims: ['Standard'] } }, 'Cadillac': { 'CT5-V Blackwing': { trims: ['Standard'] }, 'CTS-V': { trims: ['Gen 2', 'Gen 3'] }, 'CT4-V Blackwing': { trims: ['Standard'] }, 'Escalade': { trims: ['Standard'] } }, 'Chevrolet': { 'Corvette': { trims: ['Base', 'Z06', 'ZR1', 'Stingray', 'Grand Sport', 'E-Ray'] }, 'Camaro': { trims: ['Gen 5', 'Gen 6 SS', 'Gen 6 ZL1'] }, 'Silverado 1500': { trims: ['Standard'] }, 'Tahoe': { trims: ['Standard'] } }, 'Ferrari': { '458 Italia': { trims: ['Standard'] } }, 'GMC': { 'Sierra 1500': { trims: ['Standard'] }, 'Yukon': { trims: ['Standard'] } }, 'Lamborghini': { 'Huracan': { trims: ['EVO', 'STO'] } }, 'Mclaren': { '570S': { trims: ['Standard'] }, '540C': { trims: ['Standard'] }, '570GT': { trims: ['Standard'] }, '720S': { trims: ['Standard'] } }, 'Other': { 'Other': { trims: ['Other'] } } };
     const corvetteTechData = [ { year: 2005, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2005, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2015, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2016, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "ZR1", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2020, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2021, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2022, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2025, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 1500, tcmCost: 400 }, { year: 2025, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "ZR1", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 } ];
-    const packages = { 'CT5-V Blackwing': [ { id: 'bw-35', title: '+35 WHP Package (E85)', hp_delta: 35, price: 4510, parts: ['Flex Fuel Kit', 'Intake System', 'Custom E85 Dyno Tune'], description: 'A simple package to get you started with E85.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-75', title: '+75 WHP Package', hp_delta: 75, price: 4760, parts: ['WIKD Intake', 'Lower Pulley Upgrade', 'Performance Plugs & Wires'], description: 'Great bang for your buck power increase.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-140', title: '+140 WHP Package', hp_delta: 140, price: 10813, parts: ['Big Gulp Intake', 'Upper & Lower Pulleys', 'Long Tube Headers'], description: 'Serious power gains with supporting bolt-ons.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-190', title: '+190 WHP Package', hp_delta: 190, price: 12473, parts: ['Ported Supercharger', 'Throttle Body', 'Meth Injection'], description: 'Pushing the stock blower to its limits.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' }, { id: 'bw-250', title: '+250 WHP Package', hp_delta: 250, price: 20254, parts: ['Custom Camshaft', 'WIKD Subzero Chiller', 'WIKD Fuel Package'], description: 'A comprehensive package for major power.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages' } ], 'Camaro': [ { id: 'camaro-stage1', title: 'Gen 6 Camaro Stage 1', hp_delta: 50, price: 3500, parts: ['Cold Air Intake', 'Custom Dyno Tune'], description: 'A great starting point for your Gen 6 Camaro.', url: 'https://www.wikdmotorsports.com/pages/6th-gen-camaro-tuning-packages'} ], 'Corvette_C7': [ { id: 'c7-lt4-50', title: 'C7 LT4 +50 WHP (E85)', hp_delta: 50, price: 2610, parts: ['Flex Fuel Kit', 'Big Gulp Intake'], description: 'Entry-level power for C7 LT4 on E85.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-75', title: 'C7 LT4 +75 WHP', hp_delta: 75, price: 4786, parts: ['Intake', '9.2” Pulley', 'Spark Plug Wires'], description: 'Budget-friendly bolt-on performance for the C7 LT4.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-125', title: 'C7 LT4 +125 WHP', hp_delta: 125, price: 9944, parts: ['Headers', 'Pulley Combo', 'Catch Can'], description: 'Serious performance gain for your C7 Z06 or ZR1.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-175', title: 'C7 LT4 +175 WHP', hp_delta: 175, price: 13400, parts: ['Ported Snout', 'Throttle Body', 'Meth Injection'], description: 'An aggressive package for street and strip C7s.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' }, { id: 'c7-lt4-250', title: 'C7 LT4 +250 WHP', hp_delta: 250, price: 23450, parts: ['Camshaft', 'Interchiller', 'Head Studs'], description: 'A full build to max out the factory LT4 supercharger.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages' } ], 'Corvette_C8': [ { id: 'c8-lt2-60', title: 'C8 LT2 +50-70WHP', hp_delta: 60, price: 5390.45, parts: ['Flex Fuel Kit', 'Cold Air Intake'], description: 'Boosts performance with a Flex Fuel Kit, Cold Air Intake, and custom dyno tuning for E85 fuel.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-77', title: 'C8 LT2 +75-80 WHP', hp_delta: 77.5, price: 13735.10, parts: ['Cold Air Intake', 'Headers', 'Off-Road Pipe', 'Intake Manifold'], description: 'Features intake and exhaust upgrades, including headers, an off-road pipe, and a new throttle body.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-120', title: 'C8 LT2 +120 WHP', hp_delta: 120, price: 23171.43, parts: ['Blower Camshaft', 'Cylinder Heads', 'Head Studs'], description: 'Includes camshaft and cylinder head upgrades along with intake/exhaust enhancements for a comprehensive power boost.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-200-mag', title: 'C8 LT2 +200 WHP Magnuson', hp_delta: 200, price: 23105.07, parts: ['Magnuson Supercharger Kit'], description: 'A Magnuson Supercharger system provides a massive power increase with custom dyno tuning.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-200-pro', title: 'C8 LT2 +200 WHP Procharger', hp_delta: 200, price: 25603.28, parts: ['Procharger Supercharger Kit'], description: 'Features a Procharger Supercharger system for a huge jump in power, including a custom tune.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' }, { id: 'c8-lt2-250', title: 'C8 LT2 +250 WHP', hp_delta: 250, price: 44437.95, parts: ['Supercharger Kit', 'Clutch Box', 'Blower Camshaft'], description: 'The most comprehensive package, featuring a supercharger, a custom camshaft, and extensive tuning for maximum horsepower.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages' } ] };
-    const products = [ { id: 'mclaren-tips-black', title: '570S & 720S Titanium Exhaust Tips (Black)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1938.jpg?v=1734029090&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-black', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-purple', title: '570S & 720S Titanium Exhaust Tips (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1848.jpg?v=1734029242&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-1', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-inner-purple', title: '570S & 720S Titanium Exhaust Tips (Inner Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1817.jpg?v=1734029625&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-inner-purple-finish', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-style1-purple', title: '570S & 720S Titanium Exhaust Tips Style 1 (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1824.jpg?v=1734029629&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-style2-purple', title: '570S & 720S Titanium Exhaust Tips Style 2 (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1904.jpg?v=1734029609&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-2', keywords: ['570s', '720s', 'mclaren'] }, { id: 'c8-downpipe-purple', title: 'Chevy Corvette C8 Catless Titanium Downpipe 2020+ (Brushed Purple)', price: 999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4654.jpg?v=1733425387&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/chevy-corvette-c8-catless-titanium-downpipe-2020-brushed-purple', keywords: ['chevrolet', 'corvette', 'c8'], minYear: 2020 }, { id: 'c8-catback-blue', title: 'Corvette C8 Titanium Catback 2020+ (Brushed Blue)', price: 3999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4623.jpg?v=1733425432&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/corvette-c8-titanium-catback-2020-brushed-blue', keywords: ['chevrolet', 'corvette', 'c8'], minYear: 2020 }, { id: 'c8-z06-exhaust-blue', title: 'Corvette C8 Z06 Titanium Sport Exhaust System 2023+ (Without Valve) (Brushed Blue)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/1_2abafc71-96c5-49fc-8b12-a4f461d1dde7.jpg?v=1733425492&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/corvette-c8-z06-titanium-sport-exhaust-system-2023-without-valve-brushed-blue', keywords: ['chevrolet', 'corvette', 'c8', 'z06'], minYear: 2023 }, { id: 'plate-frames', title: 'Custom License Plate Frames', price: 9.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_5685.jpg?v=1745934158&width=1080', productUrl: 'https://www.wikdmotorsports.com/products/custom-plate-frames', keywords: ['universal'] }, { id: 'ferrari-458-catback-gold', title: 'Ferrari 458 Italia 4.5L Titanium Catback 2010-2015 (Golden Polish)', price: 3999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4415.jpg?v=1733425565&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-2010-2015-golden-polish', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'ferrari-458-catback-muffler-blue', title: 'Ferrari 458 Italia 4.5L Titanium Catback With Muffler 2010 - 2015 (Brushed Blue)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4436.jpg?v=1733425637&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-with-muffler-2010-2015-brushed-blue', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'ferrari-458-downpipe-blue', title: 'Ferrari 458 Italia 4.5L Titanium Downpipe 2010-2015 (Brushed Blue)', price: 2999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4682.jpg?v=1733425697&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-downpipe-2010-2015-brushed-blue', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'jet-tag', title: 'GET WIKD Jet Tag - WIKD', price: 6.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/GET_WIKD_Jet_Tag_-_WIKD.jpg?v=1745934173&width=2000', productUrl: 'https://www.wikdmotorsports.com/products/get-wikd-jet-tag-wikd', keywords: ['universal'] }, { id: 'huracan-r8-header-black', title: 'Lamborghini Huracan EVO / Audi R8 Header (Black Ceramic Coated)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Blk-1.png?v=1734023095&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-black-ceramic-coated', keywords: ['lamborghini', 'huracan', 'audi', 'r8'] }, { id: 'huracan-r8-header-gold', title: 'Lamborghini Huracan EVO Header / Audi R8 (Golden Ceramic Coated)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Gold-1.png?v=1734023095&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-golden-ceramic-coated', keywords: ['lamborghini', 'huracan', 'audi', 'r8'] }, { id: 'huracan-catback-muffler-purple', title: 'Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback With Muffler,2019+ (Brushed Purple)', price: 5999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4452.jpg?v=1733425766&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-with-muffler-2019-brushed-purple', keywords: ['lamborghini', 'huracan'], minYear: 2019 }, { id: 'huracan-catback-gold', title: 'Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback, 2019+ (Golden Polish)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4504.jpg?v=1733425822&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-2019-golden-polish', keywords: ['lamborghini', 'huracan'], minYear: 2019 }, { id: 'mclaren-570-catback-purple', title: 'Mclaren 540C/570GT/570S Twin-Turbo 3.8 V8 Titanium Catback 2015+ (Brushed Purple)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4382.jpg?v=1733425878&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-540c-570gt-570s-twin-turbo-38-v8-titanium-catback-2015-brushed-purple', keywords: ['mclaren', '540c', '570gt', '570s'], minYear: 2015 }, { id: 'mclaren-570-downpipe-purple', title: 'Mclaren 570S 540C 570GT 3.8L Twin-Turbocharged V8 Titanium Downpipe 2015+ (Brushed Purple)', price: 2699.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4698.jpg?v=1734125210&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-570s-540c-570gt-38l-twin-turbocharged-v8-titanium-downpipe-2015-brushed-purple', keywords: ['mclaren', '570s', '540c', '570gt'], minYear: 2015 }, { id: 'mclaren-720-downpipe-purple', title: 'Mclaren 720S Decat Titanium Downpipe 2018+ (Brushed Purple)', price: 3349.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4559_f71fde06-0135-4c14-9064-d85084463868.jpg?v=1734125231&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-720s-decat-titanium-downpipe-2018-brushed-purple', keywords: ['mclaren', '720s'], minYear: 2018 }, { id: 'mclaren-720-catback-purple', title: 'Mclaren 720S Titanium Catback 2018+', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4784.jpg?v=1733426002&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-720s-titanium-catback-2018-brushed-purple', keywords: ['mclaren', '720s'], minYear: 2018 }, { id: 'c7-fan-shroud', title: 'WIKD Motorsports - Fan & Shroud for C7 Corvette', price: 799.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC07228.jpg?v=1735251043&width=800', productUrl: 'https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette', keywords: ['chevrolet', 'corvette', 'c7'] }, { id: 'universal-fan-shroud', title: 'WIKD Motorsports - Universal 18in Fan & Shroud', price: 99.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/dsc08287_1.jpg?v=1734036302&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette-copy', keywords: ['universal'] }, { id: 'tuned-sticker', title: 'WIKD Tuned Sticker', price: 4.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/WIKD_Tuned_Sticker_Side_Window_Application.jpg?v=1745934178&width=2000', productUrl: 'https://www.wikdmotorsports.com/products/wikd-tuned-sticker', keywords: ['universal'] }, ];
+    const packages = {
+        'CT5-V Blackwing': [
+            { id: 'bw-35', title: '+35 WHP Package (E85)', hp_delta: 35, price: 4510, parts: ['Flex Fuel Kit', 'Intake System', 'Custom E85 Dyno Tune'], description: 'A simple package to get you started with E85.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: false },
+            { id: 'bw-75', title: '+75 WHP Package', hp_delta: 75, price: 4760, parts: ['WIKD Intake', 'Lower Pulley Upgrade', 'Performance Plugs & Wires'], description: 'Great bang for your buck power increase.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'bw-140', title: '+140 WHP Package', hp_delta: 140, price: 10813, parts: ['Big Gulp Intake', 'Upper & Lower Pulleys', 'Long Tube Headers'], description: 'Serious power gains with supporting bolt-ons.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'bw-190', title: '+190 WHP Package', hp_delta: 190, price: 12473, parts: ['Ported Supercharger', 'Throttle Body', 'Meth Injection'], description: 'Pushing the stock blower to its limits.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'bw-250', title: '+250 WHP Package', hp_delta: 250, price: 20254, parts: ['Custom Camshaft', 'WIKD Subzero Chiller', 'WIKD Fuel Package'], description: 'A comprehensive package for major power.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 }
+        ],
+        'Camaro': [
+            { id: 'camaro-stage1', title: 'Gen 6 Camaro Stage 1', hp_delta: 50, price: 3500, parts: ['Cold Air Intake', 'Custom Dyno Tune'], description: 'A great starting point for your Gen 6 Camaro.', url: 'https://www.wikdmotorsports.com/pages/6th-gen-camaro-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 }
+        ],
+        'Corvette_C7': [
+            { id: 'c7-lt4-50', title: 'C7 LT4 +50 WHP (E85)', hp_delta: 50, price: 2610, parts: ['Flex Fuel Kit', 'Big Gulp Intake'], description: 'Entry-level power for C7 LT4 on E85.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: false },
+            { id: 'c7-lt4-75', title: 'C7 LT4 +75 WHP', hp_delta: 75, price: 4786, parts: ['Intake', '9.2” Pulley', 'Spark Plug Wires'], description: 'Budget-friendly bolt-on performance for the C7 LT4.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 },
+            { id: 'c7-lt4-125', title: 'C7 LT4 +125 WHP', hp_delta: 125, price: 9944, parts: ['Headers', 'Pulley Combo', 'Catch Can'], description: 'Serious performance gain for your C7 Z06 or ZR1.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 },
+            { id: 'c7-lt4-175', title: 'C7 LT4 +175 WHP', hp_delta: 175, price: 13400, parts: ['Ported Snout', 'Throttle Body', 'Meth Injection'], description: 'An aggressive package for street and strip C7s.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 },
+            { id: 'c7-lt4-250', title: 'C7 LT4 +250 WHP', hp_delta: 250, price: 23450, parts: ['Camshaft', 'Interchiller', 'Head Studs'], description: 'A full build to max out the factory LT4 supercharger.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 }
+        ],
+        'Corvette_C8': [
+            { id: 'c8-lt2-60', title: 'C8 LT2 +50-70WHP', hp_delta: 60, price: 5390.45, parts: ['Flex Fuel Kit', 'Cold Air Intake'], description: 'Boosts performance with a Flex Fuel Kit, Cold Air Intake, and custom dyno tuning for E85 fuel.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'c8-lt2-77', title: 'C8 LT2 +75-80 WHP', hp_delta: 77.5, price: 13735.10, parts: ['Cold Air Intake', 'Headers', 'Off-Road Pipe', 'Intake Manifold'], description: 'Features intake and exhaust upgrades, including headers, an off-road pipe, and a new throttle body.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'c8-lt2-120', title: 'C8 LT2 +120 WHP', hp_delta: 120, price: 23171.43, parts: ['Blower Camshaft', 'Cylinder Heads', 'Head Studs'], description: 'Includes camshaft and cylinder head upgrades along with intake/exhaust enhancements for a comprehensive power boost.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'c8-lt2-200-mag', title: 'C8 LT2 +200 WHP Magnuson', hp_delta: 200, price: 23105.07, parts: ['Magnuson Supercharger Kit'], description: 'A Magnuson Supercharger system provides a massive power increase with custom dyno tuning.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'c8-lt2-200-pro', title: 'C8 LT2 +200 WHP Procharger', hp_delta: 200, price: 25603.28, parts: ['Procharger Supercharger Kit'], description: 'Features a Procharger Supercharger system for a huge jump in power, including a custom tune.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
+            { id: 'c8-lt2-250', title: 'C8 LT2 +250 WHP', hp_delta: 250, price: 44437.95, parts: ['Supercharger Kit', 'Clutch Box', 'Blower Camshaft'], description: 'The most comprehensive package, featuring a supercharger, a custom camshaft, and extensive tuning for maximum horsepower.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 }
+        ]
+    };
+    const products = [ { id: 'mclaren-tips-black', title: '570S & 720S Titanium Exhaust Tips (Black)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1938.jpg?v=1734029090&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-black', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-purple', title: '570S & 720S Titanium Exhaust Tips (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1848.jpg?v=1734029242&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-1', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-inner-purple', title: '570S & 720S Titanium Exhaust Tips (Inner Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1817.jpg?v=1734029625&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-inner-purple-finish', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-style1-purple', title: '570S & 720S Titanium Exhaust Tips Style 1 (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1824.jpg?v=1734029629&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-style2-purple', title: '570S & 720S Titanium Exhaust Tips Style 2 (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1904.jpg?v=1734029609&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-2', keywords: ['570s', '720s', 'mclaren'] }, { id: 'c8-downpipe-purple', title: 'Chevy Corvette C8 Catless Titanium Downpipe 2020+ (Brushed Purple)', price: 999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4654.jpg?v=1733425387&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/chevy-corvette-c8-catless-titanium-downpipe-2020-brushed-purple', keywords: ['chevrolet', 'corvette', 'c8'], minYear: 2020 }, { id: 'c8-catback-blue', title: 'Corvette C8 Titanium Catback 2020+ (Brushed Blue)', price: 3999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4623.jpg?v=1733425432&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/corvette-c8-titanium-catback-2020-brushed-blue', keywords: ['chevrolet', 'corvette', 'c8'], minYear: 2020 }, { id: 'c8-z06-exhaust-blue', title: 'Corvette C8 Z06 Titanium Sport Exhaust System 2023+ (Without Valve) (Brushed Blue)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/1_2abafc71-96c5-49fc-8b12-a4f461d1dde7.jpg?v=1733425492&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/corvette-c8-z06-titanium-sport-exhaust-system-2023-without-valve-brushed-blue', keywords: ['chevrolet', 'corvette', 'c8', 'z06'], minYear: 2023 }, { id: 'plate-frames', title: 'Custom License Plate Frames', price: 9.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_5685.jpg?v=1745934158&width=1080', productUrl: 'https://www.wikdmotorsports.com/products/custom-plate-frames', keywords: ['universal'] }, { id: 'ferrari-458-catback-gold', title: 'Ferrari 458 Italia 4.5L Titanium Catback 2010-2015 (Golden Polish)', price: 3999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4415.jpg?v=1733425565&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-2010-2015-golden-polish', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'ferrari-458-catback-muffler-blue', title: 'Ferrari 458 Italia 4.5L Titanium Catback With Muffler 2010 - 2015 (Brushed Blue)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4436.jpg?v=1733425637&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-with-muffler-2010-2015-brushed-blue', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'ferrari-458-downpipe-blue', title: 'Ferrari 458 Italia 4.5L Titanium Downpipe 2010-2015 (Brushed Blue)', price: 2999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4682.jpg?v=1733425697&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-downpipe-2010-2015-brushed-blue', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'jet-tag', title: 'GET WIKD Jet Tag - WIKD', price: 6.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/GET_WIKD_Jet_Tag_-_WIKD.jpg?v=1745934173&width=2000', productUrl: 'https://www.wikdmotorsports.com/products/get-wikd-jet-tag-wikd', keywords: ['universal'] }, { id: 'huracan-r8-header-black', title: 'Lamborghini Huracan EVO / Audi R8 Header (Black Ceramic Coated)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Blk-1.png?v=1734023095&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-black-ceramic-coated', keywords: ['lamborghini', 'huracan', 'audi', 'r8'] }, { id: 'huracan-r8-header-gold', title: 'Lamborghini Huracan EVO Header / Audi R8 (Golden Ceramic Coated)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Gold-1.png?v=1734023095&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-golden-ceramic-coated', keywords: ['lamborghini', 'huracan', 'audi', 'r8'] }, { id: 'huracan-catback-muffler-purple', title: 'Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback With Muffler,2019+ (Brushed Purple)', price: 5999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4452.jpg?v=1733425766&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-with-muffler-2019-brushed-purple', keywords: ['lamborghini', 'huracan'], minYear: 2019 }, { id: 'huracan-catback-gold', title: 'Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback, 2019+ (Golden Polish)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4504.jpg?v=1733425822&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-2019-golden-polish', keywords: ['lamborghini', 'huracan'], minYear: 2019 }, { id: 'mclaren-570-catback-purple', title: 'Mclaren 540C/570GT/570S Twin-Turbo 3.8 V8 Titanium Catback 2015+ (Brushed Purple)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4382.jpg?v=1733425787&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-540c-570gt-570s-twin-turbo-38-v8-titanium-catback-2015-brushed-purple', keywords: ['mclaren', '540c', '570gt', '570s'], minYear: 2015 }, { id: 'mclaren-570-downpipe-purple', title: 'Mclaren 570S 540C 570GT 3.8L Twin-Turbocharged V8 Titanium Downpipe 2015+ (Brushed Purple)', price: 2699.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4698.jpg?v=1734125210&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-570s-540c-570gt-38l-twin-turbocharged-v8-titanium-downpipe-2015-brushed-purple', keywords: ['mclaren', '570s', '540c', '570gt'], minYear: 2015 }, { id: 'mclaren-720-downpipe-purple', title: 'Mclaren 720S Decat Titanium Downpipe 2018+ (Brushed Purple)', price: 3349.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4559_f71fde06-0135-4c14-9064-d85084463868.jpg?v=1734125231&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-720s-decat-titanium-downpipe-2018-brushed-purple', keywords: ['mclaren', '720s'], minYear: 2018 }, { id: 'mclaren-720-catback-purple', title: 'Mclaren 720S Titanium Catback 2018+', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4784.jpg?v=1733426002&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-720s-titanium-catback-2018-brushed-purple', keywords: ['mclaren', '720s'], minYear: 2018 }, { id: 'c7-fan-shroud', title: 'WIKD Motorsports - Fan & Shroud for C7 Corvette', price: 799.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC07228.jpg?v=1735251043&width=800', productUrl: 'https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette', keywords: ['chevrolet', 'corvette', 'c7'] }, { id: 'universal-fan-shroud', title: 'WIKD Motorsports - Universal 18in Fan & Shroud', price: 99.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/dsc08287_1.jpg?v=1734036302&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette-copy', keywords: ['universal'] }, { id: 'tuned-sticker', title: 'WIKD Tuned Sticker', price: 4.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/WIKD_Tuned_Sticker_Side_Window_Application.jpg?v=1745934178&width=2000', productUrl: 'https://www.wikdmotorsports.com/products/wikd-tuned-sticker', keywords: ['universal'] }, ];
 
     // --- FORM ELEMENTS ---
     const form = document.getElementById('tuning-form');
@@ -650,9 +747,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const vinBackBtn = document.getElementById('vin-back-btn');
     const uploadVinImageInput = document.getElementById('upload-vin-image-input');
     const uploadVinBtn = document.getElementById('upload-vin-btn'); 
-    const buildTitleVehicleName = document.getElementById('build-title-vehicle-name');
     const choiceBackBtn = document.getElementById('choice-back-btn');
     const vehicleModelNameSpans = document.querySelectorAll('.vehicle-model-name');
+    const recommendationsContainer = document.getElementById('recommendations-container');
+
 
     // --- CAMERA ELEMENTS ---
     const snapVinBtn = document.getElementById('snap-vin-btn');
@@ -666,6 +764,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentStep = 1;
     let userVin = null;
     let userFirstName = '';
+    let selectedItems = [];
+
 
     // --- INITIAL FLOW LOGIC ---
     startConfigBtn.addEventListener('click', () => {
@@ -695,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initialChoiceContainer.classList.add('hidden-field');
         welcomeContainer.classList.remove('hidden-field');
         welcomeContainer.classList.add('active');
-        buildTitleVehicleName.textContent = '';
+        document.getElementById('build-title-vehicle-name').textContent = '';
     });
 
     startManualBtn.addEventListener('click', () => {
@@ -831,25 +931,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- VIN SCANNER & CAMERA LOGIC ---
-    function correctVin(vin) { return vin.replace(/[^A-Z0-9]/gi, '').replace(/O/g, '0').replace(/Q/g, '0').replace(/I/g, '1'); }
-    function extractVin(text) {
-        const vinRegex = /VIN[:\s]*([A-Z0-9\-\s]{11,20})/i;
-        const match = text.match(vinRegex);
-        if (match) {
-            const rawVin = match[1].replace(/\s|-/g, '');
-            const correctedVin = correctVin(rawVin);
-            return correctedVin.slice(0, 17);
-        }
-        const fallbackRegex = /[A-Z0-9\-\s]{17,20}/gi;
-        const candidates = text.match(fallbackRegex);
-        if (candidates) {
-            for (let c of candidates) {
-                let cleaned = correctVin(c);
-                if (cleaned.length >= 17) return cleaned.slice(0, 17);
-            }
-        }
-        return null;
+    function correctVin(vin) {
+        return vin
+            .replace(/[^A-Z0-9]/gi, '') // Final cleanup to ensure only valid characters remain
+            .replace(/[OQ]/g, '0')    // Replace O and Q with 0
+            .replace(/I/g, '1')       // Replace I with 1
+            .replace(/S/g, '5')       // Replace S with 5
+            .replace(/B/g, '8');      // Replace B with 8
     }
+
+    function extractVin(text) {
+        // 1. Remove all whitespace characters (spaces, newlines, tabs) from the text.
+        // 2. Convert the entire string to uppercase for consistency.
+        // 3. Remove any characters that are NOT letters or numbers. This is a broad cleanup.
+        const cleanedText = text.replace(/[\s\r\n-]+/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+        // 4. If after cleaning, there's nothing left, we can't proceed.
+        if (!cleanedText) {
+            return null;
+        }
+        
+        // 5. Apply corrections for common OCR misinterpretations.
+        const correctedText = correctVin(cleanedText);
+        
+        // 6. Return the result, capped at 17 characters. This provides the user with the most plausible
+        //    string found in the image, even if it's not a perfect 17-character VIN.
+        return correctedText.slice(0, 17);
+    }
+    
     function processImage(imageFile) {
         vinLoader.classList.remove('hidden-field');
         showStatus('Scanning image...', false, true);
@@ -860,7 +969,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const vin = extractVin(text);
                 if (vin) {
                     vinInput.value = vin;
-                    showStatus('VIN Detected. Click "Look Up" to continue.', false, true);
+                    // Updated status message to prompt user for verification
+                    showStatus('Text Detected. Please verify the VIN below.', false, true);
                 } else {
                     showStatus('VIN not detected in image. Please try again or enter it manually.', true);
                 }
@@ -1028,6 +1138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }));
 
     getResultsBtn.addEventListener('click', () => {
+        selectedItems = []; // Clear selections when getting new results
         generateResults();
         updateStep(4);
     });
@@ -1067,6 +1178,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function generateResults() {
+        // --- Preserve UI State ---
+        const partsGrid = recommendationsContainer.querySelector('.product-grid-container');
+        const wasExpanded = partsGrid && !partsGrid.classList.contains('collapsed');
+
+        // --- Get form data and current E85 state ---
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         data.make = makeSelect.value;
@@ -1078,27 +1194,50 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentHp = data.current_hp ? parseInt(data.current_hp) : null;
         const priorTuneType = data.prior_tune;
         const selectedYear = parseInt(data.year);
+
+        const e85Toggle = document.getElementById('e85-summary-toggle');
+        const e85Active = e85Toggle ? e85Toggle.checked : false;
+
+        // --- Update Summary Card ---
         document.getElementById('summary-vehicle').textContent = `${data.year} ${data.make} ${data.model} ${data.trim || ''}`.trim();
         document.getElementById('summary-transmission').textContent = data.transmission;
         const summaryPowerEl = document.getElementById('summary-power');
+        
+        let effectiveTargetHp = targetHpDelta;
+        
+        if (e85Active) {
+            effectiveTargetHp += 30;
+        }
+        
         let powerSummaryHTML = '';
         if (priorTuneType === 'None' || !currentHp) {
-            powerSummaryHTML = `<strong>Target Gain</strong><span>+${targetHpDelta} WHP</span>`;
+            powerSummaryHTML = `<strong>Target Gain</strong><span>+${effectiveTargetHp} WHP</span>`;
         } else {
             let hpText = `${currentHp} WHP`;
             if (priorTuneType === 'Remote') { hpText += ' (unconf.)'; }
-            powerSummaryHTML = `<strong>Power Target</strong><span>${hpText} &rarr; +${targetHpDelta} WHP</span>`;
+            powerSummaryHTML = `<strong>Power Target</strong><span>${hpText} &rarr; +${effectiveTargetHp} WHP</span>`;
         }
         summaryPowerEl.innerHTML = powerSummaryHTML;
-        document.getElementById('power-check-notice').classList.toggle('hidden-field', data.prior_tune !== 'Remote');
-        const recommendationsContainer = document.getElementById('recommendations-container');
+
+        // --- Clear previous recommendations ---
         recommendationsContainer.innerHTML = ''; 
+        
+        // --- Determine Vehicle Capabilities ---
+        const powerCheckNotice = document.getElementById('power-check-notice');
+        powerCheckNotice.classList.toggle('hidden-field', data.prior_tune !== 'Remote');
+        const powerCheckAddBtn = powerCheckNotice.querySelector('.btn-add');
+        if (powerCheckAddBtn) {
+            const isSelected = selectedItems.some(item => item.id === 'power-check');
+            powerCheckAddBtn.classList.toggle('selected', isSelected);
+        }
+
         let totalRecommendations = 0;
         let primaryRecommendationMade = false;
         let canHavePackages = false;
         let canHaveDynoTune = true;
         let canHaveParts = true;
         const isEuro = ['Audi', 'Ferrari', 'Lamborghini', 'Mclaren'].includes(data.make);
+        
         let techSpec = null;
         if (data.make === 'Chevrolet' && data.model === 'Corvette') {
             techSpec = corvetteTechData.find(spec => spec.year === selectedYear && spec.trim === data.trim && spec.transmission === (data.transmission === 'Automatic' ? 'Auto' : 'Manual'));
@@ -1107,12 +1246,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 canHaveDynoTune = techSpec.dynoTune === 'yes';
                 canHaveParts = techSpec.parts === 'yes';
             } else {
-                const isC8 = selectedYear >= 2020;
-                if(isC8) canHavePackages = true;
+                canHavePackages = selectedYear >= 2020;
             }
         } else {
              canHavePackages = !!packages[data.model];
         }
+
+        // --- Calculate Unlock Costs ---
         let unlockCost = 0;
         let unlockReason = [];
         if (techSpec) {
@@ -1125,6 +1265,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 unlockReason.push(`TCM Unlock ($${techSpec.tcmCost})`);
             }
         }
+
+        // --- Generate Package Recommendations ---
         if (canHavePackages) {
             let vehiclePackages;
             if (data.model === 'Corvette') {
@@ -1133,26 +1275,79 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 vehiclePackages = packages[data.model] || [];
             }
+
             let bestMatch = null;
             let maxHpPackage = null;
             const highHpThreshold = 75;
+
             if (vehiclePackages && vehiclePackages.length > 0) {
                 vehiclePackages.sort((a, b) => a.hp_delta - b.hp_delta);
                 maxHpPackage = vehiclePackages[vehiclePackages.length - 1];
                 bestMatch = vehiclePackages.find(pkg => pkg.hp_delta >= targetHpDelta);
                 if (!bestMatch) { bestMatch = maxHpPackage; }
             }
+
             if (maxHpPackage && targetHpDelta > maxHpPackage.hp_delta + highHpThreshold) {
                 totalRecommendations++;
                 primaryRecommendationMade = true;
-                recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-rocket"></i> Custom WIKD Tune Recommended</h3><p style="color: var(--color-text-muted);">Your horsepower goal of <strong>+${targetHpDelta} WHP</strong> is ambitious and exceeds our standard performance packages. For this level of performance, we recommend a fully custom WIKD Tune.</p><p style="color: var(--color-text-muted); margin-top: 1rem;">This involves a personalized consultation with our expert tuners to develop a bespoke solution, including part selection and dyno tuning, tailored specifically to your vehicle and goals.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">This build will likely require: ${unlockReason.join(' + ')}.</p>` : ''}<button type="button" class="btn btn-primary contact-expert-btn" style="margin-top: 1rem;"><span><i class="fas fa-envelope"></i> Discuss Your Custom Build</span></button></div>`;
+                recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-rocket"></i> Custom WIKD Tune Recommended</h3><p style="color: var(--color-text-muted);">Your horsepower goal of <strong>+${targetHpDelta} WHP</strong> is ambitious and exceeds our standard performance packages. For this level of performance, we recommend a fully custom WIKD Tune.</p><p style="color: var(--color-text-muted); margin-top: 1rem;">This involves a personalized consultation with our expert tuners to develop a bespoke solution, including part selection and dyno tuning, tailored specifically to your vehicle and goals.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">This build will likely require: ${unlockReason.join(' + ')}.</p>` : ''}<button type="button" class="btn btn-primary contact-expert-btn btn-right" style="margin-top: 1rem;"><span><i class="fas fa-envelope"></i> Discuss Your Custom Build</span></button></div>`;
             } else if (bestMatch) { 
                 totalRecommendations++;
                 primaryRecommendationMade = true;
-                const finalPrice = bestMatch.price + unlockCost;
-                recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-box-open"></i> Recommended Package</h3><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;"><div><strong style="font-size: 1.2rem; color: white;">${bestMatch.title}</strong><span class="badge">+${bestMatch.hp_delta} WHP</span></div><span style="font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">$${finalPrice.toLocaleString()}</span></div><a href="${bestMatch.url}" class="btn btn-primary" style="margin-top: 1rem;" target="_blank"><span>View Package Details</span></a></div>`;
+                
+                let finalPrice = bestMatch.price + unlockCost;
+                let finalHp = bestMatch.hp_delta;
+                let finalTitle = bestMatch.title;
+
+                if (e85Active && bestMatch.e85Compatible) {
+                    finalPrice += bestMatch.e85PriceBoost;
+                    finalHp += bestMatch.e85HpBoost;
+                    finalTitle = bestMatch.title.replace(/\s*\(E85\)/i, '') + ' (E85)';
+                }
+                
+                const isSelected = selectedItems.some(item => item.id === bestMatch.id);
+                
+                let footerHTML = `<div style="display: flex; justify-content: space-between; align-items: stretch; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="display: flex; align-items: stretch; gap: 0.5rem;">
+                                        <a href="${bestMatch.url}" class="btn btn-primary btn-left" target="_blank"><span>View Package Details</span></a>
+                                        <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="${bestMatch.id}" data-type="package" data-title="${bestMatch.title}" data-price="${bestMatch.price}" data-e85-price="${bestMatch.e85PriceBoost || 0}"><span>+</span></button>
+                                    </div>`;
+
+                if (bestMatch.e85Compatible) {
+                    footerHTML += `
+                        <div style="text-align: right;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div>
+                                    <strong style="font-size: 0.9rem; font-family: var(--font-body); text-transform: none; color: var(--color-text);">E85 Conversion</strong>
+                                    <span style="color: var(--color-text-muted); font-size: 0.8rem; display: block;">+30 WHP</span>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="e85-summary-toggle" class="choice-input" ${e85Active ? 'checked' : ''}>
+                                    <label for="e85-summary-toggle" class="e85-toggle-label"><span class="dot"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                footerHTML += `</div>`;
+
+
+                recommendationsContainer.innerHTML += `
+                    <div class="result-card">
+                        <h3><i class="fas fa-box-open"></i> Recommended Package</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <strong style="font-size: 1.2rem; color: white;">${finalTitle}</strong>
+                                <span class="badge">+${finalHp} WHP</span>
+                            </div>
+                            <span style="font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">$${finalPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        </div>
+                        ${footerHTML}
+                    </div>`;
             }
         }
+
+        // --- Generate Parts Recommendations ---
         if (canHaveParts) {
             const recommendedProducts = products.filter(p => {
                 const productKeywords = p.keywords.map(k => k.toLowerCase());
@@ -1182,16 +1377,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }).sort((a, b) => b.price - a.price);
             if (recommendedProducts.length > 0) {
                 totalRecommendations++;
-                let productsHtml = recommendedProducts.map(p => `<div class="product-card"><img src="${p.imageUrl}" alt="${p.title}" onerror="this.style.display='none'"><div class="product-card-content"><h4>${p.title}</h4><div class="product-card-footer"><span class="product-price">$${p.price.toLocaleString()}</span><a href="${p.productUrl}" class="btn" target="_blank"><span>View</span></a></div></div></div>`).join('');
+                let productsHtml = recommendedProducts.map(p => {
+                    const isSelected = selectedItems.some(item => item.id === p.id);
+                    return `<div class="product-card">
+                                <img src="${p.imageUrl}" alt="${p.title}" onerror="this.style.display='none'">
+                                <div class="product-card-content">
+                                    <h4>${p.title}</h4>
+                                    <div class="product-card-footer">
+                                        <span class="product-price">$${p.price.toLocaleString()}</span>
+                                        <div style="display: flex; align-items: stretch; gap: 0.5rem;">
+                                            <a href="${p.productUrl}" class="btn btn-left" target="_blank"><span>View</span></a>
+                                            <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="${p.id}" data-type="product" data-title="${p.title}" data-price="${p.price}"><span>+</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                }).join('');
                 const isCollapsible = recommendedProducts.length > 3; 
                 const containerCollapsedClass = isCollapsible ? 'collapsed' : '';
-                const showMoreButtonHtml = isCollapsible ? `<div class="show-more-container"><button class="btn show-more-btn"><span>Show More</span></button></div>` : '';
+                const showMoreButtonHtml = isCollapsible ? `<div class="show-more-container"><button class="btn show-more-btn btn-left"><span>Show More</span></button></div>` : '';
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-shopping-cart"></i> Recommended Parts & Gear</h3><div class="product-grid-container ${containerCollapsedClass}"><div class="product-grid">${productsHtml}</div></div>${showMoreButtonHtml}</div>`;
             }
         }
+
+        // --- Generate Fallback Recommendations ---
         if (isEuro && !primaryRecommendationMade) {
             totalRecommendations++;
-            recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-cogs"></i> Custom Euro Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, a custom tune is the best path forward to unlock its full potential. We specialize in tuning European vehicles for maximum safe, reliable power.</p><a href="https://www.wikdmotorsports.com/pages/euro-tune" class="btn btn-primary" style="margin-top: 1rem;" target="_blank"><span>Learn About Euro Tuning</span></a></div>`;
+            recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-cogs"></i> Custom Euro Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, a custom tune is the best path forward to unlock its full potential. We specialize in tuning European vehicles for maximum safe, reliable power.</p><a href="https://www.wikdmotorsports.com/pages/euro-tune" class="btn btn-primary btn-right" style="margin-top: 1rem;" target="_blank"><span>Learn About Euro Tuning</span></a></div>`;
         } else if (canHaveDynoTune && !primaryRecommendationMade && totalRecommendations === 0) {
              totalRecommendations++;
              recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-cogs"></i> Custom Dyno Tune Recommended</h3><p style="color: var(--color-text-muted);">For your vehicle and goals, a custom dyno tune is the best path forward. This allows us to tailor every parameter to your specific modifications for maximum safe, reliable power.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">Required Unlocks: ${unlockReason.join(' + ')}.</p>` : ''}</div>`;
@@ -1199,8 +1411,56 @@ document.addEventListener('DOMContentLoaded', function() {
         if (totalRecommendations === 0) {
             recommendationsContainer.innerHTML += `<div class="result-card"><h3><i class="fas fa-question-circle"></i> No Automatic Recommendations</h3><p style="color: var(--color-text-muted);">Based on your specific vehicle and goals, we don't have an automatic recommendation. This often means a fully custom approach is best. Please contact one of our experts to discuss your build.</p></div>`;
         }
+        
+        // --- Restore UI State ---
+        const newPartsGrid = recommendationsContainer.querySelector('.product-grid-container');
+        if (newPartsGrid && wasExpanded) {
+            newPartsGrid.classList.remove('collapsed');
+            const showMoreBtn = newPartsGrid.parentElement.querySelector('.show-more-btn span');
+            if (showMoreBtn) {
+                showMoreBtn.textContent = 'Show Less';
+            }
+        }
+
+        // --- Re-attach listener for dynamic E85 toggle ---
+        const newE85Toggle = document.getElementById('e85-summary-toggle');
+        if (newE85Toggle) {
+            newE85Toggle.addEventListener('change', generateResults);
+        }
     }
     
+    recommendationsContainer.addEventListener('click', function(e) {
+        const addBtn = e.target.closest('.btn-add');
+        if (addBtn) {
+            const { id, type, title, price, e85Price } = addBtn.dataset;
+            const itemIndex = selectedItems.findIndex(item => item.id === id);
+
+            if (itemIndex > -1) {
+                // Item exists, so remove it
+                selectedItems.splice(itemIndex, 1);
+            } else {
+                // Item does not exist, so add it
+                const newItem = {
+                    id,
+                    type,
+                    title,
+                    price: parseFloat(price)
+                };
+                if (type === 'package') {
+                    const e85Toggle = document.getElementById('e85-summary-toggle');
+                    newItem.e85 = e85Toggle ? e85Toggle.checked : false;
+                    if (newItem.e85) {
+                        newItem.price += parseFloat(e85Price);
+                        newItem.title = newItem.title.replace(/\s*\(E85\)/i, '') + ' (E85)';
+                    }
+                }
+                selectedItems.push(newItem);
+            }
+            // Re-render the results to reflect the change
+            generateResults();
+        }
+    });
+
     document.body.addEventListener('click', function(e) {
         const target = e.target;
         const contactBtn = target.closest('.contact-expert-btn');
@@ -1221,6 +1481,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.classList.toggle('collapsed');
                 btnSpan.textContent = container.classList.contains('collapsed') ? 'Show More' : 'Show Less';
             }
+        }
+    });
+
+    document.getElementById('power-check-notice').addEventListener('click', function(e){
+        const addBtn = e.target.closest('.btn-add');
+        if(addBtn){
+            const { id, type, title, price } = addBtn.dataset;
+            const itemIndex = selectedItems.findIndex(item => item.id === id);
+            if(itemIndex > -1){
+                selectedItems.splice(itemIndex, 1);
+            } else {
+                selectedItems.push({ id, type, title, price: parseFloat(price) });
+            }
+            generateResults();
         }
     });
 
@@ -1253,29 +1527,79 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        const customerFullName = `${firstNameInputContact.value.trim()} ${lastNameInputContact.value.trim()}`;
-
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        if (!data.transmission) data.transmission = document.querySelector('input[name="transmission"]:checked').value;
+        const rawData = Object.fromEntries(formData.entries());
+        if (!rawData.transmission) rawData.transmission = document.querySelector('input[name="transmission"]:checked').value;
         
         makeSelect.disabled = false;
         modelSelect.disabled = false;
         yearSelect.disabled = false;
         trimSelect.disabled = false;
-        const finalMake = makeSelect.value;
-        const finalModel = modelSelect.value;
-        const finalYear = yearSelect.value;
-        const finalTrim = trimSelect.value;
+
+        const emailData = {
+            year: yearSelect.value,
+            make: makeSelect.value,
+            model: modelSelect.value,
+            trim: trimSelect.value,
+            customer_name: `${rawData.customer_first_name.trim()} ${rawData.customer_last_name.trim()}`,
+            customer_phone: rawData.customer_phone,
+            customer_comments: rawData.customer_comments,
+            transmission: rawData.transmission,
+            hp_delta: rawData.hp_delta,
+            ecu_unlocked: rawData.ecu_unlocked,
+            tcm_unlocked: rawData.tcm_unlocked,
+            fuel_type: rawData.fuel_type,
+            prior_tune: rawData.prior_tune,
+            prior_mods: rawData.prior_mods
+        };
+
         if (userVin) {
             makeSelect.disabled = true;
             modelSelect.disabled = true;
             yearSelect.disabled = true;
             trimSelect.disabled = true;
         }
-        const subject = `Tuning Inquiry: ${finalYear} ${finalMake} ${finalModel} ${finalTrim || ''}`.trim();
-        const body = `Hello WIKD Motorsports Team,\n\nMy name is ${customerFullName}, and I've filled out the tuning configurator. I am interested in discussing my build.\n\n[PLEASE ADD ANY QUESTIONS OR COMMENTS HERE]\n\n====================\n\nMY CONTACT INFO:\nName: ${customerFullName}\nPhone: ${data.customer_phone}\n\n====================\n\nCONFIGURATOR BUILD SUMMARY:\nVehicle: ${finalYear} ${finalMake} ${finalModel} ${finalTrim || ''}\nVIN: ${userVin || 'Not Provided'}\nTransmission: ${data.transmission}\nPrior Tune History: ${data.prior_tune}\nCurrent HP: ${data.current_hp ? data.current_hp + ' WHP' : 'N/A'}\nTarget WHP Gain: +${data.hp_delta} WHP\n\nECU Unlocked: ${data.ecu_unlocked}\nTCM Unlocked: ${data.transmission === 'Automatic' ? data.tcm_unlocked : 'N/A'}\nPrimary Fuel: ${data.fuel_type}\n\nExisting Mods:\n${data.prior_mods || 'None listed'}\n`;
-        window.location.href = `mailto:sales@wikdmotorsports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        let selectedItemsText = 'No specific items were added to the inquiry.';
+        if (selectedItems.length > 0) {
+            selectedItemsText = selectedItems.map(item => `- ${item.title}`).join('\n');
+        }
+
+        const subject = `Tuning Inquiry: ${emailData.year} ${emailData.make} ${emailData.model} ${emailData.trim || ''}`.trim();
+
+        const emailBodyText = `
+Hello WIKD Motorsports Team,
+
+My name is ${emailData.customer_name}, and I’ve submitted the tuning configurator. I’m reaching out to review my build and discuss next steps.
+
+Customer Notes:
+${emailData.customer_comments || 'No additional comments provided.'}
+
+------------------------------------
+
+SELECTED UPGRADES FOR DISCUSSION:
+${selectedItemsText}
+
+------------------------------------
+
+MY CONTACT INFO:
+Name: ${emailData.customer_name}
+Phone: ${emailData.customer_phone}
+
+------------------------------------
+
+CONFIGURATOR BUILD SUMMARY:
+Vehicle: ${emailData.year} ${emailData.make} ${emailData.model} ${emailData.trim || ''}
+Transmission: ${emailData.transmission}
+Target WHP Gain: +${emailData.hp_delta} WHP
+ECU Unlocked: ${emailData.ecu_unlocked}
+TCM Unlocked: ${emailData.transmission === 'Automatic' ? emailData.tcm_unlocked : 'N/A'}
+Primary Fuel: ${emailData.fuel_type}
+Prior Tune History: ${emailData.prior_tune}
+Existing Mods: ${emailData.prior_mods || 'None listed'}
+        `;
+
+        window.location.href = `mailto:sales@wikdmotorsports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBodyText)}`;
     });
 
     function initializeProgressBar() {
@@ -1286,7 +1610,7 @@ document.addEventListener('DOMContentLoaded', function() {
         progressBar.style.setProperty('--bar-width', `${barTotalWidth}%`);
         updateStep(1);
     }
-
+    
     populateMakes();
     populateYears();
     updateTechInfo();
