@@ -188,13 +188,7 @@
         .form-control option.top-highlight{ color:var(--color-primary); font-weight:600 }
         .form-control option.model-highlight{ color:var(--color-primary); font-weight:600 }
         .form-control option.separator{ font-weight:600; background:var(--color-border); color:var(--color-text-muted) }
-        #regionIndicator{ margin-top:15px; font-weight:700; padding:8px 12px; border-radius:8px; display:inline-block; background:var(--color-border); color:var(--color-text) }
-        #regionIndicator.us-domestic{ background:#007bff }
-        #regionIndicator.euro{ background:#28a745 }
-        #regionIndicator.jdm{ background:#dc3545 }
-        #regionIndicator.korean{ background:#fd7e14 }
-        #regionIndicator.unknown{ background:var(--color-border); color:var(--color-text-muted) }
-
+        
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
@@ -707,7 +701,6 @@
                             <label for="trim">Trim</label>
                             <select id="trim" name="trim" class="form-control" disabled><option value="">-- Select Trim --</option></select>
                         </div>
-                        <div id="regionIndicator" class="unknown">Region: Unknown</div>
                         <!-- END INTEGRATION -->
 
                         <div class="form-group" style="margin-top: 1.5rem;">
@@ -904,7 +897,7 @@
                 </div>
                 <div class="step-header" style="margin-bottom: 1rem;">
                     <h2 id="thank-you-title" style="margin-bottom: 0.5rem;">Thanks, <span class="user-name"></span>!</h2>
-                    <p id="thank-you-subtitle">Your email is ready to send. We're excited to help you build your dream machine.</p>
+                    <p id="thank-you-subtitle">We're excited to help you build your dream machine.</p>
                 </div>
                 <div class="call-link-container" id="call-link-thank-you" style="justify-content: center;">
                      <a href="tel:844-232-9453" class="call-link">
@@ -1085,16 +1078,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function normalizeKey(str){return String(str||'').toLowerCase().replace(/\s+/g,'').replace(/-/g,'').replace(/[^a-z0-9]/g,'');}
     function toTitleCase(str){return String(str||'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
 
-    // Update region indicator
-    function updateRegionIndicator(makeName){
-        if(!makeName){regionIndicator.textContent='Region: Unknown';regionIndicator.className='unknown';return;}
-        const key=normalizeKey(makeName);
-        const rc=makeRegionMap[key]||'unknown';
-        regionIndicator.className=rc;
-        const mapText={'us-domestic':'US Domestic','euro':'European','jdm':'JDM (Japanese Domestic Market)','korean':'Korean','unknown':'Unknown'};
-        regionIndicator.textContent=`Region: ${mapText[rc]||'Unknown'}`;
-    }
-
     // Load makes: priority at top, separator, then filtered makes (no unknown, no Tesla)
     async function loadCarMakes(){
         try{
@@ -1139,12 +1122,10 @@ document.addEventListener('DOMContentLoaded', function() {
         hideTrim();
         
         if(!makeName){ 
-            updateRegionIndicator(''); 
             modelSelect.innerHTML='<option value="">-- Select Make First --</option>'; 
             return; 
         }
 
-        updateRegionIndicator(makeName);
         const normalizedMake=normalizeKey(makeName);
         const makeIsPriority = priorityMakes.some(m=>normalizeKey(m)===normalizedMake);
 
@@ -2020,7 +2001,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailBodyText = `
 Hello WIKD Motorsports Team,
 
-My name is ${emailData.customer_name}, and I’vesubmitted the tuning configurator. I’m reaching out to review my build and discuss next steps.
+My name is ${emailData.customer_name}, and I’ve submitted the tuning configurator. I’m reaching out to review my build and discuss next steps.
 
 Customer Notes:
 ${emailData.customer_comments || 'No additional comments provided.'}
