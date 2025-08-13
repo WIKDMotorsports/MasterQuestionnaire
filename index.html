@@ -933,37 +933,11 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- MASTER DATA (EXISTING LOGIC) ---
-    // NOTE: vehicleData is removed and replaced by API calls.
-    const corvetteTechData = [ { year: 2005, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2005, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2006, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2007, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2008, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2009, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2010, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2011, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2012, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Base", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2013, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2014, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2015, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2015, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2016, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2016, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2017, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2017, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2018, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2018, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Stingray", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Stingray", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Grand Sport", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Grand Sport", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "Z06", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "Z06", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "no", ecuCost: 0, tcmCost: 0 }, { year: 2019, trim: "ZR1", transmission: "Auto", lockedECU: "no", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 50 }, { year: 2019, trim: "ZR1", transmission: "Manual", lockedECU: "no", lockedTCM: "no", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2020, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2021, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2022, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2023, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2024, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "Stingray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "yes", ecuCost: 0, tcmCost: 0 }, { year: 2025, trim: "E-Ray", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "no", parts: "yes", ecuCost: 1500, tcmCost: 400 }, { year: 2025, trim: "Z06", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "yes", packages: "yes", parts: "yes", ecuCost: 250, tcmCost: 50 }, { year: 2025, trim: "ZR1", transmission: "Auto", lockedECU: "yes", lockedTCM: "yes", dynoTune: "no", packages: "no", parts: "no", ecuCost: 0, tcmCost: 0 } ];
-    const packages = {
-        'CT5-V Blackwing': [
-            { id: 'bw-35', title: '+35 WHP Package (E85)', hp_delta: 35, price: 4510, parts: ['Flex Fuel Kit', 'Intake System', 'Custom E85 Dyno Tune'], description: 'A simple package to get you started with E85.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: false },
-            { id: 'bw-75', title: '+75 WHP Package', hp_delta: 75, price: 4760, parts: ['WIKD Intake', 'Lower Pulley Upgrade', 'Performance Plugs & Wires'], description: 'Great bang for your buck power increase.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'bw-140', title: '+140 WHP Package', hp_delta: 140, price: 10813, parts: ['Big Gulp Intake', 'Upper & Lower Pulleys', 'Long Tube Headers'], description: 'Serious power gains with supporting bolt-ons.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'bw-190', title: '+190 WHP Package', hp_delta: 190, price: 12473, parts: ['Ported Supercharger', 'Throttle Body', 'Meth Injection'], description: 'Pushing the stock blower to its limits.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'bw-250', title: '+250 WHP Package', hp_delta: 250, price: 20254, parts: ['Custom Camshaft', 'WIKD Subzero Chiller', 'WIKD Fuel Package'], description: 'A comprehensive package for major power.', url: 'https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 }
-        ],
-        'Camaro': [
-            { id: 'camaro-stage1', title: 'Gen 6 Camaro Stage 1', hp_delta: 50, price: 3500, parts: ['Cold Air Intake', 'Custom Dyno Tune'], description: 'A great starting point for your Gen 6 Camaro.', url: 'https://www.wikdmotorsports.com/pages/6th-gen-camaro-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 }
-        ],
-        'Corvette_C7': [
-            { id: 'c7-lt4-50', title: 'C7 LT4 +50 WHP (E85)', hp_delta: 50, price: 2610, parts: ['Flex Fuel Kit', 'Big Gulp Intake'], description: 'Entry-level power for C7 LT4 on E85.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: false },
-            { id: 'c7-lt4-75', title: 'C7 LT4 +75 WHP', hp_delta: 75, price: 4786, parts: ['Intake', '9.2” Pulley', 'Spark Plug Wires'], description: 'Budget-friendly bolt-on performance for the C7 LT4.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 },
-            { id: 'c7-lt4-125', title: 'C7 LT4 +125 WHP', hp_delta: 125, price: 9944, parts: ['Headers', 'Pulley Combo', 'Catch Can'], description: 'Serious performance gain for your C7 Z06 or ZR1.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 },
-            { id: 'c7-lt4-175', title: 'C7 LT4 +175 WHP', hp_delta: 175, price: 13400, parts: ['Ported Snout', 'Throttle Body', 'Meth Injection'], description: 'An aggressive package for street and strip C7s.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 },
-            { id: 'c7-lt4-250', title: 'C7 LT4 +250 WHP', hp_delta: 250, price: 23450, parts: ['Camshaft', 'Interchiller', 'Head Studs'], description: 'A full build to max out the factory LT4 supercharger.', url: 'https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 645 }
-        ],
-        'Corvette_C8': [
-            { id: 'c8-lt2-60', title: 'C8 LT2 +50-70WHP', hp_delta: 60, price: 5390.45, parts: ['Flex Fuel Kit', 'Cold Air Intake'], description: 'Boosts performance with a Flex Fuel Kit, Cold Air Intake, and custom dyno tuning for E85 fuel.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'c8-lt2-77', title: 'C8 LT2 +75-80 WHP', hp_delta: 77.5, price: 13735.10, parts: ['Cold Air Intake', 'Headers', 'Off-Road Pipe', 'Intake Manifold'], description: 'Features intake and exhaust upgrades, including headers, an off-road pipe, and a new throttle body.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'c8-lt2-120', title: 'C8 LT2 +120 WHP', hp_delta: 120, price: 23171.43, parts: ['Blower Camshaft', 'Cylinder Heads', 'Head Studs'], description: 'Includes camshaft and cylinder head upgrades along with intake/exhaust enhancements for a comprehensive power boost.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'c8-lt2-200-mag', title: 'C8 LT2 +200 WHP Magnuson', hp_delta: 200, price: 23105.07, parts: ['Magnuson Supercharger Kit'], description: 'A Magnuson Supercharger system provides a massive power increase with custom dyno tuning.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'c8-lt2-200-pro', title: 'C8 LT2 +200 WHP Procharger', hp_delta: 200, price: 25603.28, parts: ['Procharger Supercharger Kit'], description: 'Features a Procharger Supercharger system for a huge jump in power, including a custom tune.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 },
-            { id: 'c8-lt2-250', title: 'C8 LT2 +250 WHP', hp_delta: 250, price: 44437.95, parts: ['Supercharger Kit', 'Clutch Box', 'Blower Camshaft'], description: 'The most comprehensive package, featuring a supercharger, a custom camshaft, and extensive tuning for maximum horsepower.', url: 'https://www.wikdmotorsports.com/pages/c8-lt2-packages', e85Compatible: true, e85HpBoost: 30, e85PriceBoost: 1455 }
-        ]
-    };
-    const products = [ { id: 'mclaren-tips-black', title: '570S & 720S Titanium Exhaust Tips (Black)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1938.jpg?v=1734029090&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-black', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-purple', title: '570S & 720S Titanium Exhaust Tips (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1848.jpg?v=1734029242&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-1', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-inner-purple', title: '570S & 720S Titanium Exhaust Tips (Inner Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1817.jpg?v=1734029625&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-inner-purple-finish', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-style1-purple', title: '570S & 720S Titanium Exhaust Tips Style 1 (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1824.jpg?v=1734029629&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish', keywords: ['570s', '720s', 'mclaren'] }, { id: 'mclaren-tips-style2-purple', title: '570S & 720S Titanium Exhaust Tips Style 2 (Brushed Purple Finish)', price: 149.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_1904.jpg?v=1734029609&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-2', keywords: ['570s', '720s', 'mclaren'] }, { id: 'c8-downpipe-purple', title: 'Chevy Corvette C8 Catless Titanium Downpipe 2020+ (Brushed Purple)', price: 999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4654.jpg?v=1733425387&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/chevy-corvette-c8-catless-titanium-downpipe-2020-brushed-purple', keywords: ['chevrolet', 'corvette', 'c8'], minYear: 2020 }, { id: 'c8-catback-blue', title: 'Corvette C8 Titanium Catback 2020+ (Brushed Blue)', price: 3999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4623.jpg?v=1733425432&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/corvette-c8-titanium-catback-2020-brushed-blue', keywords: ['chevrolet', 'corvette', 'c8'], minYear: 2020 }, { id: 'c8-z06-exhaust-blue', title: 'Corvette C8 Z06 Titanium Sport Exhaust System 2023+ (Without Valve) (Brushed Blue)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/1_2abafc71-96c5-49fc-8b12-a4f461d1dde7.jpg?v=1733425492&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/corvette-c8-z06-titanium-sport-exhaust-system-2023-without-valve-brushed-blue', keywords: ['chevrolet', 'corvette', 'c8', 'z06'], minYear: 2023 }, { id: 'plate-frames', title: 'Custom License Plate Frames', price: 9.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC_5685.jpg?v=1745934158&width=1080', productUrl: 'https://www.wikdmotorsports.com/products/custom-plate-frames', keywords: ['universal'] }, { id: 'ferrari-458-catback-gold', title: 'Ferrari 458 Italia 4.5L Titanium Catback 2010-2015 (Golden Polish)', price: 3999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4415.jpg?v=1733425565&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-2010-2015-golden-polish', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'ferrari-458-catback-muffler-blue', title: 'Ferrari 458 Italia 4.5L Titanium Catback With Muffler 2010 - 2015 (Brushed Blue)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4436.jpg?v=1733425637&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-with-muffler-2010-2015-brushed-blue', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'ferrari-458-downpipe-blue', title: 'Ferrari 458 Italia 4.5L Titanium Downpipe 2010-2015 (Brushed Blue)', price: 2999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4682.jpg?v=1733425697&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-downpipe-2010-2015-brushed-blue', keywords: ['ferrari', '458', 'italia'], minYear: 2010, maxYear: 2015 }, { id: 'jet-tag', title: 'GET WIKD Jet Tag - WIKD', price: 6.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/GET_WIKD_Jet_Tag_-_WIKD.jpg?v=1745934173&width=2000', productUrl: 'https://www.wikdmotorsports.com/products/get-wikd-jet-tag-wikd', keywords: ['universal'] }, { id: 'huracan-r8-header-black', title: 'Lamborghini Huracan EVO / Audi R8 Header (Black Ceramic Coated)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Blk-1.png?v=1734023095&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-black-ceramic-coated', keywords: ['lamborghini', 'huracan', 'audi', 'r8'] }, { id: 'huracan-r8-header-gold', title: 'Lamborghini Huracan EVO Header / Audi R8 (Golden Ceramic Coated)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Gold-1.png?v=1734023095&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-golden-ceramic-coated', keywords: ['lamborghini', 'huracan', 'audi', 'r8'] }, { id: 'huracan-catback-muffler-purple', title: 'Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback With Muffler,2019+ (Brushed Purple)', price: 5999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4452.jpg?v=1733425766&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-with-muffler-2019-brushed-purple', keywords: ['lamborghini', 'huracan'], minYear: 2019 }, { id: 'huracan-catback-gold', title: 'Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback, 2019+ (Golden Polish)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4504.jpg?v=1733425822&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-2019-golden-polish', keywords: ['lamborghini', 'huracan'], minYear: 2019 }, { id: 'mclaren-570-catback-purple', title: 'Mclaren 540C/570GT/570S Twin-Turbo 3.8 V8 Titanium Catback 2015+ (Brushed Purple)', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4382.jpg?v=1733425787&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-540c-570gt-570s-twin-turbo-38-v8-titanium-catback-2015-brushed-purple', keywords: ['mclaren', '540c', '570gt', '570s'], minYear: 2015 }, { id: 'mclaren-570-downpipe-purple', title: 'Mclaren 570S 540C 570GT 3.8L Twin-Turbocharged V8 Titanium Downpipe 2015+ (Brushed Purple)', price: 2699.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4698.jpg?v=1734125210&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-570s-540c-570gt-38l-twin-turbocharged-v8-titanium-downpipe-2015-brushed-purple', keywords: ['mclaren', '570s', '540c', '570gt'], minYear: 2015 }, { id: 'mclaren-720-downpipe-purple', title: 'Mclaren 720S Decat Titanium Downpipe 2018+ (Brushed Purple)', price: 3349.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4559_f71fde06-0135-4c14-9064-d85084463868.jpg?v=1734125231&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-720s-decat-titanium-downpipe-2018-brushed-purple', keywords: ['mclaren', '720s'], minYear: 2018 }, { id: 'mclaren-720-catback-purple', title: 'Mclaren 720S Titanium Catback 2018+', price: 4999.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/IMG_4784.jpg?v=1733426002&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/mclaren-720s-titanium-catback-2018-brushed-purple', keywords: ['mclaren', '720s'], minYear: 2018 }, { id: 'c7-fan-shroud', title: 'WIKD Motorsports - Fan & Shroud for C7 Corvette', price: 799.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/DSC07228.jpg?v=1735251043&width=800', productUrl: 'https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette', keywords: ['chevrolet', 'corvette', 'c7'] }, { id: 'universal-fan-shroud', title: 'WIKD Motorsports - Universal 18in Fan & Shroud', price: 99.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/dsc08287_1.jpg?v=1734036302&width=1920', productUrl: 'https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette-copy', keywords: ['universal'] }, { id: 'tuned-sticker', title: 'WIKD Tuned Sticker', price: 4.99, imageUrl: 'https://www.wikdmotorsports.com/cdn/shop/files/WIKD_Tuned_Sticker_Side_Window_Application.jpg?v=1745934178&width=2000', productUrl: 'https://www.wikdmotorsports.com/products/wikd-tuned-sticker', keywords: ['universal'] }, ];
+    // --- REFACTOR: MASTER DATA (WILL BE FETCHED DYNAMICALLY) ---
+    let corvetteTechData = [];
+    let packages = {};
+    let products = [];
+    const WIKD_DATA_URL = 'https://cdn.shopify.com/s/files/1/0671/4635/0805/files/WIKD-Motorsports-Data.json?v=1755118954';
 
     // --- FORM ELEMENTS ---
     const form = document.getElementById('tuning-form');
@@ -1022,39 +996,32 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedItems = [];
 
     
-    // === INTEGRATION: NEW VEHICLE SELECTOR LOGIC ===
+    // === INTEGRATION: NEW VEHICLE SELECTOR LOGIC (EXISTING) ===
     const API_BASE = 'https://vpic.nhtsa.dot.gov/api/vehicles';
     const makeSelect = document.getElementById('make');
     const modelSelect = document.getElementById('model');
-    const yearSelect = document.getElementById('year'); // Keep reference to existing year select
-    const trimGroup = document.getElementById('trim-group'); // Keep reference to existing trim group
+    const yearSelect = document.getElementById('year');
+    const trimGroup = document.getElementById('trim-group');
     const trimSelect = document.getElementById('trim');
     const regionIndicator = document.getElementById('regionIndicator');
 
-    // Priority makes at top (GMC removed as requested)
     const priorityMakes = ['Audi','Cadillac','Chevrolet','Ferrari','Lamborghini','Mclaren'];
-
-    // Exclude these makes from the list entirely
     const excludedMakes = new Set(['tesla']);
-
-    // Region mapping (normalized keys)
     const makeRegionMap = {
         'cadillac':'us-domestic','chevrolet':'us-domestic','gmc':'us-domestic','ford':'us-domestic','chrysler':'us-domestic','dodge':'us-domestic','jeep':'us-domestic','lincoln':'us-domestic','buick':'us-domestic','ram':'us-domestic',
         'audi':'euro','bmw':'euro','mercedesbenz':'euro','mercedes':'euro','volkswagen':'euro','porsche':'euro','ferrari':'euro','lamborghini':'euro','mclaren':'euro','jaguar':'euro','landrover':'euro','alfaromeo':'euro','rollsroyce':'euro','astonmartin':'euro','mini':'euro','saab':'euro','volvo':'euro','koenigsegg':'euro','bugatti':'euro','pagani':'euro','lotus':'euro','bentley':'euro','fiat':'euro','seat':'euro','skoda':'euro','smart':'euro','renault':'euro','peugeot':'euro','citroen':'euro','opel':'euro','vauxhall':'euro',
         'toyota':'jdm','honda':'jdm','nissan':'jdm','mazda':'jdm','subaru':'jdm','mitsubishi':'jdm','lexus':'jdm','infiniti':'jdm','acura':'jdm','suzuki':'jdm','isuzu':'jdm',
         'hyundai':'korean','kia':'korean'
     };
-
-    // Manual Cadillac entries (kept on top of Cadillac list)
     const manualCadillacModels = [
         {name:'CT5-V Blackwing', hasPackage:true},
         {name:'CTS-V', hasPackage:true},
         {name:'CT4-V Blackwing', hasPackage:false},
         {name:'Escalade', hasPackage:false}
     ];
-
-    // Models that have packages (normalized keys)
+    // --- FIX: Added Cadillac to the makeModelPackages object ---
     const makeModelPackages = {
+        'cadillac': { 'ct5vblackwing': true, 'ctsv': true },
         'audi':{'r8':true},
         'chevrolet':{'corvette':true,'camaro':true,'silverado1500':false,'tahoe':false},
         'ferrari':{'458italia':true},
@@ -1062,8 +1029,6 @@ document.addEventListener('DOMContentLoaded', function() {
         'lamborghini':{'huracan':true},
         'mclaren':{'570s':true,'540c':true,'570gt':true,'720s':true}
     };
-
-    // Hardcoded trims — ONLY for Corvette, Camaro, and Huracan now
     const modelTrims = {
         'chevrolet': {
             'corvette': ['Base','Z06','ZR1','Stingray','Grand Sport','E-Ray'],
@@ -1074,22 +1039,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Utilities
     function normalizeKey(str){return String(str||'').toLowerCase().replace(/\s+/g,'').replace(/-/g,'').replace(/[^a-z0-9]/g,'');}
     function toTitleCase(str){return String(str||'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
 
-    // Load makes: priority at top, separator, then filtered makes (no unknown, no Tesla)
     async function loadCarMakes(){
         try{
             const res=await fetch(`${API_BASE}/GetMakesForVehicleType/car?format=json`);
             if (!res.ok) throw new Error(`API Error: ${res.status}`);
             const data=await res.json();
             
-            makeSelect.innerHTML='<option value="">-- Select Make --</option>'; // Clear and add placeholder
+            makeSelect.innerHTML='<option value="">-- Select Make --</option>'; 
             const apiMakes=data.Results.map(m=>({raw:m.MakeName, key:normalizeKey(m.MakeName)}));
             const added=new Set();
 
-            // Add priority makes in order
             for(const pm of priorityMakes){
                 const nk=normalizeKey(pm);
                 if(excludedMakes.has(nk) || !makeRegionMap[nk]) continue;
@@ -1102,10 +1064,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 added.add(nk);
             }
 
-            // Separator
             const sep=document.createElement('option');sep.textContent='──────────';sep.disabled=true;sep.className='separator';makeSelect.appendChild(sep);
 
-            // Add remaining makes (filtered by region map & not excluded)
             const others=apiMakes.filter(x=>!added.has(x.key) && makeRegionMap[x.key] && !excludedMakes.has(x.key)).sort((a,b)=>a.raw.localeCompare(b.raw));
             for(const m of others){ const o=document.createElement('option'); o.value=m.raw; o.textContent=toTitleCase(m.raw); makeSelect.appendChild(o); added.add(m.key);}	
 
@@ -1115,7 +1075,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load models for selected make
     async function loadModelsForMake(makeName){
         modelSelect.innerHTML='<option value="">-- Loading Models --</option>'; 
         modelSelect.disabled=true; 
@@ -1129,14 +1088,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const normalizedMake=normalizeKey(makeName);
         const makeIsPriority = priorityMakes.some(m=>normalizeKey(m)===normalizedMake);
 
-        // Special handling for Cadillac
         if(normalizedMake==='cadillac'){
             let apiModels=[];
             try{ const res=await fetch(`${API_BASE}/GetModelsForMake/${encodeURIComponent(makeName)}?format=json`); const data=await res.json(); apiModels=data.Results.map(r=>r.Model_Name);}catch(e){console.error('cadillac api models',e);}	  
             const manualSet=new Set(manualCadillacModels.map(m=>normalizeKey(m.name)));
             const additional=apiModels.filter(m=>!manualSet.has(normalizeKey(m)));
 
-            modelSelect.innerHTML = '<option value="">-- Select Model --</option>'; // Clear and add placeholder
+            modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
             for(const mm of manualCadillacModels){ const opt=document.createElement('option'); opt.value=mm.name; opt.textContent=mm.name; if(mm.hasPackage && makeIsPriority) opt.className='model-highlight'; modelSelect.appendChild(opt);}	  
             additional.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; modelSelect.appendChild(opt); });
             modelSelect.disabled=false;
@@ -1144,7 +1102,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // General case
         try{
             const res=await fetch(`${API_BASE}/GetModelsForMake/${encodeURIComponent(makeName)}?format=json`);
             if (!res.ok) throw new Error(`API Error: ${res.status}`);
@@ -1153,7 +1110,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let withPackages=[]; let withoutPackages=[];
 
-            // Chevrolet special ordering: Corvette before Camaro
             if(normalizedMake==='chevrolet'){
                 const cor = data.Results.find(m=>normalizeKey(m.Model_Name)==='corvette');
                 const cam = data.Results.find(m=>normalizeKey(m.Model_Name)==='camaro');
@@ -1171,7 +1127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
-            modelSelect.innerHTML = '<option value="">-- Select Model --</option>'; // Clear and add placeholder
+            modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
             withPackages.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; if(makeIsPriority) opt.className='model-highlight'; modelSelect.appendChild(opt); });
             withoutPackages.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; modelSelect.appendChild(opt); });
 
@@ -1184,7 +1140,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Show/hide trim field
     function hideTrim(){ 
         trimGroup.classList.add('hidden-field');
         trimSelect.innerHTML='<option value="">-- Select Trim --</option>'; 
@@ -1200,7 +1155,6 @@ document.addEventListener('DOMContentLoaded', function() {
         trimSelect.required = true;
     }
 
-    // Update trims for selection
     function updateTrimDropdown(makeName, modelName){
         hideTrim();
         if(!makeName || !modelName) return;
@@ -1216,7 +1170,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showTrim(trims);
             }
         }
-        // This function replaces the old populateTrims
     }
     // === END INTEGRATION: NEW VEHICLE SELECTOR LOGIC ===
 
@@ -1286,7 +1239,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // INTEGRATION: Modified VIN decoder to handle async model loading
     decodeVinBtn.addEventListener('click', async () => {
         const vin = vinInput.value.trim().toUpperCase();
         if (vin.length !== 17) {
@@ -1318,25 +1270,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             userVin = vin;
 
-            // 1. Set Make
             makeSelect.value = makeOption.value;
-            
-            // 2. Await model loading
             await loadModelsForMake(makeSelect.value);
-
-            // 3. Set Model (now that options are populated)
             const modelOptions = Array.from(modelSelect.options).map(opt => opt.value);
             const decodedModel = modelOptions.find(m => normalizeKey(m) === normalizeKey(result.Model)) || modelOptions[0];
             modelSelect.value = decodedModel;
-            
-            // 4. Set Year and Trim
             yearSelect.value = result.ModelYear;
-            
-            // Dispatch change events to trigger subsequent logic
             modelSelect.dispatchEvent(new Event('change'));
             yearSelect.dispatchEvent(new Event('change'));
             
-            // The model change will trigger trim population, now check if the decoded trim exists
             const apiTrim = result.Trim || result.Trim2 || '';
             let trimFound = false;
             if (apiTrim && trimSelect.options.length > 1) {
@@ -1352,7 +1294,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // *** NEW LOGIC: Default to Stingray for Corvettes if no trim is found ***
             if (!trimFound && normalizeKey(modelSelect.value) === 'corvette') {
                 const stingrayOption = Array.from(trimSelect.options).find(opt => opt.value === 'Stingray');
                 if (stingrayOption) {
@@ -1381,11 +1322,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- VIN SCANNER & CAMERA LOGIC ---
     function correctVin(vin) {
         return vin
-            .replace(/[^A-Z0-9]/gi, '') // Final cleanup to ensure only valid characters remain
-            .replace(/[OQ]/g, '0')    // Replace O and Q with 0
-            .replace(/I/g, '1')       // Replace I with 1
-            .replace(/S/g, '5')       // Replace S with 5
-            .replace(/B/g, '8');      // Replace B with 8
+            .replace(/[^A-Z0-9]/gi, '')
+            .replace(/[OQ]/g, '0')
+            .replace(/I/g, '1')
+            .replace(/S/g, '5')
+            .replace(/B/g, '8');
     }
 
     function extractVin(text) {
@@ -1461,20 +1402,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // --- UI POPULATION & EVENT LISTENERS ---
-    
-    // INTEGRATION: Old populate functions are removed. New ones are defined above.
-    // This one is kept as it's independent of the new API logic.
     const populateYears = () => {
         yearSelect.innerHTML = '<option value="">-- Select Year --</option>';
         const currentYr = new Date().getFullYear();
         for (let y = currentYr + 1; y >= 2005; y--) yearSelect.add(new Option(y, y));
     };
     
-    // INTEGRATION: Updated event listeners
     makeSelect.addEventListener('change', function() {
         loadModelsForMake(this.value);
         yearSelect.value = '';
-        // The loadModelsForMake function will trigger the model change event, which handles the rest.
     });
 
     modelSelect.addEventListener('change', function() {
@@ -1555,12 +1491,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }));
 
     getResultsBtn.addEventListener('click', () => {
-        selectedItems = []; // Clear selections when getting new results
+        selectedItems = []; 
         generateResults();
         updateStep(4);
     });
     
-    // --- CORE LOGIC (Largely Unchanged, depends on correct element IDs) ---
+    // --- CORE LOGIC (Largely Unchanged) ---
     function handleCorvetteTransmission() {
         const model = modelSelect.value;
         const year = parseInt(yearSelect.value);
@@ -1684,7 +1620,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.model === 'Corvette') {
                 const generationKey = selectedYear <= 2019 ? 'Corvette_C7' : 'Corvette_C8';
                 vehiclePackages = packages[generationKey] || [];
-            } else {
+            } else if (data.model === 'Camaro' && data.trim === 'Gen 6 ZL1') {
+                // Special case for ZL1 to get its specific packages
+                vehiclePackages = packages['Camaro'].filter(p => p.id.startsWith('zl1-'));
+            }
+             else {
                 vehiclePackages = packages[data.model] || [];
             }
 
@@ -2152,11 +2092,40 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
         });
     });
 
-    // --- INITIALIZATION ---
-    loadCarMakes(); // New initial call for makes
-    populateYears(); // Keep existing year population
-    updateTechInfo();
-    checkBusinessHours();
+    // --- REFACTOR: INITIALIZATION ---
+    async function initializeApp() {
+        try {
+            const response = await fetch(WIKD_DATA_URL);
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            const data = await response.json();
+            
+            // Assign fetched data to global variables
+            corvetteTechData = data.corvetteTechData;
+            packages = data.packages;
+            products = data.products;
+
+            // Call original initialization functions that are still needed
+            loadCarMakes();
+            populateYears();
+            updateTechInfo();
+            checkBusinessHours();
+
+        } catch (error) {
+            console.error('Failed to fetch WIKD Motorsports data:', error);
+            // Gracefully handle the error in the UI
+            const welcomePanel = document.querySelector('#welcome-container .panel');
+            if(welcomePanel) {
+                welcomePanel.innerHTML = `<div class="step-header">
+                    <h2 style="color: var(--color-primary);">Error Loading Data</h2>
+                    <p>Could not load the configurator. Please try refreshing the page or contact support if the problem persists.</p>
+                </div>`;
+            }
+        }
+    }
+
+    initializeApp();
 });
 </script>
 </body>
