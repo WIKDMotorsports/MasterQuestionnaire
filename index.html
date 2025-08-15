@@ -44,9 +44,10 @@
         }
         
         .widget-container {
-            /* max-width: 800px; <-- MODIFICATION: Removed max-width for full-width layout */
             margin: auto;
-            padding: 1rem 2rem 2rem;
+            /* MODIFICATION: Removed horizontal padding to allow it to go edge-to-edge. */
+            /* Some padding is re-introduced for mobile in the media query at the bottom. */
+            padding: 1rem 0 2rem;
         }
 
         .panel {
@@ -54,9 +55,9 @@
             border: 1px solid var(--color-border);
             border-radius: 12px;
             padding: 2rem;
-            margin: 0 auto 2rem; /* MODIFICATION: Centered the panel within the full-width container */
+            margin: 0 auto 2rem; /* Centered the panel within the full-width container */
             transition: all 0.5s ease;
-            max-width: 1100px; /* MODIFICATION: Added max-width to prevent content from stretching too wide on large screens */
+            max-width: 1100px; /* Added max-width to prevent content from stretching too wide on large screens */
         }
         
         .form-step, #welcome-container, #thank-you-container {
@@ -98,7 +99,7 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 2rem;
-            max-width: 1100px; /* MODIFICATION: Added max-width to align with panel */
+            max-width: 1100px; /* Added max-width to align with panel */
             margin-left: auto;
             margin-right: auto;
         }
