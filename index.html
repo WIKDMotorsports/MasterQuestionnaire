@@ -480,11 +480,12 @@
             max-width: 400px;
         }
         
+        /* MODIFICATION: Changed tooltip to open upwards */
         .qr-tooltip {
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             right: 0; 
-            margin-top: 12px;
+            margin-bottom: 12px;
             background-color: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: 12px;
@@ -494,7 +495,7 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
+            transform: translateY(10px);
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
             pointer-events: none;
             width: auto; 
@@ -510,22 +511,40 @@
         .qr-tooltip::before {
             content: '';
             position: absolute;
-            bottom: 100%;
+            top: 100%;
             right: 20px;
             border-width: 8px;
             border-style: solid;
-            border-color: transparent transparent var(--color-border) transparent;
+            border-color: var(--color-border) transparent transparent transparent;
         }
 
         .qr-tooltip::after {
             content: '';
             position: absolute;
-            bottom: 100%;
+            top: 100%;
             right: 21px;
-            margin-bottom: -1px; 
+            margin-top: -1px; 
             border-width: 7px;
             border-style: solid;
-            border-color: transparent transparent var(--color-surface) transparent;
+            border-color: var(--color-surface) transparent transparent transparent;
+        }
+        
+        /* MODIFICATION: Added rules to center the thank you page tooltip */
+        #call-link-thank-you .qr-tooltip {
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+        }
+        
+        #call-link-thank-you .qr-tooltip.active {
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        #call-link-thank-you .qr-tooltip::before,
+        #call-link-thank-you .qr-tooltip::after {
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .qr-tooltip .qr-code-canvas {
