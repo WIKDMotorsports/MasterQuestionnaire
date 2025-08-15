@@ -56,14 +56,76 @@
             padding: 1rem 0 2rem;
         }
 
+        @keyframes colorFlowPosition {
+            0%   { background-position: 0 0, 0% 50%; }
+            50%  { background-position: 0 0, 100% 50%; }
+            100% { background-position: 0 0, 0% 50%; }
+        }
+
         .panel {
             background-color: var(--color-surface);
-            border: 1px solid var(--color-border);
             border-radius: 12px;
             padding: 2rem;
             margin: 0 auto 2rem; /* Centered the panel within the full-width container */
             transition: all 0.5s ease;
-            /* MODIFICATION: Removed max-width to allow full stretch */
+            position: relative;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+        }
+
+        /* MODIFICATION: Setup for two pseudo-elements for cross-fading */
+        .panel::before,
+        .panel::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background-size: 100% 100%, 300% 100%;
+            animation: colorFlowPosition 4s ease-in-out infinite;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 0;
+        }
+
+        /* MODIFICATION: Opacity control classes for cross-fade */
+        .panel.show-before::before { opacity: 1; }
+        .panel.show-after::after { opacity: 1; }
+
+        /* MODIFICATION: Theme-specific gradients for the ::before pseudo-element */
+        .panel.theme-packages-before::before {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #b30000, #ff1a00, #ffaa00, #ff1a00, #b30000);
+        }
+        .panel.theme-wheels-before::before {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #004d00, #008000, #90ee90, #008000, #004d00);
+        }
+        .panel.theme-cooling-before::before {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #00c5ff, #ffffff, #afeeee, #ffffff, #00c5ff);
+        }
+        .panel.theme-exhaust-before::before {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #4B0082, #800000, #8A2BE2, #800000, #4B0082);
+        }
+
+        /* MODIFICATION: Theme-specific gradients for the ::after pseudo-element */
+        .panel.theme-packages-after::after {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #b30000, #ff1a00, #ffaa00, #ff1a00, #b30000);
+        }
+        .panel.theme-wheels-after::after {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #004d00, #008000, #90ee90, #008000, #004d00);
+        }
+        .panel.theme-cooling-after::after {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #00c5ff, #ffffff, #afeeee, #ffffff, #00c5ff);
+        }
+        .panel.theme-exhaust-after::after {
+            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
+                              linear-gradient(90deg, #4B0082, #800000, #8A2BE2, #800000, #4B0082);
         }
         
         .form-step, #welcome-container, #thank-you-container {
@@ -105,7 +167,6 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 2rem;
-            /* MODIFICATION: Removed max-width to allow full stretch */
             margin-left: auto;
             margin-right: auto;
         }
@@ -194,7 +255,6 @@
         .form-control:focus { outline: none; border-color: var(--color-primary); }
         .form-control:disabled { background-color: #2a2a2a; color: #888; cursor: not-allowed; }
         
-        /* INTEGRATION: Styles from new vehicle selector */
         .form-control option { background: var(--color-surface); color: var(--color-text); }
         .form-control option.top-highlight{ color:var(--color-primary); font-weight:600 }
         .form-control option.model-highlight{ color:var(--color-primary); font-weight:600 }
@@ -2141,6 +2201,48 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
             populateYears();
             updateTechInfo();
             checkBusinessHours();
+
+            // MODIFICATION: Start the cross-fading theme cycling for panel borders
+            const panels = document.querySelectorAll('.panel');
+            const themes = ['theme-packages', 'theme-wheels', 'theme-cooling', 'theme-exhaust'];
+            let currentThemeIndex = 0;
+            let isBeforePrimary = true; // Start with ::before being the visible element
+
+            // Set the initial theme on all panels for the ::before pseudo-element
+            panels.forEach(panel => {
+                panel.classList.add(themes[0] + '-before');
+                panel.classList.add('show-before'); // Make ::before visible initially
+            });
+
+            setInterval(() => {
+                const nextThemeIndex = (currentThemeIndex + 1) % themes.length;
+                const newTheme = themes[nextThemeIndex];
+                
+                panels.forEach(panel => {
+                    if (isBeforePrimary) {
+                        // Currently showing ::before, so fade in ::after with the new theme
+                        // 1. Set the new theme on the ::after element
+                        themes.forEach(t => panel.classList.remove(t + '-after')); // Clean up old themes
+                        panel.classList.add(newTheme + '-after');
+                        
+                        // 2. Trigger the cross-fade by toggling opacity classes
+                        panel.classList.remove('show-before');
+                        panel.classList.add('show-after');
+                    } else {
+                        // Currently showing ::after, so fade in ::before with the new theme
+                        // 1. Set the new theme on the ::before element
+                        themes.forEach(t => panel.classList.remove(t + '-before')); // Clean up old themes
+                        panel.classList.add(newTheme + '-before');
+
+                        // 2. Trigger the cross-fade
+                        panel.classList.remove('show-after');
+                        panel.classList.add('show-before');
+                    }
+                });
+
+                currentThemeIndex = nextThemeIndex;
+                isBeforePrimary = !isBeforePrimary; // Swap the primary element for the next cycle
+            }, 7000); // 7-second interval to match the hero banner
 
         } catch (error) {
             console.error('Failed to fetch WIKD Motorsports data:', error);
