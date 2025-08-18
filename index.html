@@ -92,40 +92,39 @@
         .panel.show-before::before { opacity: 1; }
         .panel.show-after::after { opacity: 1; }
 
-        /* MODIFICATION: Theme-specific gradients for the ::before pseudo-element */
+        /* MODIFICATION: Halved falloff distance for a more subtle effect */
         .panel.theme-packages-before::before {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #b30000, #ff1a00, #ffaa00, #ff1a00, #b30000);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(179,0,0,0.5), rgba(255,26,0,0.6), rgba(255,170,0,0.5), rgba(255,26,0,0.6), rgba(179,0,0,0.5));
         }
         .panel.theme-wheels-before::before {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #004d00, #008000, #90ee90, #008000, #004d00);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(0,77,0,0.5), rgba(0,128,0,0.6), rgba(144,238,144,0.5), rgba(0,128,0,0.6), rgba(0,77,0,0.5));
         }
         .panel.theme-cooling-before::before {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #00c5ff, #ffffff, #afeeee, #ffffff, #00c5ff);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(0,197,255,0.5), rgba(255,255,255,0.6), rgba(175,238,238,0.5), rgba(255,255,255,0.6), rgba(0,197,255,0.5));
         }
         .panel.theme-exhaust-before::before {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #4B0082, #800000, #8A2BE2, #800000, #4B0082);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(75,0,130,0.5), rgba(128,0,0,0.6), rgba(138,43,226,0.5), rgba(128,0,0,0.6), rgba(75,0,130,0.5));
         }
 
-        /* MODIFICATION: Theme-specific gradients for the ::after pseudo-element */
         .panel.theme-packages-after::after {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #b30000, #ff1a00, #ffaa00, #ff1a00, #b30000);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(179,0,0,0.5), rgba(255,26,0,0.6), rgba(255,170,0,0.5), rgba(255,26,0,0.6), rgba(179,0,0,0.5));
         }
         .panel.theme-wheels-after::after {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #004d00, #008000, #90ee90, #008000, #004d00);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(0,77,0,0.5), rgba(0,128,0,0.6), rgba(144,238,144,0.5), rgba(0,128,0,0.6), rgba(0,77,0,0.5));
         }
         .panel.theme-cooling-after::after {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #00c5ff, #ffffff, #afeeee, #ffffff, #00c5ff);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(0,197,255,0.5), rgba(255,255,255,0.6), rgba(175,238,238,0.5), rgba(255,255,255,0.6), rgba(0,197,255,0.5));
         }
         .panel.theme-exhaust-after::after {
-            background-image: linear-gradient(to bottom, transparent 25%, var(--color-border) 75%), 
-                              linear-gradient(90deg, #4B0082, #800000, #8A2BE2, #800000, #4B0082);
+            background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
+                              linear-gradient(90deg, rgba(75,0,130,0.5), rgba(128,0,0,0.6), rgba(138,43,226,0.5), rgba(128,0,0,0.6), rgba(75,0,130,0.5));
         }
         
         .form-step, #welcome-container, #thank-you-container {
