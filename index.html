@@ -37,9 +37,9 @@
             color: var(--color-text);
             font-family: var(--font-body);
             line-height: 1.6;
-            padding-top: 80px;
-            padding-bottom: 80px;
-            margin: 0; /* MODIFICATION: Removed default browser margin */
+            /* MODIFICATION: Removed all padding and margin for edge-to-edge layout */
+            padding: 0;
+            margin: 0;
         }
 
         h1, h2, h3 {
@@ -51,9 +51,10 @@
         }
         
         .widget-container {
-            margin: auto;
-            /* Some padding is re-introduced for mobile in the media query at the bottom. */
-            padding: 1rem 0 2rem;
+            width: 100%;
+            /* MODIFICATION: Removed horizontal padding and margin. Added vertical padding for spacing. */
+            padding: 2rem 0;
+            margin: 0;
         }
 
         @keyframes colorFlowPosition {
@@ -64,13 +65,16 @@
 
         .panel {
             background-color: var(--color-surface);
-            border-radius: 12px;
+            /* MODIFICATION: Removed border-radius and horizontal margin for full-width display */
+            border-radius: 0;
             padding: 2rem;
-            margin: 0 auto 2rem; /* Centered the panel within the full-width container */
+            margin: 0 0 2rem 0;
             transition: all 0.5s ease;
             position: relative;
             border: 1px solid transparent;
             background-clip: padding-box;
+            border-left: none; /* Ensure no side borders interfere with edge-to-edge */
+            border-right: none;
         }
 
         /* MODIFICATION: Setup for two pseudo-elements for cross-fading */
@@ -168,6 +172,8 @@
             margin-bottom: 2rem;
             margin-left: auto;
             margin-right: auto;
+            max-width: 900px; /* Give progress bar a max width to look good */
+            padding: 0 1rem; /* Add some padding so nodes don't hit edge */
         }
 
         .progress-bar::before {
@@ -678,7 +684,7 @@
         }
 
         @media (max-width: 640px) {
-            .widget-container { padding-left: 1rem; padding-right: 1rem; }
+            /* MODIFICATION: Removed the rule that added horizontal padding */
             .panel { padding: 1.5rem; }
             .step-header h2 { font-size: 2rem; }
             .product-grid { grid-template-columns: 1fr; }
