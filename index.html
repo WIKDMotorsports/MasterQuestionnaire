@@ -986,7 +986,8 @@ src="https://www.facebook.com/tr?id=442096331724242&ev=PageView&noscript=1"
                                 <animated-icons src="https://animatedicons.co/get-icon?name=Back&style=minimalistic&token=7a22709d-7dc4-4654-b0d6-df0167ffeb74" trigger="click" attributes='{"variationThumbColour":"#EAEAEA","variationName":"Dark","variationNumber":4,"numberOfGroups":2,"strokeWidth":1.5,"backgroundIsGroup":true,"defaultColours":{"group-1":"#EAEAEA","group-2":"#EAEAEA","background":"#0A0A0A"}}' height="22" width="22"></animated-icons>
                                 <span>Back to Results</span>
                             </button>
-                            <button type="button" class="btn btn-primary btn-right" id="generate-email-btn">
+                           <button type="button" class="btn btn-primary btn-right" id="generate-email-btn"
+                              onclick="fbq('trackCustom', 'GenerateEmailClicked')">
                                 <span>Generate Email</span>
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -2284,5 +2285,6 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
 </script>
 </body>
 </html>
+
 
 
