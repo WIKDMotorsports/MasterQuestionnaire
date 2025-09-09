@@ -1743,7 +1743,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isSelected = selectedItems.some(item => item.id === 'custom-tune-high-hp');
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3>${tuneIcon} Custom WIKD Tune Recommended</h3><p style="color: var(--color-text-muted);">Your horsepower goal of <strong>+${targetHpDelta} WHP</strong> is ambitious and exceeds our standard performance packages. For this level of performance, we recommend a fully custom WIKD Tune.</p><p style="color: var(--color-text-muted); margin-top: 1rem;">This involves a personalized consultation with our expert tuners to develop a bespoke solution, including part selection and dyno tuning, tailored specifically to your vehicle and goals.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">This build will likely require: ${unlockReason.join(' + ')}.</p>` : ''}
                 <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
-                    <a href="https://www.wikdmotorsports.com/pages/custom-dyno-tuning" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                    <a href="https://www.wikdmotorsports.com/pages/euro-tune" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
                     <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="custom-tune-high-hp" data-type="service" data-title="Custom WIKD Tune" data-price="0"><span>+</span></button>
                 </div></div>`;
             } else if (bestMatch) { 
@@ -1865,7 +1865,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isSelected = selectedItems.some(item => item.id === 'custom-tune-domestic-euro');
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3>${tuneIcon} Custom Dyno Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, a custom dyno tune is the best path forward to unlock its full potential. This allows us to tailor every parameter to your specific modifications for maximum safe, reliable power.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">Required Unlocks: ${unlockReason.join(' + ')}.</p>` : ''}
                 <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
-                    <a href="https://www.wikdmotorsports.com/pages/custom-dyno-tuning" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                    <a href="https://www.wikdmotorsports.com/pages/euro-tune" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
                     <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="custom-tune-domestic-euro" data-type="service" data-title="Custom Dyno Tune" data-price="0"><span>+</span></button>
                 </div></div>`;
             } else if (region === 'jdm' || region === 'korean') {
@@ -1873,7 +1873,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isSelected = selectedItems.some(item => item.id === 'custom-tune-import');
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3>${tuneIcon} Custom Import Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, we recommend a custom import tune to unlock its full potential. Our experts specialize in tuning Japanese and Korean vehicles for maximum performance and reliability.</p>
                 <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
-                    <a href="https://www.wikdmotorsports.com/pages/custom-dyno-tuning" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                    <a href="https://www.wikdmotorsports.com/pages/euro-tune" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
                     <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="custom-tune-import" data-type="service" data-title="Custom Import Tune" data-price="0"><span>+</span></button>
                 </div></div>`;
             }
@@ -2267,3 +2267,4 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
 </script>
 </body>
 </html>
+
