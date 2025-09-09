@@ -987,10 +987,10 @@ src="https://www.facebook.com/tr?id=442096331724242&ev=PageView&noscript=1"
                                 <span>Back to Results</span>
                             </button>
                            <button type="button" class="btn btn-primary btn-right" id="generate-email-btn"
-                              onclick="fbq('trackCustom', 'GenerateEmailClicked')">
-                                <span>Generate Email</span>
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
+  onclick="fbq('track', 'Lead')">
+    <span>Generate Email</span>
+    <i class="fas fa-paper-plane"></i>
+</button>
                         </div>
                     </div>
                 </div>
@@ -2285,6 +2285,7 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
 </script>
 </body>
 </html>
+
 
 
 
