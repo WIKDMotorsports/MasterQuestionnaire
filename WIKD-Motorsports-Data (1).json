@@ -1,0 +1,1401 @@
+{
+  "vehicleData": {
+    "Audi": {
+      "R8": {
+        "trims": ["Standard"]
+      }
+    },
+    "Cadillac": {
+      "CT5-V Blackwing": {
+        "trims": ["Standard"]
+      },
+      "CTS-V": {
+        "trims": ["Gen 2", "Gen 3"]
+      },
+      "CT4-V Blackwing": {
+        "trims": ["Standard"]
+      },
+      "Escalade": {
+        "trims": ["Standard"]
+      }
+    },
+    "Chevrolet": {
+      "Corvette": {
+        "trims": ["Base", "Z06", "ZR1", "Stingray", "Grand Sport", "E-Ray"]
+      },
+      "Camaro": {
+        "trims": ["Gen 5", "Gen 6 SS", "Gen 6 ZL1"]
+      },
+      "Silverado 1500": {
+        "trims": ["Standard"]
+      },
+      "Tahoe": {
+        "trims": ["Standard"]
+      }
+    },
+    "Ferrari": {
+      "458 Italia": {
+        "trims": ["Standard"]
+      }
+    },
+    "GMC": {
+      "Sierra 1500": {
+        "trims": ["Standard"]
+      },
+      "Yukon": {
+        "trims": ["Standard"]
+      }
+    },
+    "Lamborghini": {
+      "Huracan": {
+        "trims": ["EVO", "STO"]
+      }
+    },
+    "Mclaren": {
+      "570S": {
+        "trims": ["Standard"]
+      },
+      "540C": {
+        "trims": ["Standard"]
+      },
+      "570GT": {
+        "trims": ["Standard"]
+      },
+      "720S": {
+        "trims": ["Standard"]
+      }
+    },
+    "Other": {
+      "Other": {
+        "trims": ["Other"]
+      }
+    }
+  },
+  "corvetteTechData": [{
+    "year": 2005,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2005,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2006,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2006,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2006,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2007,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2007,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2007,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2008,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2008,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2008,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2009,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2009,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2009,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2009,
+    "trim": "ZR1",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2010,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2010,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2010,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2010,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2010,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2010,
+    "trim": "ZR1",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2011,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2011,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2011,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2011,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2011,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2011,
+    "trim": "ZR1",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2012,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2012,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2012,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2012,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2012,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2012,
+    "trim": "ZR1",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2013,
+    "trim": "Base",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2013,
+    "trim": "Base",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2013,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2013,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2013,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2013,
+    "trim": "ZR1",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2014,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2014,
+    "trim": "Stingray",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2015,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2015,
+    "trim": "Stingray",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2015,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2015,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2016,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2016,
+    "trim": "Stingray",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2016,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2016,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2017,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2017,
+    "trim": "Stingray",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2017,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2017,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2017,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2017,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2018,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2018,
+    "trim": "Stingray",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2018,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2018,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2018,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2018,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2019,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2019,
+    "trim": "Stingray",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2019,
+    "trim": "Grand Sport",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2019,
+    "trim": "Grand Sport",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2019,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2019,
+    "trim": "Z06",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2019,
+    "trim": "ZR1",
+    "transmission": "Auto",
+    "lockedECU": "no",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 50
+  }, {
+    "year": 2019,
+    "trim": "ZR1",
+    "transmission": "Manual",
+    "lockedECU": "no",
+    "lockedTCM": "no",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2020,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2021,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2022,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2023,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2023,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2024,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2024,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2024,
+    "trim": "E-Ray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2025,
+    "trim": "Stingray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "no",
+    "packages": "no",
+    "parts": "yes",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }, {
+    "year": 2025,
+    "trim": "E-Ray",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "no",
+    "parts": "yes",
+    "ecuCost": 1500,
+    "tcmCost": 400
+  }, {
+    "year": 2025,
+    "trim": "Z06",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "yes",
+    "packages": "yes",
+    "parts": "yes",
+    "ecuCost": 250,
+    "tcmCost": 50
+  }, {
+    "year": 2025,
+    "trim": "ZR1",
+    "transmission": "Auto",
+    "lockedECU": "yes",
+    "lockedTCM": "yes",
+    "dynoTune": "no",
+    "packages": "no",
+    "parts": "no",
+    "ecuCost": 0,
+    "tcmCost": 0
+  }],
+  "packages": {
+    "CT5-V Blackwing": [{
+      "id": "bw-35",
+      "title": "+35 WHP Package (E85)",
+      "hp_delta": 35,
+      "price": 4510,
+      "parts": ["Flex Fuel Kit", "Intake System", "Custom E85 Dyno Tune"],
+      "description": "A simple package to get you started with E85.",
+      "url": "https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages",
+      "e85Compatible": false
+    }, {
+      "id": "bw-75",
+      "title": "+75 WHP Package",
+      "hp_delta": 75,
+      "price": 4760,
+      "parts": ["WIKD Intake", "Lower Pulley Upgrade", "Performance Plugs & Wires"],
+      "description": "Great bang for your buck power increase.",
+      "url": "https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "bw-140",
+      "title": "+140 WHP Package",
+      "hp_delta": 140,
+      "price": 10813,
+      "parts": ["Big Gulp Intake", "Upper & Lower Pulleys", "Long Tube Headers"],
+      "description": "Serious power gains with supporting bolt-ons.",
+      "url": "https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "bw-190",
+      "title": "+190 WHP Package",
+      "hp_delta": 190,
+      "price": 12473,
+      "parts": ["Ported Supercharger", "Throttle Body", "Meth Injection"],
+      "description": "Pushing the stock blower to its limits.",
+      "url": "https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "bw-250",
+      "title": "+250 WHP Package",
+      "hp_delta": 250,
+      "price": 20254,
+      "parts": ["Custom Camshaft", "WIKD Subzero Chiller", "WIKD Fuel Package"],
+      "description": "A comprehensive package for major power.",
+      "url": "https://www.wikdmotorsports.com/pages/ct5-blackwing-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }],
+    "Camaro": [{
+      "id": "camaro-stage1",
+      "title": "Gen 6 Camaro Stage 1",
+      "hp_delta": 50,
+      "price": 3500,
+      "parts": ["Cold Air Intake", "Custom Dyno Tune"],
+      "description": "A great starting point for your Gen 6 Camaro.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "zl1-35",
+      "title": "ZL1 LT4 +35 WHP (E85)",
+      "hp_delta": 35,
+      "price": 2610.79,
+      "parts": ["Flex Fuel Kit", "Big Gulp Intake"],
+      "description": "Boost your Camaro ZL1's performance with a Flex Fuel Kit, Big Gulp Intake, and custom dyno tuning for E85 fuel. This package requires E85 fuel.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-zl1-tuning-packages",
+      "e85Compatible": false
+    }, {
+      "id": "zl1-75",
+      "title": "ZL1 LT4 +75 WHP",
+      "hp_delta": 75,
+      "price": 3948.60,
+      "parts": ["Big Gulp Intake", "10mm LT Spark Plug Wires", "Spark Plug", "9.2 Lower Pulley", "Damper", "Crank Seal", "Supercharger Belt", "Performance Crank Bolt"],
+      "description": "Features a Big Gulp Intake, performance spark plugs, lower pulley upgrade, and custom dyno tuning for a noticeable power increase.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-zl1-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "zl1-140",
+      "title": "ZL1 LT4 +140 WHP",
+      "hp_delta": 140,
+      "price": 9944.09,
+      "parts": ["Big Gulp Intake", "10mm LT Spark Plug Wires", "Spark Plugs", "9.6 Lower Pulley", "Damper", "Crank Seal", "Supercharger Belt", "2.3 Upper Pulley", "2 LTH and Midpipe", "MLS Manifold Gaskets", "Catch Can", "D140 oil change kit", "Voltage Booster", "Performance Crank Bolt"],
+      "description": "Includes intake and pulley upgrades, long tube headers, spark plugs, a catch can, and a comprehensive custom dyno tune.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-zl1-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "zl1-190",
+      "title": "ZL1 LT4 +190 WHP",
+      "hp_delta": 190,
+      "price": 12449.62,
+      "parts": ["Big Gulp Intake", "10mm LT Spark Plug Wires", "Spark Plugs", "9.6 Lower Pulley", "Damper", "Crank Seal", "Supercharger Belt", "2.25 Upper Pulley", "2 LTH and Midpipe", "Exhaust Manifold Gaskets", "Catch Can", "D140 oil change kit", "Fuel Pump", "Supercharger Snout Ported", "Throttle Body", "Meth Injection", "Performance Crank Bolt"],
+      "description": "A serious upgrade with a ported supercharger snout, throttle body, headers, pulley upgrades, Meth Injection, and an advanced custom dyno tune.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-zl1-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "zl1-250",
+      "title": "ZL1 LT4 +250 WHP",
+      "hp_delta": 250,
+      "price": 22516.81,
+      "parts": ["Big Gulp Intake", "10mm LT Spark Plug Wires", "Spark Plug", "9.6 Lower Pulley", "Damper", "Supercharger Belt", "2.25 Upper Pulley", "2\" LTH and Midpipe", "MLS Manifold Gaskets", "Catch Can", "D140 oil change kit", "WIKD Fuel Package", "Fuel Pump", "103 Throttle body", "Blower Camshaft", "VVT Delete Cover", "Front Crank Seal", "Timing Guide", "Pushrods", "Trunnion Kit", "Lifter Set", "DOD Block Plugs", "Valve Spring Kit", "Head Gasket", "Head Studs", "Lifter Guide", "WIKD Subzero Interchiller", "2.5 gal Expansion Tank", "Hub install / snout porting", "Fuel Pump", "WIKD Fuel Package", "Meth Injection", "Performance Crank Bolt"],
+      "description": "Our most comprehensive package, featuring a custom camshaft, WIKD Subzero Interchiller, WIKD Fuel Package, and extensive tuning for maximum horsepower. Due to this package's high performance, swapping to E85 may result in boosting power by more than 30 WHP.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-zl1-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "zl1-1000",
+      "title": "WIKD 1000+ WHP",
+      "hp_delta": 1000,
+      "price": 99999.99,
+      "parts": ["Forged Internal Engine Build (custom spec)", "WIKD Forced Induction System (Twin Turbo/Massive Supercharger - custom setup)", "Reinforced Transmission & Drivetrain (custom hardened components)", "Upgraded Fuel System (custom high-flow lines, injectors, pumps)", "Advanced Cooling System (custom radiators, intercoolers, oil coolers)", "Standalone Engine Management System (fully custom tuned)", "Full Exhaust System (custom fabrication)", "Custom Suspension & Chassis Reinforcements", "Performance Braking System (modified for extreme loads)", "Custom Wheels & High-Performance Tires", "Custom Aero Package (for downforce and stability)", "Safety Enhancements (roll cage, racing seats - modified for street/track)", "Anything else you can afford"],
+      "description": "This isn't just a package; it's a declaration. The WIKD 1000+ WHP build transforms your machine into an absolute force of nature. Be warned: once unleashed, there's no going back. The depth of our ability is limited only by the depth of your wallet. Consider this your blank check to automotive nirvana. WARNING: THIS MACHINE WILL BECOME A BEAST UNLIKE ANYTHING YOU'VE EVER DRIVEN. HANDLE WITH EXTREME CAUTION.",
+      "url": "https://www.wikdmotorsports.com/pages/6th-gen-camaro-zl1-tuning-packages",
+      "e85Compatible": false
+    }],
+    "Corvette_C7": [{
+      "id": "c7-lt4-50",
+      "title": "C7 LT4 +50 WHP (E85)",
+      "hp_delta": 50,
+      "price": 2610,
+      "parts": ["Flex Fuel Kit", "Big Gulp Intake"],
+      "description": "Entry-level power for C7 LT4 on E85.",
+      "url": "https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages",
+      "e85Compatible": false
+    }, {
+      "id": "c7-lt4-75",
+      "title": "C7 LT4 +75 WHP",
+      "hp_delta": 75,
+      "price": 4786,
+      "parts": ["Intake", "9.2” Pulley", "Spark Plug Wires"],
+      "description": "Budget-friendly bolt-on performance for the C7 LT4.",
+      "url": "https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "c7-lt4-125",
+      "title": "C7 LT4 +125 WHP",
+      "hp_delta": 125,
+      "price": 9944,
+      "parts": ["Headers", "Pulley Combo", "Catch Can"],
+      "description": "Serious performance gain for your C7 Z06 or ZR1.",
+      "url": "https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "c7-lt4-175",
+      "title": "C7 LT4 +175 WHP",
+      "hp_delta": 175,
+      "price": 13400,
+      "parts": ["Ported Snout", "Throttle Body", "Meth Injection"],
+      "description": "An aggressive package for street and strip C7s.",
+      "url": "https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }, {
+      "id": "c7-lt4-250",
+      "title": "C7 LT4 +250 WHP",
+      "hp_delta": 250,
+      "price": 23450,
+      "parts": ["Camshaft", "Interchiller", "Head Studs"],
+      "description": "A full build to max out the factory LT4 supercharger.",
+      "url": "https://www.wikdmotorsports.com/pages/corvette-c7-lt4-tuning-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 645
+    }],
+    "Corvette_C8": [{
+      "id": "c8-lt2-60",
+      "title": "C8 LT2 +50-70WHP",
+      "hp_delta": 60,
+      "price": 5390.45,
+      "parts": ["Flex Fuel Kit", "Cold Air Intake"],
+      "description": "Boosts performance with a Flex Fuel Kit, Cold Air Intake, and custom dyno tuning for E85 fuel.",
+      "url": "https://www.wikdmotorsports.com/pages/c8-lt2-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "c8-lt2-77",
+      "title": "C8 LT2 +75-80 WHP",
+      "hp_delta": 77.5,
+      "price": 13735.1,
+      "parts": ["Cold Air Intake", "Headers", "Off-Road Pipe", "Intake Manifold"],
+      "description": "Features intake and exhaust upgrades, including headers, an off-road pipe, and a new throttle body.",
+      "url": "https://www.wikdmotorsports.com/pages/c8-lt2-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "c8-lt2-120",
+      "title": "C8 LT2 +120 WHP",
+      "hp_delta": 120,
+      "price": 23171.43,
+      "parts": ["Blower Camshaft", "Cylinder Heads", "Head Studs"],
+      "description": "Includes camshaft and cylinder head upgrades along with intake/exhaust enhancements for a comprehensive power boost.",
+      "url": "https://www.wikdmotorsports.com/pages/c8-lt2-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "c8-lt2-200-mag",
+      "title": "C8 LT2 +200 WHP Magnuson",
+      "hp_delta": 200,
+      "price": 23105.07,
+      "parts": ["Magnuson Supercharger Kit"],
+      "description": "A Magnuson Supercharger system provides a massive power increase with custom dyno tuning.",
+      "url": "https://www.wikdmotorsports.com/pages/c8-lt2-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "c8-lt2-200-pro",
+      "title": "C8 LT2 +200 WHP Procharger",
+      "hp_delta": 200,
+      "price": 25603.28,
+      "parts": ["Procharger Supercharger Kit"],
+      "description": "Features a Procharger Supercharger system for a huge jump in power, including a custom tune.",
+      "url": "https://www.wikdmotorsports.com/pages/c8-lt2-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }, {
+      "id": "c8-lt2-250",
+      "title": "C8 LT2 +250 WHP",
+      "hp_delta": 250,
+      "price": 44437.95,
+      "parts": ["Supercharger Kit", "Clutch Box", "Blower Camshaft"],
+      "description": "The most comprehensive package, featuring a supercharger, a custom camshaft, and extensive tuning for maximum horsepower.",
+      "url": "https://www.wikdmotorsports.com/pages/c8-lt2-packages",
+      "e85Compatible": true,
+      "e85HpBoost": 30,
+      "e85PriceBoost": 1455
+    }]
+  },
+  "products": [{
+    "id": "mclaren-tips-black",
+    "title": "570S & 720S Titanium Exhaust Tips (Black)",
+    "price": 149.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC_1938.jpg?v=1734029090&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-black",
+    "keywords": ["570s", "720s", "mclaren"]
+  }, {
+    "id": "mclaren-tips-purple",
+    "title": "570S & 720S Titanium Exhaust Tips (Brushed Purple Finish)",
+    "price": 149.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC_1848.jpg?v=1734029242&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-1",
+    "keywords": ["570s", "720s", "mclaren"]
+  }, {
+    "id": "mclaren-tips-inner-purple",
+    "title": "570S & 720S Titanium Exhaust Tips (Inner Purple Finish)",
+    "price": 149.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC_1817.jpg?v=1734029625&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-inner-purple-finish",
+    "keywords": ["570s", "720s", "mclaren"]
+  }, {
+    "id": "mclaren-tips-style1-purple",
+    "title": "570S & 720S Titanium Exhaust Tips Style 1 (Brushed Purple Finish)",
+    "price": 149.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC_1824.jpg?v=1734029629&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish",
+    "keywords": ["570s", "720s", "mclaren"]
+  }, {
+    "id": "mclaren-tips-style2-purple",
+    "title": "570S & 720S Titanium Exhaust Tips Style 2 (Brushed Purple Finish)",
+    "price": 149.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC_1904.jpg?v=1734029609&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/570s-720s-titanium-exhaust-tips-brushed-purple-finish-2",
+    "keywords": ["570s", "720s", "mclaren"]
+  }, {
+    "id": "c8-downpipe-purple",
+    "title": "Chevy Corvette C8 Catless Titanium Downpipe 2020+ (Brushed Purple)",
+    "price": 999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4654.jpg?v=1733425387&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/chevy-corvette-c8-catless-titanium-downpipe-2020-brushed-purple",
+    "keywords": ["chevrolet", "corvette", "c8"],
+    "minYear": 2020
+  }, {
+    "id": "c8-catback-blue",
+    "title": "Corvette C8 Titanium Catback 2020+ (Brushed Blue)",
+    "price": 3999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4623.jpg?v=1733425432&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/corvette-c8-titanium-catback-2020-brushed-blue",
+    "keywords": ["chevrolet", "corvette", "c8"],
+    "minYear": 2020
+  }, {
+    "id": "c8-z06-exhaust-blue",
+    "title": "Corvette C8 Z06 Titanium Sport Exhaust System 2023+ (Without Valve) (Brushed Blue)",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/1_2abafc71-96c5-49fc-8b12-a4f461d1dde7.jpg?v=1733425492&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/corvette-c8-z06-titanium-sport-exhaust-system-2023-without-valve-brushed-blue",
+    "keywords": ["chevrolet", "corvette", "c8", "z06"],
+    "minYear": 2023
+  }, {
+    "id": "plate-frames",
+    "title": "Custom License Plate Frames",
+    "price": 9.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC_5685.jpg?v=1745934158&width=1080",
+    "productUrl": "https://www.wikdmotorsports.com/products/custom-plate-frames",
+    "keywords": ["universal"]
+  }, {
+    "id": "ferrari-458-catback-gold",
+    "title": "Ferrari 458 Italia 4.5L Titanium Catback 2010-2015 (Golden Polish)",
+    "price": 3999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4415.jpg?v=1733425565&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-2010-2015-golden-polish",
+    "keywords": ["ferrari", "458", "italia"],
+    "minYear": 2010,
+    "maxYear": 2015
+  }, {
+    "id": "ferrari-458-catback-muffler-blue",
+    "title": "Ferrari 458 Italia 4.5L Titanium Catback With Muffler 2010 - 2015 (Brushed Blue)",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4436.jpg?v=1733425637&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-catback-with-muffler-2010-2015-brushed-blue",
+    "keywords": ["ferrari", "458", "italia"],
+    "minYear": 2010,
+    "maxYear": 2015
+  }, {
+    "id": "ferrari-458-downpipe-blue",
+    "title": "Ferrari 458 Italia 4.5L Titanium Downpipe 2010-2015 (Brushed Blue)",
+    "price": 2999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4682.jpg?v=1733425697&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/ferrari-458-italia-45l-titanium-downpipe-2010-2015-brushed-blue",
+    "keywords": ["ferrari", "458", "italia"],
+    "minYear": 2010,
+    "maxYear": 2015
+  }, {
+    "id": "jet-tag",
+    "title": "GET WIKD Jet Tag - WIKD",
+    "price": 6.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/GET_WIKD_Jet_Tag_-_WIKD.jpg?v=1745934173&width=2000",
+    "productUrl": "https://www.wikdmotorsports.com/products/get-wikd-jet-tag-wikd",
+    "keywords": ["universal"]
+  }, {
+    "id": "huracan-r8-header-black",
+    "title": "Lamborghini Huracan EVO / Audi R8 Header (Black Ceramic Coated)",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Blk-1.png?v=1734023095&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-black-ceramic-coated",
+    "keywords": ["lamborghini", "huracan", "audi", "r8"]
+  }, {
+    "id": "huracan-r8-header-gold",
+    "title": "Lamborghini Huracan EVO Header / Audi R8 (Golden Ceramic Coated)",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/Huracan_Headers_Gold-1.png?v=1734023095&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/lamborghini-huracan-evo-header-golden-ceramic-coated",
+    "keywords": ["lamborghini", "huracan", "audi", "r8"]
+  }, {
+    "id": "huracan-catback-muffler-purple",
+    "title": "Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback With Muffler,2019+ (Brushed Purple)",
+    "price": 5999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4452.jpg?v=1733425766&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-with-muffler-2019-brushed-purple",
+    "keywords": ["lamborghini", "huracan"],
+    "minYear": 2019
+  }, {
+    "id": "huracan-catback-gold",
+    "title": "Lamborghini Huracan EVO/STO 5.2 V10 Titanium Catback, 2019+ (Golden Polish)",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4504.jpg?v=1733425822&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/lamborghini-huracan-evosto-remove-opf-52-v10-titanium-catback-2019-golden-polish",
+    "keywords": ["lamborghini", "huracan"],
+    "minYear": 2019
+  }, {
+    "id": "mclaren-570-catback-purple",
+    "title": "Mclaren 540C/570GT/570S Twin-Turbo 3.8 V8 Titanium Catback 2015+ (Brushed Purple)",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4382.jpg?v=1733425787&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/mclaren-540c-570gt-570s-twin-turbo-38-v8-titanium-catback-2015-brushed-purple",
+    "keywords": ["mclaren", "540c", "570gt", "570s"],
+    "minYear": 2015
+  }, {
+    "id": "mclaren-570-downpipe-purple",
+    "title": "Mclaren 570S 540C 570GT 3.8L Twin-Turbocharged V8 Titanium Downpipe 2015+ (Brushed Purple)",
+    "price": 2699.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4698.jpg?v=1734125210&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/mclaren-570s-540c-570gt-38l-twin-turbocharged-v8-titanium-downpipe-2015-brushed-purple",
+    "keywords": ["mclaren", "570s", "540c", "570gt"],
+    "minYear": 2015
+  }, {
+    "id": "mclaren-720-downpipe-purple",
+    "title": "Mclaren 720S Decat Titanium Downpipe 2018+ (Brushed Purple)",
+    "price": 3349.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4559_f71fde06-0135-4c14-9064-d85084463868.jpg?v=1734125231&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/mclaren-720s-decat-titanium-downpipe-2018-brushed-purple",
+    "keywords": ["mclaren", "720s"],
+    "minYear": 2018
+  }, {
+    "id": "mclaren-720-catback-purple",
+    "title": "Mclaren 720S Titanium Catback 2018+",
+    "price": 4999.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/IMG_4784.jpg?v=1733426002&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/mclaren-720s-titanium-catback-2018-brushed-purple",
+    "keywords": ["mclaren", "720s"],
+    "minYear": 2018
+  }, {
+    "id": "c7-fan-shroud",
+    "title": "WIKD Motorsports - Fan & Shroud for C7 Corvette",
+    "price": 799.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/DSC07228.jpg?v=1735251043&width=800",
+    "productUrl": "https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette",
+    "keywords": ["chevrolet", "corvette", "c7"]
+  }, {
+    "id": "universal-fan-shroud",
+    "title": "WIKD Motorsports - Universal 18in Fan & Shroud",
+    "price": 99.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/dsc08287_1.jpg?v=1734036302&width=1920",
+    "productUrl": "https://www.wikdmotorsports.com/products/wikd-motorsports-fan-shroud-for-c7-corvette-copy",
+    "keywords": ["universal"]
+  }, {
+    "id": "tuned-sticker",
+    "title": "WIKD Tuned Sticker",
+    "price": 4.99,
+    "imageUrl": "https://www.wikdmotorsports.com/cdn/shop/files/WIKD_Tuned_Sticker_Side_Window_Application.jpg?v=1745934178&width=2000",
+    "productUrl": "https://www.wikdmotorsports.com/products/wikd-tuned-sticker",
+    "keywords": ["universal"]
+  }]
+}
