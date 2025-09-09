@@ -988,7 +988,7 @@ src="https://www.facebook.com/tr?id=796935762872173&ev=NoScript&noscript=1"
                                 <span>Back to Results</span>
                             </button>
                            <button type="button" class="btn btn-primary btn-right" id="generate-email-btn"
-  onclick="fbq('track', 'Lead')">
+  onclick="fbq('track', 'Lead'); console.log('Lead event fired');">
     <span>Generate Email</span>
     <i class="fas fa-paper-plane"></i>
 </button>
@@ -2286,6 +2286,7 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
 </script>
 </body>
 </html>
+
 
 
 
