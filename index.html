@@ -2411,12 +2411,15 @@ setTimeout(() => {
 
     // --- REFACTOR: INITIALIZATION ---
     async function runApp() {
+        // --- STEP 1: ATTEMPT FIREBASE INITIALIZATION ---
+        // This block will try to connect to Firebase. If it fails (e.g., outside the canvas),
+        // it will log a warning and set isFirebaseReady to false, but the app will continue.
         try {
-            // --- FIREBASE INITIALIZATION (v8 Syntax) ---
-            const firebaseConfig = typeof __firebase_config !== 'undefined' 
-                ? JSON.parse(__firebase_config) 
-                : { apiKey: "AIzaSyAWX6sYYsa-scVrg2Ctjob04AHqxorq8Fs", authDomain: "wikdconfigurators.firebaseapp.com", projectId: "wikdconfigurators", storageBucket: "wikdconfigurators.appspot.com", messagingSenderId: "623427770699", appId: "1:623427770699:web:ec24e40cb6501c047e30ce" };
+            if (typeof firebase === 'undefined' || typeof __firebase_config === 'undefined') {
+                throw new Error("Firebase scripts or config not available.");
+            }
 
+            const firebaseConfig = JSON.parse(__firebase_config);
             firebase.initializeApp(firebaseConfig);
             db = firebase.firestore();
             auth = firebase.auth();
@@ -2430,15 +2433,23 @@ setTimeout(() => {
             })();
 
             isFirebaseReady = true;
-            console.log("Firebase initialized and user authenticated with UID:", user.user.uid);
+            console.log("Firebase Connection Successful. UID:", user.user.uid);
 
             sessionId = getCookie('configuratorSessionId');
             if (!sessionId) {
                 sessionId = generateUUID();
-                setCookie('configuratorSessionId', sessionId, 30); // Store for 30 days
+                setCookie('configuratorSessionId', sessionId, 30);
             }
-            console.log("Current Session ID:", sessionId);
+            console.log("Session ID:", sessionId);
+            
+        } catch (firebaseError) {
+            isFirebaseReady = false;
+            console.warn("Firebase initialization failed. Running in offline mode. Progress will not be saved.", firebaseError);
+        }
 
+        // --- STEP 2: LOAD CORE APPLICATION DATA & INITIALIZE UI ---
+        // This block runs regardless of Firebase's status, ensuring the app always loads.
+        try {
             const TARGET_URL = 'https://cdn.shopify.com/s/files/1/0671/4635/0805/files/WIKD-Motorsports-Data.json?v=1755118954';
             const response = await fetch(TARGET_URL);
 
@@ -2452,25 +2463,26 @@ setTimeout(() => {
             packages = data.packages;
             products = data.products;
 
-            // Call original initialization functions that are still needed
+            // Initialize UI elements
             await loadCarMakes();
             populateYears();
             updateTechInfo();
             checkBusinessHours();
             
-            // Load state from firebase AFTER dynamic data is loaded
-            await loadStateFromFirebase(sessionId);
+            // Attempt to load state only if Firebase is ready and we have a session ID
+            if (isFirebaseReady && sessionId) {
+                await loadStateFromFirebase(sessionId);
+            }
 
             // MODIFICATION: Start the cross-fading theme cycling for panel borders
             const panels = document.querySelectorAll('.panel');
             const themes = ['theme-exhaust', 'theme-packages', 'theme-wheels', 'theme-cooling'];
             let currentThemeIndex = 0;
-            let isBeforePrimary = true; // Start with ::before being the visible element
+            let isBeforePrimary = true; 
 
-            // Set the initial theme on all panels for the ::before pseudo-element
             panels.forEach(panel => {
                 panel.classList.add(themes[0] + '-before');
-                panel.classList.add('show-before'); // Make ::before visible initially
+                panel.classList.add('show-before'); 
             });
 
             setInterval(() => {
@@ -2479,38 +2491,29 @@ setTimeout(() => {
                 
                 panels.forEach(panel => {
                     if (isBeforePrimary) {
-                        // Currently showing ::before, so fade in ::after with the new theme
-                        // 1. Set the new theme on the ::after element
-                        themes.forEach(t => panel.classList.remove(t + '-after')); // Clean up old themes
+                        themes.forEach(t => panel.classList.remove(t + '-after')); 
                         panel.classList.add(newTheme + '-after');
-                        
-                        // 2. Trigger the cross-fade by toggling opacity classes
                         panel.classList.remove('show-before');
                         panel.classList.add('show-after');
                     } else {
-                        // Currently showing ::after, so fade in ::before with the new theme
-                        // 1. Set the new theme on the ::before element
-                        themes.forEach(t => panel.classList.remove(t + '-before')); // Clean up old themes
+                        themes.forEach(t => panel.classList.remove(t + '-before')); 
                         panel.classList.add(newTheme + '-before');
-
-                        // 2. Trigger the cross-fade
                         panel.classList.remove('show-after');
                         panel.classList.add('show-before');
                     }
                 });
 
                 currentThemeIndex = nextThemeIndex;
-                isBeforePrimary = !isBeforePrimary; // Swap the primary element for the next cycle
-            }, 7000); // 7-second interval to match the hero banner
+                isBeforePrimary = !isBeforePrimary; 
+            }, 7000); 
 
         } catch (error) {
-            console.error('Failed to initialize app:', error);
-            // Gracefully handle the error in the UI
+            console.error('Failed to initialize app core:', error);
             const welcomePanel = document.querySelector('#welcome-container .panel');
             if(welcomePanel) {
                 welcomePanel.innerHTML = `<div class="step-header">
                     <h2 style="color: var(--color-primary);">Error Loading Data</h2>
-                    <p>Could not load the configurator. Please try refreshing the page or contact support if the problem persists.</p>
+                    <p>Could not load the configurator data. Please try refreshing the page or contact support if the problem persists.</p>
                 </div>`;
             }
         }
