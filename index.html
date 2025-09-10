@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Meta Pixel Minimal Loader -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-
-// Initialize your pixel ID, but don't auto-track PageView
-fbq('init', '796935762872173');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=796935762872173&ev=NoScript&noscript=1"
-/></noscript>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WIKD Motorsports | Custom Tuning Configurator</title>
@@ -117,36 +99,36 @@ src="https://www.facebook.com/tr?id=796935762872173&ev=NoScript&noscript=1"
         /* MODIFICATION: Halved falloff distance for a more subtle effect */
         .panel.theme-packages-before::before {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(179,0,0,0.5), rgba(255,26,0,0.6), rgba(255,170,0,0.5), rgba(255,26,0,0.6), rgba(179,0,0,0.5));
+                                linear-gradient(90deg, rgba(179,0,0,0.5), rgba(255,26,0,0.6), rgba(255,170,0,0.5), rgba(255,26,0,0.6), rgba(179,0,0,0.5));
         }
         .panel.theme-wheels-before::before {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(0,77,0,0.5), rgba(0,128,0,0.6), rgba(144,238,144,0.5), rgba(0,128,0,0.6), rgba(0,77,0,0.5));
+                                linear-gradient(90deg, rgba(0,77,0,0.5), rgba(0,128,0,0.6), rgba(144,238,144,0.5), rgba(0,128,0,0.6), rgba(0,77,0,0.5));
         }
         .panel.theme-cooling-before::before {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(0,197,255,0.5), rgba(255,255,255,0.6), rgba(175,238,238,0.5), rgba(255,255,255,0.6), rgba(0,197,255,0.5));
+                                linear-gradient(90deg, rgba(0,197,255,0.5), rgba(255,255,255,0.6), rgba(175,238,238,0.5), rgba(255,255,255,0.6), rgba(0,197,255,0.5));
         }
         .panel.theme-exhaust-before::before {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(75,0,130,0.5), rgba(128,0,0,0.6), rgba(138,43,226,0.5), rgba(128,0,0,0.6), rgba(75,0,130,0.5));
+                                linear-gradient(90deg, rgba(75,0,130,0.5), rgba(128,0,0,0.6), rgba(138,43,226,0.5), rgba(128,0,0,0.6), rgba(75,0,130,0.5));
         }
 
         .panel.theme-packages-after::after {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(179,0,0,0.5), rgba(255,26,0,0.6), rgba(255,170,0,0.5), rgba(255,26,0,0.6), rgba(179,0,0,0.5));
+                                linear-gradient(90deg, rgba(179,0,0,0.5), rgba(255,26,0,0.6), rgba(255,170,0,0.5), rgba(255,26,0,0.6), rgba(179,0,0,0.5));
         }
         .panel.theme-wheels-after::after {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(0,77,0,0.5), rgba(0,128,0,0.6), rgba(144,238,144,0.5), rgba(0,128,0,0.6), rgba(0,77,0,0.5));
+                                linear-gradient(90deg, rgba(0,77,0,0.5), rgba(0,128,0,0.6), rgba(144,238,144,0.5), rgba(0,128,0,0.6), rgba(0,77,0,0.5));
         }
         .panel.theme-cooling-after::after {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(0,197,255,0.5), rgba(255,255,255,0.6), rgba(175,238,238,0.5), rgba(255,255,255,0.6), rgba(0,197,255,0.5));
+                                linear-gradient(90deg, rgba(0,197,255,0.5), rgba(255,255,255,0.6), rgba(175,238,238,0.5), rgba(255,255,255,0.6), rgba(0,197,255,0.5));
         }
         .panel.theme-exhaust-after::after {
             background-image: linear-gradient(to bottom, transparent 0px, transparent 35px, var(--color-border) 125px), 
-                              linear-gradient(90deg, rgba(75,0,130,0.5), rgba(128,0,0,0.6), rgba(138,43,226,0.5), rgba(128,0,0,0.6), rgba(75,0,130,0.5));
+                                linear-gradient(90deg, rgba(75,0,130,0.5), rgba(128,0,0,0.6), rgba(138,43,226,0.5), rgba(128,0,0,0.6), rgba(75,0,130,0.5));
         }
         
         .form-step, #welcome-container, #thank-you-container {
@@ -987,11 +969,10 @@ src="https://www.facebook.com/tr?id=796935762872173&ev=NoScript&noscript=1"
                                 <animated-icons src="https://animatedicons.co/get-icon?name=Back&style=minimalistic&token=7a22709d-7dc4-4654-b0d6-df0167ffeb74" trigger="click" attributes='{"variationThumbColour":"#EAEAEA","variationName":"Dark","variationNumber":4,"numberOfGroups":2,"strokeWidth":1.5,"backgroundIsGroup":true,"defaultColours":{"group-1":"#EAEAEA","group-2":"#EAEAEA","background":"#0A0A0A"}}' height="22" width="22"></animated-icons>
                                 <span>Back to Results</span>
                             </button>
-                           <button type="button" class="btn btn-primary btn-right" id="generate-email-btn"
-  onclick="fbq('track', 'Lead'); console.log('Lead event fired');">
-    <span>Generate Email</span>
-    <i class="fas fa-paper-plane"></i>
-</button>
+                            <button type="button" class="btn btn-primary btn-right" id="generate-email-btn">
+                                <span>Generate Email</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1043,16 +1024,27 @@ src="https://www.facebook.com/tr?id=796935762872173&ev=NoScript&noscript=1"
             <button type="button" class="btn btn-primary" id="capture-btn"><span><i class="fas fa-camera"></i> Snap Picture</span></button>
         </div>
     </div>
-
+    
+    <!-- FIX: Use Firebase v8 Compat Libraries to work in a standard script tag -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // --- REFACTOR: MASTER DATA (WILL BE FETCHED DYNAMICALLY) ---
+    // Note: This script is no longer type="module"
+    document.addEventListener('DOMContentLoaded', function() {
+    // --- FIREBASE VARIABLES ---
+    let db, auth;
+    let sessionId = null;
+    let isFirebaseReady = false;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+
+    // --- REFACTOR: MASTER DATA ---
     let corvetteTechData = [];
     let packages = {};
     let products = [];
-    const WIKD_DATA_URL = 'https://cdn.shopify.com/s/files/1/0671/4635/0805/files/WIKD-Motorsports-Data.json?v=1755118954';
-
+    
     // --- FORM ELEMENTS ---
     const form = document.getElementById('tuning-form');
     const nextBtns = document.querySelectorAll('.next-btn');
@@ -1133,7 +1125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         {name:'CT4-V Blackwing', hasPackage:false},
         {name:'Escalade', hasPackage:false}
     ];
-    // --- FIX: Added Cadillac to the makeModelPackages object ---
+    // --- FIX: Added Cadillac to the makeModelPackages object and corrected key ---
     const makeModelPackages = {
         'cadillac': { 'ct5vblackwing': true, 'ctsv': true },
         'audi':{'r8':true},
@@ -1152,6 +1144,147 @@ document.addEventListener('DOMContentLoaded', function() {
             'huracan': ['EVO','STO']
         }
     };
+    
+    // --- FIREBASE HELPER FUNCTIONS ---
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Lax";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i=0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    function generateUUID() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+    
+    async function saveStateToFirebase() {
+        if (!isFirebaseReady || !sessionId) return;
+        
+        try {
+            const state = {
+                firstName: firstNameInput.value,
+                vin: userVin,
+                make: makeSelect.value,
+                model: modelSelect.value,
+                year: yearSelect.value,
+                trim: trimSelect.value,
+                transmission: document.querySelector('input[name="transmission"]:checked')?.value,
+                tcmUnlocked: document.querySelector('input[name="tcm_unlocked"]:checked')?.value,
+                ecuUnlocked: document.querySelector('input[name="ecu_unlocked"]:checked')?.value,
+                fuelType: document.querySelector('input[name="fuel_type"]:checked')?.value,
+                priorTune: document.querySelector('input[name="prior_tune"]:checked')?.value,
+                currentHp: document.getElementById('current-hp').value,
+                priorMods: document.getElementById('prior-mods').value,
+                hpDelta: whpSlider.value,
+                selectedItems: selectedItems,
+                currentStep: currentStep,
+                customerFirstName: document.getElementById('customer-first-name').value,
+                customerLastName: document.getElementById('customer-last-name').value,
+                customerPhone: document.getElementById('customer-phone').value,
+                customerComments: document.getElementById('customer-comments').value,
+                lastUpdated: new Date().toISOString()
+            };
+            
+            await db.collection(`/artifacts/${appId}/public/data/submissions`).doc(sessionId).set(state, { merge: true });
+            console.log("State saved to Firebase for session:", sessionId);
+
+        } catch (error) {
+            console.error("Error saving state to Firebase: ", error);
+        }
+    }
+
+    async function loadStateFromFirebase(sid) {
+        if (!isFirebaseReady || !sid) return;
+
+        try {
+            const docRef = db.collection(`/artifacts/${appId}/public/data/submissions`).doc(sid);
+            const docSnap = await docRef.get();
+
+            if (docSnap.exists) {
+                const state = docSnap.data();
+                console.log("Loading state from Firebase:", state);
+                
+                // --- Restore Welcome Screen ---
+                if (state.firstName) {
+                    firstNameInput.value = state.firstName;
+                    validateAndStoreName(); 
+                }
+                userVin = state.vin || null;
+
+                // --- Restore Step 1: Vehicle ---
+                if (state.make) {
+                    makeSelect.value = state.make;
+                    await loadModelsForMake(state.make);
+                    if (state.model) {
+                        modelSelect.value = state.model;
+                        modelSelect.dispatchEvent(new Event('change'));
+                    }
+                    if(state.year) yearSelect.value = state.year;
+                    if(state.trim) trimSelect.value = state.trim;
+                    if(state.transmission) document.querySelector(`input[name="transmission"][value="${state.transmission}"]`).checked = true;
+                }
+                
+                // --- Restore Step 2: Tech Details ---
+                if(state.tcmUnlocked) document.querySelector(`input[name="tcm_unlocked"][value="${state.tcmUnlocked}"]`).checked = true;
+                if(state.ecuUnlocked) document.querySelector(`input[name="ecu_unlocked"][value="${state.ecuUnlocked}"]`).checked = true;
+                if(state.fuelType) document.querySelector(`input[name="fuel_type"][value="${state.fuelType}"]`).checked = true;
+                if(state.priorTune) {
+                    document.querySelector(`input[name="prior_tune"][value="${state.priorTune}"]`).checked = true;
+                    document.querySelector(`input[name="prior_tune"][value="${state.priorTune}"]`).dispatchEvent(new Event('change'));
+                }
+                if(state.currentHp) document.getElementById('current-hp').value = state.currentHp;
+
+                // --- Restore Step 3: Goals ---
+                if(state.priorMods) document.getElementById('prior-mods').value = state.priorMods;
+                if(state.hpDelta) {
+                    whpSlider.value = state.hpDelta;
+                    whpSlider.dispatchEvent(new Event('input'));
+                }
+                
+                // --- Restore Step 4: Results ---
+                selectedItems = state.selectedItems || [];
+                
+                // --- Restore Step 5: Contact ---
+                if(state.customerFirstName) document.getElementById('customer-first-name').value = state.customerFirstName;
+                if(state.customerLastName) document.getElementById('customer-last-name').value = state.customerLastName;
+                if(state.customerPhone) document.getElementById('customer-phone').value = state.customerPhone;
+                if(state.customerComments) document.getElementById('customer-comments').value = state.customerComments;
+
+                // --- Restore Current Step ---
+                if (state.currentStep && state.currentStep > 1) {
+                    welcomeContainer.classList.remove('active');
+                    welcomeContainer.classList.add('hidden-field');
+                    questionnaireContainer.classList.remove('hidden-field');
+                    questionnaireContainer.classList.add('active');
+                    initializeProgressBar();
+                    updateStep(state.currentStep, true); // Pass a flag to prevent re-saving
+                    if(state.currentStep >= 4) generateResults();
+                }
+
+            } else {
+                console.log("No previous session found for:", sid);
+            }
+        } catch (error) {
+            console.error("Error loading state from Firebase:", error);
+        }
+    }
+
 
     function normalizeKey(str){return String(str||'').toLowerCase().replace(/\s+/g,'').replace(/-/g,'').replace(/[^a-z0-9]/g,'');}
     function toTitleCase(str){return String(str||'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
@@ -1311,11 +1444,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return true;
     }
+    
+    firstNameInput.addEventListener('change', saveStateToFirebase);
 
     // --- INITIAL FLOW LOGIC (MODIFIED) ---
     startManualBtn.addEventListener('click', () => {
         if (!validateAndStoreName()) return;
-
+        saveStateToFirebase();
         welcomeContainer.classList.remove('active');
         welcomeContainer.classList.add('hidden-field');
         questionnaireContainer.classList.remove('hidden-field');
@@ -1325,7 +1460,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     startVinBtn.addEventListener('click', () => {
         if (!validateAndStoreName()) return;
-
+        saveStateToFirebase();
         initialButtons.classList.add('hidden-field');
         vinLookupContainer.classList.remove('hidden-field');
         welcomeTitle.textContent = 'VIN Lookup';
@@ -1525,26 +1660,42 @@ document.addEventListener('DOMContentLoaded', function() {
     makeSelect.addEventListener('change', function() {
         loadModelsForMake(this.value);
         yearSelect.value = '';
+        saveStateToFirebase();
     });
 
     modelSelect.addEventListener('change', function() {
         updateTrimDropdown(makeSelect.value, this.value);
         handleCorvetteTransmission();
         updateTechInfo();
+        saveStateToFirebase();
     });
 
     yearSelect.addEventListener('change', () => {
         handleCorvetteTransmission();
         updateTechInfo();
+        saveStateToFirebase();
     });
 
-    trimSelect.addEventListener('change', updateTechInfo);
+    trimSelect.addEventListener('change', () => {
+        updateTechInfo();
+        saveStateToFirebase();
+    });
 
-    document.querySelectorAll('input[name="transmission"]').forEach(radio => radio.addEventListener('change', updateTechInfo));
+    document.querySelectorAll('input[name="transmission"], input[name="tcm_unlocked"], input[name="ecu_unlocked"], input[name="fuel_type"], input[name="prior_tune"]')
+        .forEach(radio => radio.addEventListener('change', () => {
+             updateTechInfo();
+             saveStateToFirebase();
+        }));
+    
+    document.getElementById('current-hp').addEventListener('change', saveStateToFirebase);
+    document.getElementById('prior-mods').addEventListener('change', saveStateToFirebase);
+
     whpSlider.addEventListener('input', (e) => {
         const numberSpan = whpOutput.querySelector('.whp-number');
         numberSpan.textContent = `+${e.target.value}`;
     });
+    whpSlider.addEventListener('change', saveStateToFirebase);
+
     priorTuneRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             currentHpGroup.classList.toggle('hidden-field', !(this.value === 'Dyno' || this.value === 'Remote'));
@@ -1552,8 +1703,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // --- STEP NAVIGATION LOGIC (Unchanged) ---
-    const updateStep = (newStep) => {
-        if (newStep > currentStep) {
+    const updateStep = (newStep, fromLoad = false) => {
+        if (!fromLoad && newStep > currentStep) {
             const currentStepPanel = steps[currentStep - 1];
             const inputs = currentStepPanel.querySelectorAll('select[required], input[required]');
             if (Array.from(inputs).some(input => !input.value)) {
@@ -1588,6 +1739,9 @@ document.addEventListener('DOMContentLoaded', function() {
             else if (stepNumber === newStep) step.classList.add('active');
         });
         currentStep = newStep;
+        if (!fromLoad) {
+            saveStateToFirebase();
+        }
         window.scrollTo(0, 0);
     };
 
@@ -1762,7 +1916,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isSelected = selectedItems.some(item => item.id === 'custom-tune-high-hp');
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3>${tuneIcon} Custom WIKD Tune Recommended</h3><p style="color: var(--color-text-muted);">Your horsepower goal of <strong>+${targetHpDelta} WHP</strong> is ambitious and exceeds our standard performance packages. For this level of performance, we recommend a fully custom WIKD Tune.</p><p style="color: var(--color-text-muted); margin-top: 1rem;">This involves a personalized consultation with our expert tuners to develop a bespoke solution, including part selection and dyno tuning, tailored specifically to your vehicle and goals.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">This build will likely require: ${unlockReason.join(' + ')}.</p>` : ''}
                 <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
-                    <a href="https://www.wikdmotorsports.com/pages/euro-tune" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                    <a href="https://www.wikdmotorsports.com/pages/custom-dyno-tuning" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
                     <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="custom-tune-high-hp" data-type="service" data-title="Custom WIKD Tune" data-price="0"><span>+</span></button>
                 </div></div>`;
             } else if (bestMatch) { 
@@ -1884,7 +2038,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isSelected = selectedItems.some(item => item.id === 'custom-tune-domestic-euro');
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3>${tuneIcon} Custom Dyno Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, a custom dyno tune is the best path forward to unlock its full potential. This allows us to tailor every parameter to your specific modifications for maximum safe, reliable power.</p>${unlockCost > 0 ? `<p style="color: var(--color-text-muted); margin-top: 1rem;">Required Unlocks: ${unlockReason.join(' + ')}.</p>` : ''}
                 <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
-                    <a href="https://www.wikdmotorsports.com/pages/euro-tune" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                    <a href="https://www.wikdmotorsports.com/pages/custom-dyno-tuning" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
                     <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="custom-tune-domestic-euro" data-type="service" data-title="Custom Dyno Tune" data-price="0"><span>+</span></button>
                 </div></div>`;
             } else if (region === 'jdm' || region === 'korean') {
@@ -1892,7 +2046,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isSelected = selectedItems.some(item => item.id === 'custom-tune-import');
                 recommendationsContainer.innerHTML += `<div class="result-card"><h3>${tuneIcon} Custom Import Tune Recommended</h3><p style="color: var(--color-text-muted);">For your ${data.make} ${data.model}, we recommend a custom import tune to unlock its full potential. Our experts specialize in tuning Japanese and Korean vehicles for maximum performance and reliability.</p>
                 <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-top: 1rem;">
-                    <a href="https://www.wikdmotorsports.com/pages/euro-tune" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
+                    <a href="https://www.wikdmotorsports.com/pages/custom-dyno-tuning" target="_blank" class="btn btn-primary btn-left"><span>Learn More</span></a>
                     <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="custom-tune-import" data-type="service" data-title="Custom Import Tune" data-price="0"><span>+</span></button>
                 </div></div>`;
             }
@@ -1943,6 +2097,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedItems.push(newItem);
             }
             generateResults();
+            saveStateToFirebase();
         }
     });
 
@@ -1980,11 +2135,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedItems.push({ id, type, title, price: parseFloat(price) });
             }
             generateResults();
+            saveStateToFirebase();
         }
     });
 
     document.getElementById('generate-email-btn').addEventListener('click', function(e) {
         e.preventDefault();
+        saveStateToFirebase();
         const firstNameInputContact = document.getElementById('customer-first-name');
         const lastNameInputContact = document.getElementById('customer-last-name');
         const phoneInput = document.getElementById('customer-phone');
@@ -2082,26 +2239,55 @@ TCM Unlocked: ${emailData.transmission === 'Automatic' ? rawData.tcm_unlocked : 
 Primary Fuel: ${emailData.fuel_type}
 Prior Tune History: ${emailData.prior_tune}
 Existing Mods: ${emailData.prior_mods || 'None listed'}
-        `;
+`;
 
-        window.location.href = `mailto:sales@wikdmotorsports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBodyText)}`;
+// 👉 Send data to Zapier webhook for GHL
+fetch("https://hooks.zapier.com/hooks/catch/19421224/udc59ev/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        firstName: rawData.customer_first_name,
+        lastName: rawData.customer_last_name,
+        phone: rawData.customer_phone,
+        email: rawData.customer_email || "",
+        year: emailData.year,
+        make: emailData.make,
+        model: emailData.model,
+        trim: emailData.trim,
+        transmission: emailData.transmission,
+        hp_delta: emailData.hp_delta,
+        ecu_unlocked: emailData.ecu_unlocked,
+        tcm_unlocked: emailData.transmission === 'Automatic' ? rawData.tcm_unlocked : 'N/A',
+        fuel_type: emailData.fuel_type,
+        prior_tune: emailData.prior_tune,
+        prior_mods: emailData.prior_mods,
+        selected_items: selectedItems.map(item => item.title)
+    })
+}).catch(err => console.error("Zapier webhook error:", err));
 
-        setTimeout(() => {
-            questionnaireContainer.classList.remove('active');
-            questionnaireContainer.classList.add('hidden-field');
-            
-            thankYouContainer.classList.remove('hidden-field');
-            thankYouContainer.classList.add('active');
-            
-            const thankYouNameSpan = thankYouContainer.querySelector('.user-name');
-            if (thankYouNameSpan) {
-                thankYouNameSpan.textContent = userFirstName;
-            }
+// 👉 Continue with your existing email workflow
+window.location.href = `mailto:sales@wikdmotorsports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBodyText)}`;
+
+setTimeout(() => {
+    questionnaireContainer.classList.remove('active');
+    questionnaireContainer.classList.add('hidden-field');
+
+    thankYouContainer.classList.remove('hidden-field');
+    thankYouContainer.classList.add('active');
+    
+    const thankYouNameSpan = thankYouContainer.querySelector('.user-name');
+    if (thankYouNameSpan) {
+        thankYouNameSpan.textContent = userFirstName;
+    }
+}, 200);
             
             checkBusinessHours();
             window.scrollTo(0, 0);
         }, 500);
     });
+    
+    document.querySelectorAll('#customer-first-name, #customer-last-name, #customer-phone, #customer-comments')
+        .forEach(input => input.addEventListener('change', saveStateToFirebase));
 
     function initializeProgressBar() {
         const totalSteps = progressSteps.length;
@@ -2207,9 +2393,38 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
     });
 
     // --- REFACTOR: INITIALIZATION ---
-    async function initializeApp() {
+    async function runApp() {
         try {
-            const response = await fetch(WIKD_DATA_URL);
+            // --- FIREBASE INITIALIZATION (v8 Syntax) ---
+            const firebaseConfig = typeof __firebase_config !== 'undefined' 
+                ? JSON.parse(__firebase_config) 
+                : { apiKey: "AIzaSyAWX6sYYsa-scVrg2Ctjob04AHqxorq8Fs", authDomain: "wikdconfigurators.firebaseapp.com", projectId: "wikdconfigurators", storageBucket: "wikdconfigurators.appspot.com", messagingSenderId: "623427770699", appId: "1:623427770699:web:ec24e40cb6501c047e30ce" };
+
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            auth = firebase.auth();
+            
+            const user = await (async () => {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    return await auth.signInWithCustomToken(__initial_auth_token);
+                } else {
+                    return await auth.signInAnonymously();
+                }
+            })();
+
+            isFirebaseReady = true;
+            console.log("Firebase initialized and user authenticated with UID:", user.user.uid);
+
+            sessionId = getCookie('configuratorSessionId');
+            if (!sessionId) {
+                sessionId = generateUUID();
+                setCookie('configuratorSessionId', sessionId, 30); // Store for 30 days
+            }
+            console.log("Current Session ID:", sessionId);
+
+            const TARGET_URL = 'https://cdn.shopify.com/s/files/1/0671/4635/0805/files/WIKD-Motorsports-Data.json?v=1755118954';
+            const response = await fetch(TARGET_URL);
+
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
@@ -2221,10 +2436,13 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
             products = data.products;
 
             // Call original initialization functions that are still needed
-            loadCarMakes();
+            await loadCarMakes();
             populateYears();
             updateTechInfo();
             checkBusinessHours();
+            
+            // Load state from firebase AFTER dynamic data is loaded
+            await loadStateFromFirebase(sessionId);
 
             // MODIFICATION: Start the cross-fading theme cycling for panel borders
             const panels = document.querySelectorAll('.panel');
@@ -2269,7 +2487,7 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
             }, 7000); // 7-second interval to match the hero banner
 
         } catch (error) {
-            console.error('Failed to fetch WIKD Motorsports data:', error);
+            console.error('Failed to initialize app:', error);
             // Gracefully handle the error in the UI
             const welcomePanel = document.querySelector('#welcome-container .panel');
             if(welcomePanel) {
@@ -2281,14 +2499,9 @@ Existing Mods: ${emailData.prior_mods || 'None listed'}
         }
     }
 
-    initializeApp();
+    runApp();
 });
 </script>
 </body>
 </html>
-
-
-
-
-
 
