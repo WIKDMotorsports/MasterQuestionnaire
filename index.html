@@ -1314,7 +1314,7 @@
             const sep=document.createElement('option');sep.textContent='──────────';sep.disabled=true;sep.className='separator';makeSelect.appendChild(sep);
 
             const others=apiMakes.filter(x=>!added.has(x.key) && makeRegionMap[x.key] && !excludedMakes.has(x.key)).sort((a,b)=>a.raw.localeCompare(b.raw));
-            for(const m of others){ const o=document.createElement('option'); o.value=m.raw; o.textContent=toTitleCase(m.raw); makeSelect.appendChild(o); added.add(m.key);}	
+            for(const m of others){ const o=document.createElement('option'); o.value=m.raw; o.textContent=toTitleCase(m.raw); makeSelect.appendChild(o); added.add(m.key);}   
 
         }catch(err){
             console.error('loadCarMakes error',err);
@@ -1337,12 +1337,12 @@
 
         if(normalizedMake==='cadillac'){
             let apiModels=[];
-            try{ const res=await fetch(`${API_BASE}/GetModelsForMake/${encodeURIComponent(makeName)}?format=json`); const data=await res.json(); apiModels=data.Results.map(r=>r.Model_Name);}catch(e){console.error('cadillac api models',e);}	  
+            try{ const res=await fetch(`${API_BASE}/GetModelsForMake/${encodeURIComponent(makeName)}?format=json`); const data=await res.json(); apiModels=data.Results.map(r=>r.Model_Name);}catch(e){console.error('cadillac api models',e);}      
             const manualSet=new Set(manualCadillacModels.map(m=>normalizeKey(m.name)));
             const additional=apiModels.filter(m=>!manualSet.has(normalizeKey(m)));
 
             modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
-            for(const mm of manualCadillacModels){ const opt=document.createElement('option'); opt.value=mm.name; opt.textContent=mm.name; if(mm.hasPackage && makeIsPriority) opt.className='model-highlight'; modelSelect.appendChild(opt);}	  
+            for(const mm of manualCadillacModels){ const opt=document.createElement('option'); opt.value=mm.name; opt.textContent=mm.name; if(mm.hasPackage && makeIsPriority) opt.className='model-highlight'; modelSelect.appendChild(opt);}      
             additional.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; modelSelect.appendChild(opt); });
             modelSelect.disabled=false;
             modelSelect.dispatchEvent(new Event('change'));
@@ -1378,7 +1378,7 @@
             withPackages.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; if(makeIsPriority) opt.className='model-highlight'; modelSelect.appendChild(opt); });
             withoutPackages.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; modelSelect.appendChild(opt); });
 
-            if(data.Results.length===0){ modelSelect.innerHTML = '<option value="">No models found</option>';}	  
+            if(data.Results.length===0){ modelSelect.innerHTML = '<option value="">No models found</option>';}      
             modelSelect.disabled=false;
             modelSelect.dispatchEvent(new Event('change'));
         }catch(err){ 
@@ -2241,11 +2241,12 @@ Prior Tune History: ${emailData.prior_tune}
 Existing Mods: ${emailData.prior_mods || 'None listed'}
 `;
 
-// 👉 Send data to Zapier webhook for GHL
-fetch("https://hooks.zapier.com/hooks/catch/19421224/udc59ev/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+// 👉 **FIX: Send data to Zapier using fetch with 'no-cors' mode.**
+// This is the correct modern method to bypass browser CORS security for a 
+// "fire-and-forget" request, keeping everything in a single HTML file.
+try {
+    const zapierWebhookUrl = "https://hooks.zapier.com/hooks/catch/19421224/udc59ev/";
+    const zapierData = {
         firstName: rawData.customer_first_name,
         lastName: rawData.customer_last_name,
         phone: rawData.customer_phone,
@@ -2261,9 +2262,26 @@ fetch("https://hooks.zapier.com/hooks/catch/19421224/udc59ev/", {
         fuel_type: emailData.fuel_type,
         prior_tune: emailData.prior_tune,
         prior_mods: emailData.prior_mods,
-        selected_items: selectedItems.map(item => item.title)
-    })
-}).catch(err => console.error("Zapier webhook error:", err));
+        selected_items: selectedItems.map(item => item.title).join(', ')
+    };
+    
+    console.log("Sending data to Zapier:", zapierData);
+
+    fetch(zapierWebhookUrl, {
+        method: 'POST',
+        body: JSON.stringify(zapierData),
+        mode: 'no-cors', // This is the crucial part that makes it work.
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+} catch (err) {
+    // This catch is for synchronous errors during the creation of the request.
+    // Network errors won't be caught here because of 'no-cors' mode.
+    console.error("Error preparing the Zapier request:", err);
+}
+
 
 // 👉 Continue with your existing email workflow
 window.location.href = `mailto:sales@wikdmotorsports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBodyText)}`;
@@ -2279,11 +2297,10 @@ setTimeout(() => {
     if (thankYouNameSpan) {
         thankYouNameSpan.textContent = userFirstName;
     }
-}, 200);
-            
-            checkBusinessHours();
-            window.scrollTo(0, 0);
-        }, 500);
+    
+    checkBusinessHours();
+    window.scrollTo(0, 0);
+}, 500); 
     });
     
     document.querySelectorAll('#customer-first-name, #customer-last-name, #customer-phone, #customer-comments')
@@ -2349,16 +2366,16 @@ setTimeout(() => {
                     
                     if (!canvas.dataset.rendered) {
                          QRCode.toCanvas(canvas, phoneNumber, { 
-                            width: 150, 
-                            margin: 0, 
-                            color: {
-                                dark: '#FF3B30',
-                                light: '#141414'
-                            }
+                             width: 150, 
+                             margin: 0, 
+                             color: {
+                                 dark: '#FF3B30',
+                                 light: '#141414'
+                             }
                          }, function (error) {
-                            if (error) console.error(error);
-                            canvas.dataset.rendered = 'true';
-                        });
+                             if (error) console.error(error);
+                             canvas.dataset.rendered = 'true';
+                         });
                     }
                 }
             }
