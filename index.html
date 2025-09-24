@@ -687,19 +687,107 @@
             transform: scale(1.2);
         }
 
-        /* NEW ANIMATION STYLES */
-        #add-to-inquiry-prompt {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            padding: 2px 5px;
-            animation: scale-pulse 0.8s cubic-bezier(0.5, 0, 0.5, 1) 0.5s 1; /* duration, timing, delay, count */
+        /* --- INTEGRATION: STAR RATING STYLES --- */
+        .review-prompt-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
-
-        @keyframes scale-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .star-review-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0;
+        }
+        .stars-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .star-rating-text {
+            color: #d4d4d8; 
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: var(--font-heading); /* Rajdhani Font */
+            opacity: 0;
+            animation: fadeInStars 0.5s cubic-bezier(0.1, 1.2, 0, 1) 0.5s forwards;
+        }
+        #add-to-inquiry-prompt {
+            text-align: left;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            opacity: 0;
+            animation: fadeInStars 0.5s cubic-bezier(0.1, 1.2, 0, 1) 0.6s forwards;
+        }
+        .star-link {
+            position: relative;
+            display: block;
+            width: 2rem; /* 32px */
+            height: 2rem; /* 32px */
+            transition: transform 0.2s cubic-bezier(0.1, 1.2, 0, 1);
+            opacity: 0;
+            animation: fadeInStars 0.5s cubic-bezier(0.1, 1.2, 0, 1) forwards;
+        }
+        .star-link:hover {
+            transform: scale(1.1);
+        }
+        .star-svg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .star-clip {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            clip-path: inset(0 40% 0 0);
+        }
+        .star-glow-pulse {
+            animation: pulseGlow 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+        .star-gradient-pulse {
+            --center-opacity: 0.7;
+            animation: pulseGradient 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+        .glint-wrapper {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            -webkit-mask: url(#star-mask);
+            mask: url(#star-mask);
+        }
+        .glint-wrapper::after {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.6) 50%, transparent 60%);
+            background-size: 200% 100%;
+            background-position: 200% 0;
+            animation: glintWipe 5s infinite;
+            animation-delay: var(--glint-delay, 0s);
+        }
+        @keyframes fadeInStars {
+            from { opacity: 0; transform: scale(0.8); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.7)); }
+            50% { filter: drop-shadow(0 0 16px rgba(251, 191, 36, 1)); }
+        }
+        @keyframes pulseGradient {
+            0%, 100% { --center-opacity: 0.7; }
+            50% { --center-opacity: 1; }
+        }
+        @keyframes glintWipe {
+            0%   { background-position: 200% 0; }
+            5%   { background-position: 200% 0; }
+            25%  { background-position: -200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         @media (max-width: 640px) {
@@ -724,6 +812,24 @@
     </style>
 </head>
 <body>
+    <!-- INTEGRATION: SVG Definitions for Star Rating Gradient -->
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <defs>
+            <radialGradient id="starGradient3D">
+                <stop offset="0%" stop-color="white" stop-opacity="var(--center-opacity, 0.7)"/>
+                <stop offset="20%" stop-color="#FDE047" />
+                <stop offset="90%" stop-color="#F59E0B" />
+            </radialGradient>
+            <!-- NEW: Define the star shape once -->
+            <symbol id="star-symbol" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </symbol>
+            <!-- NEW: Define the mask using the symbol -->
+            <mask id="star-mask">
+                <use href="#star-symbol" fill="white" />
+            </mask>
+        </defs>
+    </svg>
 
     <div class="widget-container">
         <div id="welcome-container" class="active">
@@ -918,18 +1024,51 @@
                     <div class="panel" id="result-panel">
                         <div class="step-header"><h2>Here's what we can do for you</h2></div>
                         
-                        <!-- UPDATE 2: DUPLICATED CTA AT TOP -->
-                        <div style="text-align: center; margin-bottom: 1rem;">
-                            <h3 style="justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-comments"></i> Next Steps</h3>
-                            <p style="color: var(--color-text-muted); margin-bottom: 0;">Ready to upgrade or need a fully custom build? Our experts are here to help craft the perfect solution for you.</p>
+                        <!-- INTEGRATION: STAR RATING -->
+                        <div class="review-prompt-wrapper">
+                            <p id="add-to-inquiry-prompt">Press '+' to add parts to your inquiry</p>
+                            <div class="star-review-container">
+                                <div class="stars-wrapper">
+                                    <!-- Full Star -->
+                                    <a href="https://share.google/7vAZnoZqZSVFpq84p" target="_blank" rel="noopener noreferrer" class="star-link" style="animation-delay: 0s;">
+                                        <svg class="star-svg star-glow-pulse" style="color: #fbbf24; animation-delay: 0s;" fill="currentColor"><use href="#star-symbol"></use></svg>
+                                        <svg class="star-svg star-gradient-pulse" style="animation-delay: 0s;" fill="url(#starGradient3D)"><use href="#star-symbol"></use></svg>
+                                        <div class="glint-wrapper" style="--glint-delay: 1.0s;"></div>
+                                    </a>
+                                    <!-- Full Star -->
+                                    <a href="https://share.google/7vAZnoZqZSVFpq84p" target="_blank" rel="noopener noreferrer" class="star-link" style="animation-delay: 0.1s;">
+                                        <svg class="star-svg star-glow-pulse" style="color: #fbbf24; animation-delay: 0.1s;" fill="currentColor"><use href="#star-symbol"></use></svg>
+                                        <svg class="star-svg star-gradient-pulse" style="animation-delay: 0.1s;" fill="url(#starGradient3D)"><use href="#star-symbol"></use></svg>
+                                        <div class="glint-wrapper" style="--glint-delay: 1.2s;"></div>
+                                    </a>
+                                    <!-- Full Star -->
+                                    <a href="https://share.google/7vAZnoZqZSVFpq84p" target="_blank" rel="noopener noreferrer" class="star-link" style="animation-delay: 0.2s;">
+                                        <svg class="star-svg star-glow-pulse" style="color: #fbbf24; animation-delay: 0.2s;" fill="currentColor"><use href="#star-symbol"></use></svg>
+                                        <svg class="star-svg star-gradient-pulse" style="animation-delay: 0.2s;" fill="url(#starGradient3D)"><use href="#star-symbol"></use></svg>
+                                        <div class="glint-wrapper" style="--glint-delay: 1.4s;"></div>
+                                    </a>
+                                    <!-- Full Star -->
+                                    <a href="https://share.google/7vAZnoZqZSVFpq84p" target="_blank" rel="noopener noreferrer" class="star-link" style="animation-delay: 0.3s;">
+                                        <svg class="star-svg star-glow-pulse" style="color: #fbbf24; animation-delay: 0.3s;" fill="currentColor"><use href="#star-symbol"></use></svg>
+                                        <svg class="star-svg star-gradient-pulse" style="animation-delay: 0.3s;" fill="url(#starGradient3D)"><use href="#star-symbol"></use></svg>
+                                        <div class="glint-wrapper" style="--glint-delay: 1.6s;"></div>
+                                    </a>
+                                    <!-- Partial Star -->
+                                    <a href="https://share.google/7vAZnoZqZSVFpq84p" target="_blank" rel="noopener noreferrer" class="star-link" style="animation-delay: 0.4s;">
+                                        <svg class="star-svg star-glow-pulse" style="color: #fbbf24; animation-delay: 0.4s;" fill="currentColor"><use href="#star-symbol"></use></svg>
+                                        <svg class="star-svg" style="color: #3f3f46;" fill="currentColor"><use href="#star-symbol"></use></svg>
+                                        <div class="star-clip">
+                                            <svg class="star-svg star-gradient-pulse" style="animation-delay: 0.4s;" fill="url(#starGradient3D)"><use href="#star-symbol"></use></svg>
+                                            <div class="glint-wrapper" style="--glint-delay: 1.8s;"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="star-rating-text">
+                                    4.6 / 5
+                                </div>
+                            </div>
                         </div>
-                        <div class="btn-group" style="margin-top: 1.5rem; margin-bottom: 2rem; justify-content: center;">
-                            <button type="button" class="btn btn-primary contact-expert-btn">
-                                <span>Talk to an Expert</span>
-                                <animated-icons src="https://animatedicons.co/get-icon?name=mail&style=minimalistic&token=e55f9897-402e-4453-b539-03e933b6d7fa" trigger="loop" attributes='{"variationThumbColour":"#FF3B30","variationName":"Dark","variationNumber":4,"numberOfGroups":2,"strokeWidth":1.5,"backgroundIsGroup":true,"defaultColours":{"group-1":"#FF3B30","group-2":"#FF3B30","background":"#0A0A0A"}}' height="22" width="22"></animated-icons>
-                            </button>
-                        </div>
-                        <!-- END UPDATE 2 -->
+                        <!-- END INTEGRATION -->
 
                         <div id="summary-card" class="result-card">
                             <h3><i class="fas fa-car"></i> <span class="user-name-possessive"></span> Build Summary</h3>
@@ -1043,7 +1182,7 @@
                                 width="22">
                             </animated-icons>
                             <span>Want to discuss your build now? Give us a ring, we’re open!</span>
-                        </a>
+                       </a>
                         <div class="qr-tooltip">
                             <canvas class="qr-code-canvas"></canvas>
                             <p>Scan to call us!</p>
@@ -1419,7 +1558,7 @@
             withPackages.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; if(makeIsPriority) opt.className='model-highlight'; modelSelect.appendChild(opt); });
             withoutPackages.forEach(mn=>{ const opt=document.createElement('option'); opt.value=mn; opt.textContent=mn; modelSelect.appendChild(opt); });
 
-            if(data.Results.length===0){ modelSelect.innerHTML = '<option value="">No models found</option>';}       
+            if(data.Results.length===0){ modelSelect.innerHTML = '<option value="">No models found</option>';}    
             modelSelect.disabled=false;
             modelSelect.dispatchEvent(new Event('change'));
         }catch(err){ 
@@ -2000,10 +2139,10 @@
                 const isSelected = selectedItems.some(item => item.id === bestMatch.id);
                 
                 let footerHTML = `<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-                                        <div style="display: flex; align-items: stretch; gap: 0.5rem;">
-                                            <a href="${bestMatch.url}" class="btn btn-primary btn-left" target="_blank"><span>View Package Details</span></a>
-                                            <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="${bestMatch.id}" data-type="package" data-title="${bestMatch.title}" data-price="${bestMatch.price}" data-e85-price="${bestMatch.e85PriceBoost || 0}"><span>+</span></button>
-                                        </div>`;
+                                            <div style="display: flex; align-items: stretch; gap: 0.5rem;">
+                                                <a href="${bestMatch.url}" class="btn btn-primary btn-left" target="_blank"><span>View Package Details</span></a>
+                                                <button type="button" class="btn btn-add btn-right ${isSelected ? 'selected' : ''}" data-id="${bestMatch.id}" data-type="package" data-title="${bestMatch.title}" data-price="${bestMatch.price}" data-e85-price="${bestMatch.e85PriceBoost || 0}"><span>+</span></button>
+                                            </div>`;
 
                 if (bestMatch.e85Compatible) {
                     footerHTML += `
@@ -2412,13 +2551,13 @@ setTimeout(() => {
                     tooltip.classList.add('active');
                     
                     if (!canvas.dataset.rendered) {
-                         QRCode.toCanvas(canvas, phoneNumber, { 
-                             width: 150, 
-                             margin: 0, 
-                             color: {
-                                 dark: '#FF3B30',
-                                 light: '#141414'
-                             }
+                          QRCode.toCanvas(canvas, phoneNumber, { 
+                            width: 150, 
+                            margin: 0, 
+                            color: {
+                                dark: '#FF3B30',
+                                light: '#141414'
+                            }
                          }, function (error) {
                              if (error) console.error(error);
                              canvas.dataset.rendered = 'true';
@@ -2571,4 +2710,6 @@ setTimeout(() => {
 </script>
 </body>
 </html>
+
+
 
